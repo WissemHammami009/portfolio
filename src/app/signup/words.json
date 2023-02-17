@@ -1,0 +1,8 @@
+{
+    "name":"Name",
+    "surname":"Surname",
+    "password":"Password",
+    "email":"Email",
+    "phone":"Phone Number",
+    "button_text":"Create Account" 
+}

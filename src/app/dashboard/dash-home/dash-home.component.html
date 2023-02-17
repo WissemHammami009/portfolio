@@ -1,0 +1,62 @@
+<div class="card text-center container">
+    <br>
+    <form class="row g-3" [formGroup]="headerupdateForm" (ngSubmit)="updateheader()">
+       
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="fullname" placeholder="Full Name" formControlName="full_name">
+                <label for="fullname">Full Name</label>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="adresss1" placeholder="Adress 1" formControlName="street">
+                <label for="adresss1">Adress 1</label>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="inputAddress" placeholder="Adress 2 " formControlName="town">
+                <label for="inputAddress">Adress 2</label>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
+                <label for="email">Email</label>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-floating">
+                <textarea class="form-control"  rows="5" id="floatingTextarea" formControlName="description"></textarea>
+                <label for="floatingTextarea">Description</label>
+              </div>
+        </div>
+        <!-- social media links -->
+        <hr>
+        <h5>Social media: </h5>
+        
+        <div class="col-md-6">
+            <label for="facebook"><h2><i class="fa-brands fa-linkedin"></i></h2></label>
+                <input class="form-control form-control-sm" type="text" placeholder="LinkedIn" aria-label=".form-control-sm example" formControlName="linkedin">
+        </div>
+        <div class="col-md-6">
+            <label for="facebook"><h2><i class="fa-brands fa-facebook"></i></h2></label>
+                <input class="form-control form-control-sm" type="text" placeholder="Facebook" aria-label=".form-control-sm example" formControlName='facebook'>
+        </div>
+        <div class="col-md-12">
+            <label for="facebook"><h2><i class="fa-brands fa-github"></i></h2></label>
+                <input class="form-control form-control-sm text-center" type="text" placeholder="Github" aria-label=".form-control-sm example" formControlName="github">
+        </div>
+
+        
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">{{button}}</button>
+        </div>
+      </form><br>
+</div>
+

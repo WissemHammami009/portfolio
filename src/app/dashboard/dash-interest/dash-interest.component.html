@@ -1,0 +1,14 @@
+<div class="card  container">
+    <div class="col-md-12">
+        <div class="form-floating">
+            <textarea class="form-control"  rows="5" id="floatingTextarea" [formControl]="interest"></textarea>
+            <label for="floatingTextarea">Interests</label>
+          </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="form-control btn btn-primary" (click)="updateinterest()" >Save changes</button>
+          </div>
+    </div>
+    <br>
+</div>

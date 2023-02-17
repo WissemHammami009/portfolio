@@ -1,0 +1,60 @@
+<div class="card  container">
+    <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th scope="col"> Name</th>
+            <th scope="col">Value(%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of li">
+            <td>{{item.skill}}</td>
+            <td>{{item.percentage}}</td>
+            <td><button class="btn btn-primary" (click)="delete(item)">Delete</button>&nbsp; <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="modify(item.skill,item.percentage,item)">Modify</button></td>
+          </tr>
+        </tbody>
+      </table>
+    <form  [formGroup]="languageForm" (ngSubmit)="additem()">
+        <div class="row">
+            <div class="col">
+            <input type="text" class="form-control" placeholder="Programming language name" aria-label="First name" formControlName="skill">
+            </div>
+            <div class="col">
+            <input type="text" class="form-control" placeholder="value (ex: 50)" aria-label="Last name" formControlName="percentage">
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" type="submit" [disabled]="!languageForm.valid">Add</button>
+            </div><br>
+        </div>
+
+    </form><br>
+    <button class="btn btn-primary" (click)="updateskills()">Save Changes</button><br>
+</div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col">
+                <input type="text" class="form-control" placeholder="Programming language name" aria-label="First name" [formControl]="skill_modal" >
+                </div>
+                <div class="col">
+                <input type="text" class="form-control" placeholder="value (ex: 50)" aria-label="Last name" [formControl]="percentage_modal">
+                </div>
+               
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="update()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
