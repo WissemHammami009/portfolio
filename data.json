@@ -1,0 +1,26 @@
+{
+    "full_name":"Wissem Hammami",
+    "street":"125 Goubellat",
+    "town":"Beja Tunis",
+    "phone":"+16 54106903",
+    "email":"me@wissem-hammami.ovh",
+    "description":"My name is Wissem Hammami. I am originally from béja. A developer with 3 years of experiencce, skilled and developing Websites and software. I'm excellent in HTML CSS JS PHP SQL and Expressjs. Also I can improve your google search ranking.",
+    "experience":[
+        {"postion":"Junior web developer","time":"2020-2022","entreprise":"MBK SYSTEM","description_post":"-"},
+        {"postion":"Junior web developer","time":"2020-2022","entreprise":"MBK SYSTEM","description_post":"-"}
+    ],
+    "education":[
+        {"diploma":"Baccaleareate","time":"2019","university":"2 Mars 1934","branch":"Computer Science"},
+        {"diploma":"Baccaleareate","time":"2019","university":"2 Mars 1934","branch":"Computer Science"}
+    ],
+    "skills":[
+        {"skill":"html","percentage":"50"},
+        {"skill":"html","percentage":"50"},
+        {"skill":"html","percentage":"50"}
+    ],
+    "interest":"Apart from being a web developer, I enjoy most of my time being outdoors. In the winter, I am an avid skier and novice ice climber. During the warmer months here in Colorado, I enjoy mountain biking, free climbing, and kayaking.",
+    "certif":[
+        {"name":"Mobile Web Specialist - Google Certification"},
+        {"name":"3 rd Place - James Buchanan High School - Hackathon 2005"}
+    ]
+}
