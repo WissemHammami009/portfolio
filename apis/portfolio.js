@@ -143,6 +143,29 @@ router.post('/getinterest',(req,res)=>{
          }
     })
 })
+//get experience
+router.post('/getexperience',(req,res)=>{
+    portfolio.findOne({alias:req.body.alias}).then(resp=>{
+        if (resp == null) {
+            res.status(200).json({found:false,message:"No data found"})
+        }
+        else{
+            res.status(200).json(resp.experience)
+         }
+    })
+})
 
-
+//update experience 
+router.patch('/updateexperience',(req,res)=>{
+    let alias = req.body.alias
+    delete req.body.alias
+    const data = portfolio.updateOne({alias:alias},{$set:req.body}).then(resp=>{
+        if (resp.modifiedCount > 0) {
+            res.status(200).json({isModified:true})
+        }
+        else {
+            res.status(200).json({isModified:false})
+        }
+    })
+})
 module.exports = router;
