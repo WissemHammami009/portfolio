@@ -24,7 +24,7 @@ const portfolio = mongo.Schema({
     description: {
         type: String
     },
-    experience: [{position:{type:String},time:{type:String},entreprise:{type:String},description_post:{type:String}}],
+    experience: [{time:{type:String},entreprise:{type:String},description_post:{type:String}}],
     education: [
         {diploma:{type:String},time:{type:String},university:{type:String},branch:{type:String}}
     ],
