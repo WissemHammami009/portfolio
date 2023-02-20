@@ -10,19 +10,15 @@
         </thead>
         <tbody>
           <tr  *ngFor="let item of li">
-            <td>{{item.postion}}</td>
             <td>{{item.entreprise}}</td>
             <td><textarea [value]="item.description_post" readonly></textarea></td>
             <td>{{item.time}}</td>
-            <td><button class="btn btn-primary" (click)="delete(item)" >Delete</button>&nbsp; <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled>Modify</button></td>
+            <td><button class="btn btn-primary" (click)="delete(item)" >Delete</button>&nbsp; <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="modify_exp(item.entreprise,item.description_post,item.time,item)">Modify</button></td>
           </tr>
         </tbody>
       </table>
     <form [formGroup]="expForm" (ngSubmit)="additem()">
         <div class="row">
-            <div class="col">
-            <input type="text" class="form-control" placeholder="Position" formControlName="postion">
-            </div>
             <div class="col">
             <input type="text" class="form-control" placeholder="Entreprise"formControlName="entreprise">
             </div>
@@ -33,7 +29,7 @@
                 <input type="text" class="form-control" placeholder="Period" formControlName="time">
                 </div>
             <div class="col">
-                <button class="btn btn-primary" type="submit" disabled>Add</button>
+                <button class="btn btn-primary" type="submit" >Add</button>
             </div><br>
         </div>
 
@@ -51,19 +47,20 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div class="row">
-                <div class="col">
-                <input type="text" class="form-control" placeholder="Programming language name" aria-label="First name"  >
-                </div>
-                <div class="col">
-                <input type="text" class="form-control" placeholder="value (ex: 50)" aria-label="Last name" >
-                </div>
-               
+          <div class="row">
+            <div class="col">
+            <input type="text" class="form-control" placeholder="Entreprise" [formControl]="entreprise">
             </div>
+            <div class="col">
+              <textarea type="text" class="form-control" placeholder="Description" [formControl]="description"></textarea>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Period" [formControl]="time">
+                </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  (click)="update_exp()">Save changes</button>
         </div>
       </div>
     </div>

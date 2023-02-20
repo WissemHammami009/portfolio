@@ -13,9 +13,12 @@ export class DashExperienceComponent implements OnInit {
 
   constructor(private serviceport:PortfolioService) { }
   li :any
+  entreprise = new FormControl()
+  description = new FormControl()
+  time = new FormControl()
+  pos :any
   expForm = new FormGroup({
     id:new FormControl(),
-    postion: new FormControl(),
     entreprise: new FormControl(),
     description_post:new FormControl(),
     time:new FormControl(),
@@ -70,5 +73,21 @@ export class DashExperienceComponent implements OnInit {
       }
     })
     Swal.close()
+  }
+
+  modify_exp(entreprise:any,description:any,time:any,item:any){
+    this.pos = this.li.indexOf(item);
+    this.entreprise.setValue(entreprise)
+    this.description.setValue(description)
+    this.time.setValue(time)
+  }
+  update_exp(){
+    this.li.splice(this.pos,1);
+    let json = {entreprise:this.entreprise.value,description_post:this.description.value,time:this.time.value}
+    this.li.push(json)
+    Swal.fire({
+      icon:"success",
+      text:"Entry Updated"
+    })
   }
 }

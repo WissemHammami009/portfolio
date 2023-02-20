@@ -22,7 +22,7 @@ export class DashSkillsComponent implements OnInit {
   percentage_modal = new FormControl('')
   pos: number = 0
  
-  additem(){
+  additem_skills(){
     this.languageForm.patchValue({id:this.li.length + 1})
     this.li.push(this.languageForm.value)
     this.languageForm.reset()
@@ -65,13 +65,13 @@ export class DashSkillsComponent implements OnInit {
     })
   }
 
-  modify(skill:any,percentage:any,item:any){
+  modify_skills(skill:any,percentage:any,item:any){
       this.pos = this.li.indexOf(item);
       this.skill_modal.setValue(skill)
       this.percentage_modal.setValue(percentage)
     }
 
-  update(){
+  update_skills(){
     this.li.splice(this.pos,1);
     let json = {skill:this.skill_modal.value,percentage:this.percentage_modal.value}
     this.li.push(json)
