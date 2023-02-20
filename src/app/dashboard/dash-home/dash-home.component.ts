@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class DashHomeComponent implements OnInit {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private route:Router) { }
   headerupdateForm = new FormGroup({
     full_name : new FormControl(''),
     street : new FormControl(''),
@@ -81,4 +82,8 @@ export class DashHomeComponent implements OnInit {
       }
     })
   }
+
+
+
+
 }
