@@ -6,13 +6,44 @@ import { Injectable } from '@angular/core';
 })
 export class PortfolioService {
 
+  endpoint  = "http://localhost:3000/"
   constructor(private http:HttpClient) { }
 
+  checkprotfolioexist(json:any){
+    return this.http.post(this.endpoint+'api/portfolio/check/portfolio',json)
+  }
 
   getexperiencedata( alias:string){
-    return this.http.post("http://localhost:3000/api/portfolio/getexperience",{alias:alias})
+    return this.http.post(this.endpoint+"api/portfolio/getexperience",{alias:alias})
   }
   updateexpriencedata(json:any){
-    return this.http.patch("http://localhost:3000/api/portfolio/updateexperience",json)
+    return this.http.patch(this.endpoint+"api/portfolio/updateexperience",json)
+  }
+  
+  getskills(json:any){
+    return this.http.post(this.endpoint+"api/portfolio/getskills",json)
+  }
+  updateskills(json:any){
+    return this.http.patch(this.endpoint+'api/portfolio/updateskills',json)
+  }
+  
+  getinterest(json:any){
+    return this.http.post(this.endpoint+'api/portfolio/getinterest',json)
+  }
+  updateinterest(json:any){
+    return this.http.patch(this.endpoint+'api/portfolio//updateinterest',json)
+  }
+
+  getheader(json:any){
+    return this.http.post(this.endpoint+"api/portfolio/getheader",json)
+  }
+  updateheader(json:any){
+    return this.http.patch(this.endpoint+"api/portfolio/updateheader",json)
+  }
+  getcertif(json:any){
+    return this.http.post(this.endpoint+"api/portfolio/getawards",json)
+  }
+  updatecertif(json:any){
+    return this.http.post(this.endpoint+"api/portfolio/updateskills",json)
   }
 }

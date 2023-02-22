@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
+import { PortfolioService } from '../services/portfolio.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,12 +11,12 @@ import Swal from 'sweetalert2';
 })
 export class DashboardComponent implements OnInit {
   li :any
-  constructor(private title:Title,private http:HttpClient) { }
+  constructor(private title:Title,private portfolioserv:PortfolioService) { }
 
   ngOnInit(): void {
     this.title.setTitle("Portfolio - Dashboard")
     localStorage.setItem("alias","wissemhammami");
-    this.http.post("http://localhost:3000/api/portfolio/check/portfolio",{alias:localStorage.getItem('alias')}).subscribe(resp=>{
+    this.portfolioserv.checkprotfolioexist({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
       if (this.li.data == false) {
         Swal.fire({

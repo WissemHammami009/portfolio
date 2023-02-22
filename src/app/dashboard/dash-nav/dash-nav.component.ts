@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-dash-nav',
@@ -8,13 +9,12 @@ import { Router } from '@angular/router';
 })
 export class DashNavComponent implements OnInit {
 
-  constructor(private route:Router) { }
+  constructor(private auth:AuthService) { }
 
   ngOnInit(): void {
   }
 
   logout(){
-    localStorage.clear()
-    this.route.navigate(['/home'])
+    this.auth.logout()
   }
 }

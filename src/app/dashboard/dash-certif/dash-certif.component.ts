@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 export class DashCertifComponent implements OnInit {
 
 
-  constructor(private http:HttpClient) { }
+  constructor(private portfolioserv:PortfolioService) { }
   li:any
   username:any 
   awardsForm = new FormGroup({
@@ -35,7 +36,7 @@ export class DashCertifComponent implements OnInit {
    this.getdata()
   }
   getdata(){
-    this.http.post("http://localhost:3000/api/portfolio/getawards",{alias:this.username}).subscribe(resp=>{
+    this.portfolioserv.getcertif({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
       console.log(this.li)
     })
@@ -48,10 +49,8 @@ export class DashCertifComponent implements OnInit {
     Swal.showLoading(null);
 
     let json  = {alias:this.username,certif:this.li}
-    
-    console.log(json)
 
-    this.http.patch("http://localhost:3000/api/portfolio/updateskills",json).subscribe(resp=>{
+    this.portfolioserv.updatecertif(json).subscribe(resp=>{
       this.li = resp
       if (this.li.isModified == true) {
         Swal.fire({

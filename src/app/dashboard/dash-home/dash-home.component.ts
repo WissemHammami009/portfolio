@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class DashHomeComponent implements OnInit {
 
-  constructor(private http:HttpClient,private route:Router) { }
+  constructor(private portfolioserv:PortfolioService,private route:Router) { }
   headerupdateForm = new FormGroup({
     full_name : new FormControl(''),
     street : new FormControl(''),
@@ -49,7 +50,7 @@ export class DashHomeComponent implements OnInit {
   }
 
   getdata(){
-    this.http.post("http://localhost:3000/api/portfolio/getheader",{alias:"wissemhammami"}).subscribe(resp=>{
+    this.portfolioserv.getheader({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
       if (this.li.found == true) {
         this.setForm(this.li) 
@@ -62,7 +63,7 @@ export class DashHomeComponent implements OnInit {
       title: 'Running...',
     });
     Swal.showLoading(null);
-    this.http.patch("http://localhost:3000/api/portfolio/updateheader",this.headerupdateForm.value).subscribe(resp=>{
+    this.portfolioserv.updateheader(this.headerupdateForm.value).subscribe(resp=>{
       this.li = resp
       if (this.li.isModified == true) {
         Swal.fire({

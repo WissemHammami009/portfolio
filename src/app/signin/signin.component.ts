@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import words from "./words.json";
 import link from "../global.json"
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -11,7 +12,7 @@ import link from "../global.json"
 })
 export class SigninComponent implements OnInit {
   words:any = words
-  constructor(private http:HttpClient) { }
+  constructor(private authservice:AuthService) { }
   signinForm = new FormGroup({
     email: new FormControl('',[Validators.required,Validators.email]),
     password: new FormControl('',[Validators.required,Validators.minLength(8)])
@@ -24,7 +25,7 @@ export class SigninComponent implements OnInit {
   }
   login(){
     console.log(this.signinForm.value)
-    this.http.post(this.link.backend_link +"api/user/login",this.signinForm.value).subscribe(resp=>{
+    this.authservice.login(this.signinForm.value).subscribe(resp=>{
       this.li = resp
       if (this.li.isLogged == false) {
         this.passerror = true
@@ -53,7 +54,7 @@ export class SigninComponent implements OnInit {
         Swal.fire({
           icon: 'success',
           title: 'Login successfully..!',
-          html: 'We just keeping things ready to you '+ str +' &#128515;!',
+          html: 'We just keeping things ready to you  &#128515;!',
           didOpen: () => {
             Swal.showLoading(null)
           }

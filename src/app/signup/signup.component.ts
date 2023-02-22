@@ -5,6 +5,7 @@ import words from "./words.json";
 import link from "../global.json"
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class SignupComponent implements OnInit {
   words:any = words
-  constructor(private http:HttpClient) { }
+  constructor(private authservice:AuthService) { }
   signupForm = new FormGroup({
     name : new FormControl('',Validators.required),
     surname : new FormControl('',Validators.required),
@@ -28,7 +29,7 @@ export class SignupComponent implements OnInit {
 
   signup(){
     console.log(this.signupForm.value)
-    this.http.post("http://localhost:3000/api/user/add/user",this.signupForm.value).subscribe(resp=>{
+    this.authservice.signup(this.signupForm.value).subscribe(resp=>{
       this.li = resp 
       this.signupForm.reset()
       if (this.li.signup.added == "no") {

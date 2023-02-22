@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import Swal from 'sweetalert2';
 import link from '../../global.json'
 @Component({
@@ -11,7 +12,7 @@ import link from '../../global.json'
 })
 export class DashInterestComponent implements OnInit {
 
-  constructor(private http:HttpClient,private title:Title) { }
+  constructor(private portfolioserv:PortfolioService  ,private title:Title) { }
   link : any = link
   li:any
   interest = new FormControl('')
@@ -26,7 +27,7 @@ export class DashInterestComponent implements OnInit {
   }
 
   getdata(){
-    this.http.post(this.link.backend_link+"api/portfolio/getinterest",{alias:"wissemhammami"}).subscribe(resp=>{
+    this.portfolioserv.getinterest({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
       this.interest.setValue(this.li.interest);
     })
@@ -38,7 +39,7 @@ export class DashInterestComponent implements OnInit {
     });
     Swal.showLoading(null);
     let json = {alias:"wissemhammami",interest:this.interest.value}
-    this.http.patch(this.link.backend_link+"api/portfolio//updateinterest",json).subscribe(resp=>{
+    this.portfolioserv.updateinterest(json).subscribe(resp=>{
       this.li = resp
       if (this.li.isModified == true) {
         Swal.fire({
