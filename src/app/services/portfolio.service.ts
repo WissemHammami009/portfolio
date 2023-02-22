@@ -13,8 +13,8 @@ export class PortfolioService {
     return this.http.post(this.endpoint+'api/portfolio/check/portfolio',json)
   }
 
-  getexperiencedata( alias:string){
-    return this.http.post(this.endpoint+"api/portfolio/getexperience",{alias:alias})
+  getexperiencedata( json:any){
+    return this.http.post(this.endpoint+"api/portfolio/getexperience",json)
   }
   updateexpriencedata(json:any){
     return this.http.patch(this.endpoint+"api/portfolio/updateexperience",json)
