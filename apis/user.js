@@ -1,3 +1,4 @@
+var { genUniqueId } = require('../tools/functions');
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
@@ -8,7 +9,7 @@ const  User = require('../models/user');
 
 var assert = require('assert');
 var nodemailer = require('nodemailer');
-const { find } = require('../models/user');
+
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     host:"smtp.gmail.com",
@@ -414,7 +415,8 @@ router.post('/login',(req,res)=>{
             res.status(200).json({isLogged:false,user:"not found!"})
         }
         else {
-            res.status(200).json({isLogged:true, user: "found!",resp })
+            tokken = genUniqueId()
+            res.status(200).json({isLogged:true, user: "found!",resp,tokken:tokken })
         }
 })
 .catch(err=>{
