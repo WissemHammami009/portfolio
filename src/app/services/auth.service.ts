@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,4 +18,10 @@ export class AuthService {
     localStorage.clear()
     this.route.navigate(['/home'])
   }
+  settokken(tokken:string,username:string){
+    localStorage.setItem("tokken",tokken)
+    localStorage.setItem('name',username)
+    sessionStorage.setItem('tokken',tokken)
+  }
+  
 }

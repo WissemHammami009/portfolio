@@ -24,7 +24,6 @@ export class SigninComponent implements OnInit {
   ngOnInit(): void {
   }
   login(){
-    console.log(this.signinForm.value)
     this.authservice.login(this.signinForm.value).subscribe(resp=>{
       this.li = resp
       if (this.li.isLogged == false) {
@@ -50,7 +49,7 @@ export class SigninComponent implements OnInit {
         })
       }
       else  {
-        let str = this.signinForm.contains('name')
+        
         Swal.fire({
           icon: 'success',
           title: 'Login successfully..!',
@@ -59,6 +58,7 @@ export class SigninComponent implements OnInit {
             Swal.showLoading(null)
           }
         })
+        this.authservice.settokken(this.li.tokken,this.li.resp.fullname)
       }
     })
   }
