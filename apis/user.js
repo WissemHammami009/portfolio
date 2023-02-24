@@ -6,8 +6,6 @@ const crypto = require('crypto')
 router.use(bodyParser.json());
 
 const  User = require('../models/user');
-
-var assert = require('assert');
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({

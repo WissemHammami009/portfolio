@@ -1,6 +1,6 @@
 
 const mongo = require('mongoose')
-
+var db = require('../database/connectdb');
 const portfolio = mongo.Schema({
     full_name: {
         type:String,
