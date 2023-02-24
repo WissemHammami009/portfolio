@@ -18,7 +18,6 @@ import { DashExperienceComponent } from './dashboard/dash-experience/dash-experi
 import { DashSkillsComponent } from './dashboard/dash-skills/dash-skills.component';
 import { DashCertifComponent } from './dashboard/dash-certif/dash-certif.component';
 import { DashInterestComponent } from './dashboard/dash-interest/dash-interest.component';
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -16,6 +16,7 @@ export class AuthService {
   }
   logout(){
     localStorage.clear()
+    sessionStorage.clear()
     this.route.navigate(['/home'])
   }
   settokken(tokken:string,username:string){

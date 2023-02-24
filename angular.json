@@ -27,9 +27,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/plugins/icofont/icofont.css",
+              "src/assets/plugins/fontawesome/css/all.css",
+              "src/assets/plugins/bootstrap/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+               "src/assets/plugins/jquery/jquery.min.js",
+               "src/assets/plugins/bootstrap/bootstrap.min.js",
+               "src/assets/plugins/google-map/map.js",
+               "src/assets/js/script.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -58,7 +66,7 @@
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true,
+              "sourceMap": false,
               "namedChunks": true
             }
           },

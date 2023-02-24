@@ -6,6 +6,7 @@ import link from "../global.json"
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AuthService } from '../services/auth.service';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -13,7 +14,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class SignupComponent implements OnInit {
   words:any = words
-  constructor(private authservice:AuthService) { }
+  constructor(private authservice:AuthService,private title:Title) { }
   signupForm = new FormGroup({
     name : new FormControl('',Validators.required),
     surname : new FormControl('',Validators.required),
@@ -25,6 +26,7 @@ export class SignupComponent implements OnInit {
   li:any
   links : any = link
   ngOnInit(): void {
+    this.title.setTitle("Yo Yo welcome - Portfolio.")
   }
 
   signup(){

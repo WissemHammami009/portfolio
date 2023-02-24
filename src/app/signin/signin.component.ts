@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import words from "./words.json";
 import link from "../global.json"
 import { AuthService } from '../services/auth.service';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -12,7 +13,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class SigninComponent implements OnInit {
   words:any = words
-  constructor(private authservice:AuthService) { }
+  constructor(private authservice:AuthService,private title:Title) { }
   signinForm = new FormGroup({
     email: new FormControl('',[Validators.required,Validators.email]),
     password: new FormControl('',[Validators.required,Validators.minLength(8)])
@@ -22,6 +23,7 @@ export class SigninComponent implements OnInit {
   link : any = link
 
   ngOnInit(): void {
+    this.title.setTitle("Welcome back - Portfolio. ")
   }
   login(){
     this.authservice.login(this.signinForm.value).subscribe(resp=>{
