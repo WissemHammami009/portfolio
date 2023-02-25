@@ -1,6 +1,7 @@
 
 const mongo = require('mongoose')
 var db = require('../database/connectdb');
+var {randomId} = require('../tools/functions')
 const User = mongo.Schema({
     email: {
         type: String,
@@ -43,6 +44,10 @@ const User = mongo.Schema({
         type:String,
         length:10,
         default:""
+    },
+    alias:{
+        type:String,
+        default:randomId(10)
     }
 })
 

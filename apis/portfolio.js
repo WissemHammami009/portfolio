@@ -1,11 +1,26 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
-const crypto = require('crypto')
 router.use(bodyParser.json());
 
 const portfolio= require('../models/portfolio');
 
+//create new alias for new portfolio 
+router.post("/create-portfolio",async (req,res)=>{
+    const port = new portfolio({
+        alias:req.body.alias,
+        experience:[{time:"",entreprise:"",description_post:""}],
+        education:[{diploma:"",time:"",university:"",branch:""}],
+        skills:[{skill:"",percentage:""}],
+        certif:[{name:""}]
+
+    })
+    port.save({alias:req.body.alias}).then(resp=>{
+        res.json({code:200,resp})
+    }).catch(err=>{
+        res.json({code:err.code})
+    })
+})
 
 //check if having a portfolio
 router.post("/check/portfolio",async (req,res)=>{
@@ -17,6 +32,7 @@ router.post("/check/portfolio",async (req,res)=>{
         }
     })
 })
+
 router.post('/profile',(req,res)=>{
     
     const find = portfolio.findOne({alias:req.body.alias}).then(resp=>{
@@ -81,6 +97,7 @@ router.patch('/updateskills',(req,res)=>{
         }
     })
 })
+
 router.post('/getskills',(req,res)=>{
     const find = portfolio.findOne({alias:req.body.alias}).then(resp=>{
         if (resp == null) {
@@ -94,7 +111,7 @@ router.post('/getskills',(req,res)=>{
 })
 
 
-router.patch('/updateawards',(req,res)=>{
+router.patch('/updatecertif',(req,res)=>{
     let alias = req.body.alias
     delete req.body.alias
     const data = portfolio.updateOne({alias:alias},{$set:req.body}).then(resp=>{
@@ -107,7 +124,7 @@ router.patch('/updateawards',(req,res)=>{
     })
 })
 
-router.post('/getawards',(req,res)=>{
+router.post('/getcertif',(req,res)=>{
     const find = portfolio.findOne({alias:req.body.alias}).then(resp=>{
         if (resp == null) {
             res.status(200).json({found:false,message:"No data found"})

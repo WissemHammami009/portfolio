@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"nodemon index.js"
+    "start": "nodemon index.js"
   },
   "author": "Wissem Hammami",
   "license": "ISC",
@@ -17,7 +17,9 @@
     "localStorage": "^1.0.4",
     "mongoose": "^6.4.0",
     "node-cache": "^5.1.2",
+    "nodemailer": "^6.9.1",
     "nodemon": "^2.0.18",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "uuid": "^9.0.0"
   }
 }

@@ -4,25 +4,31 @@ var db = require('../database/connectdb');
 const portfolio = mongo.Schema({
     full_name: {
         type:String,
-        required: true
+        default:""
     },
     street: {
-        type:String
+        type:String,
+        default:""
     },
     town: {
-        type:String
+        type:String,
+        default:""
     },
     post: {
-        type:String
+        type:String,
+        default:""
     },
     email: {
         type: String,
+        default:""
     },
     phone: {
-        type:String
+        type:String,
+        default:""
     },
     description: {
-        type: String
+        type: String,
+        default:""
     },
     experience: [{time:{type:String},entreprise:{type:String},description_post:{type:String}}],
     education: [
@@ -30,17 +36,21 @@ const portfolio = mongo.Schema({
     ],
     skills:[{skill :{type:String}, percentage:{type:String}}],
     interest:{
-        type:String
+        type:String,default:""
     },
     certif:[{name :{type:String}}],
     facebook:{
-        type:String
+        type:String,default:""
     },
     linkedin:{
-        type:String
+        type:String,default:""
     },
     github:{
-        type:String
+        type:String,default:""
+    },
+    alias:{
+        type:String,
+        unique:true
     }
 
 })
