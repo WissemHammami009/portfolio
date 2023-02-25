@@ -10,8 +10,9 @@ import { AuthService } from 'src/app/services/auth.service';
 export class DashNavComponent implements OnInit {
 
   constructor(private auth:AuthService) { }
-
+  link:any
   ngOnInit(): void {
+    this.link = "../portfolio/"+localStorage.getItem('alias')
   }
 
   logout(){

@@ -6,6 +6,7 @@ import words from "./words.json";
 import link from "../global.json"
 import { AuthService } from '../services/auth.service';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -13,7 +14,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class SigninComponent implements OnInit {
   words:any = words
-  constructor(private authservice:AuthService,private title:Title) { }
+  constructor(private authservice:AuthService,private title:Title,private router:Router) { }
   signinForm = new FormGroup({
     email: new FormControl('',[Validators.required,Validators.email]),
     password: new FormControl('',[Validators.required,Validators.minLength(8)])
@@ -61,6 +62,8 @@ export class SigninComponent implements OnInit {
           }
         })
         this.authservice.settokken(this.li.tokken,this.li.resp.fullname)
+        localStorage.setItem('alias',this.li.resp.alias)
+        this.router.navigate(["dashboard"])
       }
     })
   }

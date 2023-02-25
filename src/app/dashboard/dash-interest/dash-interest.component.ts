@@ -38,7 +38,7 @@ export class DashInterestComponent implements OnInit {
       title: 'Running...',
     });
     Swal.showLoading(null);
-    let json = {alias:"wissemhammami",interest:this.interest.value}
+    let json = {alias:localStorage.getItem('alias'),interest:this.interest.value}
     this.portfolioserv.updateinterest(json).subscribe(resp=>{
       this.li = resp
       if (this.li.isModified == true) {

@@ -45,7 +45,7 @@ export class DashHomeComponent implements OnInit {
       facebook:li.facebook,
       linkedin:li.linkedin,
       github:li.github,
-      alias:'wissemhammami'
+      alias:localStorage.getItem('alias')
     })
   }
 

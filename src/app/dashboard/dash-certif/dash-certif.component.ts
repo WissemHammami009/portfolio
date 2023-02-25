@@ -48,7 +48,7 @@ export class DashCertifComponent implements OnInit {
 
     Swal.showLoading(null);
 
-    let json  = {alias:this.username,certif:this.li}
+    let json  = {alias:localStorage.getItem('alias'),certif:this.li}
 
     this.portfolioserv.updatecertif(json).subscribe(resp=>{
       this.li = resp

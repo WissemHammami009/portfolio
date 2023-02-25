@@ -9,6 +9,9 @@ export class PortfolioService {
   endpoint  = "http://localhost:3000/"
   constructor(private http:HttpClient) { }
 
+  createportfolio(json:any){
+    return this.http.post(this.endpoint+"api/portfolio/create-portfolio",json)
+  }
   checkprotfolioexist(json:any){
     return this.http.post(this.endpoint+'api/portfolio/check/portfolio',json)
   }
@@ -41,9 +44,9 @@ export class PortfolioService {
     return this.http.patch(this.endpoint+"api/portfolio/updateheader",json)
   }
   getcertif(json:any){
-    return this.http.post(this.endpoint+"api/portfolio/getawards",json)
+    return this.http.post(this.endpoint+"api/portfolio/getcertif",json)
   }
   updatecertif(json:any){
-    return this.http.post(this.endpoint+"api/portfolio/updateskills",json)
+    return this.http.patch(this.endpoint+"api/portfolio/updatecertif",json)
   }
 }
