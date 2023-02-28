@@ -24,5 +24,8 @@ export class AuthService {
     localStorage.setItem('name',username)
     sessionStorage.setItem('tokken',tokken)
   }
+  checkalreadylogged(){
+    return localStorage.getItem('alias') != null && localStorage.getItem('name') != null && localStorage.getItem('tokken') != null
+  }
   
 }

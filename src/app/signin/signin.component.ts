@@ -25,6 +25,18 @@ export class SigninComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle("Welcome back - Portfolio. ")
+    if(this.authservice.checkalreadylogged()){
+      Swal.fire({
+        icon:"info",
+        title:"Already logged!",
+        text:"We will go to dashboard then..",
+        allowEnterKey:false,
+        allowEscapeKey:false,
+        allowOutsideClick:false
+      }).then(res=>{
+        this.router.navigate(['dashboard'])
+      })
+    }
   }
   login(){
     this.authservice.login(this.signinForm.value).subscribe(resp=>{
