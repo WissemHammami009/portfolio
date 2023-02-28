@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -39,13 +39,11 @@ export class PortfolioComponent implements OnInit {
       showConfirmButton:false
     });
     return
-   } 
-   this.link = this.link+this.li.alias
-      console.log(this.link)
-      if (resp) {
-        
-      }
-    })
+   }
+    error: (err: HttpErrorResponse) => {
+        console.log(err.message)
+    }
+    }) 
   Swal.close()
    
   }
