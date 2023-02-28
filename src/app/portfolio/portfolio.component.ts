@@ -40,9 +40,7 @@ export class PortfolioComponent implements OnInit {
     });
     return
    }
-    error: (err: HttpErrorResponse) => {
-        console.log(err.message)
-    }
+   this.link = this.link+this.li.alias
     }) 
   Swal.close()
    
