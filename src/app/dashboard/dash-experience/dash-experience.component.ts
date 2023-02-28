@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError } from 'rxjs';
-import { PortfolioService } from 'src/app/services/portfolio.service';
+import { PortfolioService } from 'src/services/portfolio.service';
 import Swal from 'sweetalert2';
 
 @Component({

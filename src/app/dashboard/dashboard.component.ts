@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { PortfolioService } from '../services/portfolio.service';
+import { PortfolioService } from '../../services/portfolio.service';
 
 @Component({
   selector: 'app-dashboard',

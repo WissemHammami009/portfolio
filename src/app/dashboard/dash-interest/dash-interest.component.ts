@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { PortfolioService } from 'src/app/services/portfolio.service';
+import { PortfolioService } from 'src/services/portfolio.service';
 import Swal from 'sweetalert2';
 import link from '../../global.json'
 @Component({
