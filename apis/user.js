@@ -449,4 +449,26 @@ router.post("/update/name",(req,res)=>{
         res.status(200).json(resp,data,id);
     })
 })
+
+//<---------------------------------------------------- Settings Section ------------------------------------->
+router.patch('/update/profile',(req,res)=>{
+    let alias = req.body.alias 
+    delete req.body.alias 
+    User.updateOne({alias:alias},{$set:req.body}).then(resp=>{
+        if (resp.modifiedCount > 0) {
+            res.status(200).json({isModified:true})
+        }
+        else {
+            res.status(200).json({isModified:false})
+        }
+    })
+})
+
+router.post('/aboutuser',(req,res)=>{
+    User.findOne({alias:req.body.alias},{email:1,birthdate:1,fullname:1,phone:1,alias:1}).then(resp=>{
+        res.status(200).json(resp)
+    })
+})
+
+
 module.exports = router;
