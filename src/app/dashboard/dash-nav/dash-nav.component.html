@@ -8,11 +8,11 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
-                  <li class="nav-item active">
-                      <a class="nav-link" >Home <i class="fa-solid fa-house"></i></a>
+                  <li [class]="active_home">
+                      <a class="nav-link" routerLink="/dashboard">Home <i class="fa-solid fa-house"></i></a>
                   </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">Settings <i class="fa-solid fa-gear"></i></a>
+                  <li [class]="active_sett">
+                      <a class="nav-link" routerLink="/dashboard/settings">Settings <i class="fa-solid fa-gear"></i></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link link-button" routerLink="{{link}}" target="_blank">Link <i class="fa-solid fa-link"></i></a>

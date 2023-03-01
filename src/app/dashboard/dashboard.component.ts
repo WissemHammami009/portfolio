@@ -13,6 +13,7 @@ import { PortfolioService } from '../../services/portfolio.service';
 export class DashboardComponent implements OnInit {
   li :any
   link : any
+  here = "nav-item active"
   constructor(private title:Title,private portfolioserv:PortfolioService,private router:Router) { }
 
   ngOnInit(): void {
@@ -52,9 +53,9 @@ export class DashboardComponent implements OnInit {
                     title:"Information",
                     text:"Portfolio added now you can move to add your data and click on update"
                   }).then(res=>{
-                    this.router.navigate(['/dashboard'])
+                    this.router.navigate(['/reload'])
                   })
-                  this.router.navigate(['/dashboard'])
+                  this.router.navigate(['/reload'])
                 }
               })
             }
