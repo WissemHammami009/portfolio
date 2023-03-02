@@ -14,7 +14,7 @@ export class DashNavComponent implements OnInit {
   link:any
   
   ngOnInit(): void {
-    this.link = "../portfolio/"+localStorage.getItem('alias')
+    this.link = "/portfolio/"+localStorage.getItem('alias')
     
   }
 

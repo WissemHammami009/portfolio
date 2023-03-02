@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
 import { Title } from '@angular/platform-browser';
+import { UserServiceService } from 'src/services/user-service.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -14,7 +15,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class SignupComponent implements OnInit {
   words:any = words
-  constructor(private authservice:AuthService,private title:Title) { }
+  constructor(private authservice:AuthService,private userservice:UserServiceService) { }
   signupForm = new FormGroup({
     name : new FormControl('',Validators.required),
     surname : new FormControl('',Validators.required),
@@ -26,7 +27,7 @@ export class SignupComponent implements OnInit {
   li:any
   links : any = link
   ngOnInit(): void {
-    this.title.setTitle("Yo Yo welcome - Portfolio.")
+    this.userservice.changeTitle("Yo Yo welcome - Portfolio.")
   }
 
   signup(){

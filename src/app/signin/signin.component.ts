@@ -7,6 +7,7 @@ import link from "../global.json"
 import { AuthService } from '../../services/auth.service';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { UserServiceService } from 'src/services/user-service.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -14,17 +15,22 @@ import { Router } from '@angular/router';
 })
 export class SigninComponent implements OnInit {
   words:any = words
-  constructor(private authservice:AuthService,private title:Title,private router:Router) { }
+  constructor(private authservice:AuthService,private router:Router,private userservice:UserServiceService) { }
   signinForm = new FormGroup({
     email: new FormControl('',[Validators.required,Validators.email]),
     password: new FormControl('',[Validators.required,Validators.minLength(8)])
   })
   li:any
+  dashaccess:boolean = false
   passerror:boolean = false
   link : any = link
 
   ngOnInit(): void {
-    this.title.setTitle("Welcome back - Portfolio. ")
+    this.userservice.changeTitle("Welcome back - Portfolio. ")
+    if ( "notlogged" in localStorage) {
+      localStorage.clear()
+      this.dashaccess = true
+    }
     if(this.authservice.checkalreadylogged()){
       Swal.fire({
         icon:"info",

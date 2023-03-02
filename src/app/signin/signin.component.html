@@ -37,6 +37,9 @@
                             <div class="text-center text-md-center mb-4 mt-md-0">
                                 <h1 class="mb-0 h3">Sign in to our platform</h1>
                             </div>
+                            <div class="alert alert-danger text-center alert-dismissible fade show" *ngIf="dashaccess"><strong>Oops..! </strong>You need to login to access the dashboard.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
                             <div class="alert alert-danger text-center alert-dismissible fade show" *ngIf="passerror"><strong>Sorry..! </strong>Authentification failed.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>

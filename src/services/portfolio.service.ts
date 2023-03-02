@@ -49,4 +49,8 @@ export class PortfolioService {
   updatecertif(json:any){
     return this.http.patch(this.endpoint+"api/portfolio/updatecertif",json)
   }
+
+  getlastestportfolio(){
+    return this.http.get(this.endpoint+"api/portfolio/lastest")
+  }
 }

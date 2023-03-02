@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/services/auth.service';
 import { UserServiceService } from 'src/services/user-service.service';
 import Swal from 'sweetalert2';
 
@@ -10,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private userinfo:UserServiceService) { }
+  constructor(private userinfo:UserServiceService,private authservice:AuthService,private router:Router) { }
   li:any
   updateForm = new FormGroup({
     fullname : new FormControl(),
@@ -21,6 +23,11 @@ export class SettingsComponent implements OnInit {
   here = "nav-item active"
   ngOnInit(): void {
     Swal.showLoading(null)
+    if (this.authservice.checkalreadylogged() == false){
+      localStorage.setItem('notlogged',"yes")
+      this.router.navigate(['/signin'])
+      
+    }
     this.getdata()
     Swal.close()
   }

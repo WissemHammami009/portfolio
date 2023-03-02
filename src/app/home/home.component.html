@@ -10,7 +10,6 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-
 <style type="text/css">
   .logo-edit {
     color: white;
@@ -20,7 +19,7 @@
 
 <nav class="navbar navbar-expand-lg fixed-top trans-navigation">
   <div class="container">
-    <a class="navbar-brand" href="index.html">
+    <a class="navbar-brand" >
       <h4 class="img-fluid b-logo logo-edit">Portfolio.</h4>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav"
@@ -44,16 +43,16 @@
            
           </ul>
         <li class="nav-item">
-          <a class="nav-link smoth-scroll" href="about.html">About</a>
+          <a class="nav-link smoth-scroll" >About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link smoth-scroll" href="service.html">Service</a>
+          <a class="nav-link smoth-scroll" >Service</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link smoth-scroll" href="pricing.html">Pricing</a>
+          <a class="nav-link smoth-scroll" >Pricing</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link smoth-scroll" href="contact.html">Contact</a>
+          <a class="nav-link smoth-scroll" >Contact</a>
         </li>
       </ul>
     </div>
@@ -69,10 +68,9 @@
         <div class="row">
           <div class="col-lg-8 m-auto text-center col-sm-12 col-md-12">
             <div class="banner-content content-padding">
-              <h5 class="subtitle">A creative agency</h5>
-              <h1 class="banner-title">We craft seo and digital markting services</h1>
-              <p>We provide marketing services to startups and small businesses to looking for a partner for their digital media, design-area.We are a a startup company to be commited to work and time management.</p>
-
+              <h5 class="subtitle">A creative website</h5>
+              <h1 class="banner-title">Free Portfolio Website Builder</h1>
+              <p>Create a portfolio website that’s as unique and creative as you are. Impress potential clients and employers from the get-go with a stunning portfolio design made using our free online portfolio website builder.</p>
               <a routerLink="/signup" class="btn btn-white btn-circled">lets start</a>
             </div>
           </div>
@@ -101,8 +99,6 @@
 </section>
 <!--  ABOUT AREA END  -->
 
-
-
 <!--  FOOTER AREA START  -->
 <section id="footer" class="section-padding">
   <div class="container">
@@ -112,7 +108,7 @@
           <h4>Lastest portfolio.</h4>
           <div>
             <ul *ngFor="let item of li">
-                <li><a href="http://localhost:4200/portfolio/{{item.alias}}" class="portfolio_last">{{item.alias}}</a></li>
+                <li><a href="http://localhost:4200/portfolio/{{item?.alias}}" class="portfolio_last">{{item?.alias}}</a></li>
             </ul>
           </div>
         </div>
@@ -144,8 +140,8 @@
       <div class="col-lg-3 col-md-4 col-sm-12">
         <div class="footer-widget footer-text">
           <h4>Our location</h4>
-          <p class="mail"><span>Mail:</span> promdise@gmail.com</p>
-          <p><span>Phone :</span>+202-277-3894</p>
+          <p class="mail"><span>Mail:</span> contact@free-portfolio.com</p>
+          <p><span>Phone :</span>+216 12345678</p>
           <p><span>Location:</span> 455 West Orchard Street Kings Mountain, NC 28086,NOC building</p>
         </div>
       </div>
@@ -153,13 +149,15 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <div class="footer-copy">
-          Copyright &copy; 2021, Designed &amp; Developed by <a href="#">Portfolio Team</a>
+          Copyright &copy; 2021, Designed &amp; Developed by <a href="https://wissem-hammami.ovh" target="_blank">Portfolio Team</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 <!--  FOOTER AREA END  -->
+
+
 
    
 
