@@ -24,6 +24,9 @@ app.use('/api/portfolio',portfolio)
 app.get('/',(req,res)=>{
     res.sendFile('./views/index.html',{root:__dirname})
 })
+app.get('/testbackend',(req,res)=>{
+    res.json({data:true})
+})
 app.listen(3000,()=>{
     console.log('server running !! ')
 })

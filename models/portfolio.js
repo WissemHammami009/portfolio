@@ -26,6 +26,10 @@ const portfolio = mongo.Schema({
         type:String,
         default:""
     },
+    image_url:{
+        type:String,
+        default:""
+    },
     description: {
         type: String,
         default:""

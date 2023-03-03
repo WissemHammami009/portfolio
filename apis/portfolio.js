@@ -66,7 +66,8 @@ router.post('/getheader',(req,res)=>{
                 description:resp.description,
                 facebook:resp.facebook,
                 linkedin:resp.linkedin,
-                github:resp.github
+                github:resp.github,
+                image_url:resp.image_url
                 }
             res.status(200).json(json)
         }
