@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private userinfo:UserServiceService,private authservice:AuthService,private router:Router) { }
+  constructor(private userinfo:UserServiceService, private userservice:UserServiceService,private authservice:AuthService,private router:Router) { }
   li:any
   updateForm = new FormGroup({
     fullname : new FormControl(),
@@ -23,6 +23,7 @@ export class SettingsComponent implements OnInit {
   here = "nav-item active"
   ngOnInit(): void {
     Swal.showLoading(null)
+    this.userservice.checkbackend_isup().subscribe()
     if (this.authservice.checkalreadylogged() == false){
       localStorage.setItem('notlogged',"yes")
       this.router.navigate(['/signin'])

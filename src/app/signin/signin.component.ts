@@ -27,6 +27,7 @@ export class SigninComponent implements OnInit {
 
   ngOnInit(): void {
     this.userservice.changeTitle("Welcome back - Portfolio. ")
+    this.userservice.checkbackend_isup().subscribe()
     if ( "notlogged" in localStorage) {
       localStorage.clear()
       this.dashaccess = true

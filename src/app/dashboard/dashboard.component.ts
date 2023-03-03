@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth.service';
+import { UserServiceService } from 'src/services/user-service.service';
 import Swal from 'sweetalert2';
 import { PortfolioService } from '../../services/portfolio.service';
 
@@ -15,10 +16,11 @@ export class DashboardComponent implements OnInit {
   li :any
   link : any
   here = "nav-item active"
-  constructor(private title:Title,private portfolioserv:PortfolioService,private authservice:AuthService,private router:Router) { }
+  constructor(private title:Title,private userservice:UserServiceService ,private portfolioserv:PortfolioService,private authservice:AuthService,private router:Router) { }
 
   ngOnInit(): void {
     this.title.setTitle("Portfolio - Dashboard")
+    this.userservice.checkbackend_isup().subscribe()
     if (this.authservice.checkalreadylogged() == false){
       localStorage.setItem('notlogged',"yes")
       this.router.navigate(['/signin'])

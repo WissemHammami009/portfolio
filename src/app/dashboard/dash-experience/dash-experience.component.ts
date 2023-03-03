@@ -41,7 +41,6 @@ export class DashExperienceComponent implements OnInit {
   getdata(){
     this.serviceport.getexperiencedata({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
-      console.log(this.li)
     })
   }
 

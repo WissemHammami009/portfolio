@@ -32,25 +32,36 @@
 
         <div class="col-md-12">
             <div class="form-floating">
+                <input type="email" class="form-control" id="phone" placeholder="Phone" formControlName="phone">
+                <label for="phone">Phone</label>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-floating">
                 <textarea class="form-control"  rows="5" id="floatingTextarea" formControlName="description"></textarea>
                 <label for="floatingTextarea">Description</label>
               </div>
         </div>
         <!-- social media links -->
         <hr>
-        <h5>Social media: </h5>
+        <h5>Social media and Profile picture: </h5>
         
         <div class="col-md-6">
-            <label for="facebook"><h2><i class="fa-brands fa-linkedin"></i></h2></label>
+            <label for="facebook"><h2><i class="fa-brands fa-linkedin"></i></h2>LinkedIn</label>
                 <input class="form-control form-control-sm" type="text" placeholder="LinkedIn URL" aria-label=".form-control-sm example" formControlName="linkedin">
         </div>
         <div class="col-md-6">
-            <label for="facebook"><h2><i class="fa-brands fa-facebook"></i></h2></label>
+            <label for="facebook"><h2><i class="fa-brands fa-facebook"></i></h2>Facebook</label>
                 <input class="form-control form-control-sm" type="text" placeholder="Facebook URL" aria-label=".form-control-sm example" formControlName='facebook'>
         </div>
-        <div class="col-md-12">
-            <label for="facebook"><h2><i class="fa-brands fa-github"></i></h2></label>
+        <div class="col-md-6">
+            <label for="facebook"><h2><i class="fa-brands fa-github"></i></h2>Github</label>
                 <input class="form-control form-control-sm text-center" type="text" placeholder="Github URL" aria-label=".form-control-sm example" formControlName="github">
+        </div>
+        <div class="col-md-6">
+            <label for="facebook"><h2><i class="fa-solid fa-link"></i></h2>Portfolio Picture Link</label>
+                <input class="form-control form-control-sm text-center" type="text" placeholder="Github URL" aria-label=".form-control-sm example" formControlName="image_url">
         </div>
 
         

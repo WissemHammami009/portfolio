@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 export class DashHomeComponent implements OnInit {
 
   constructor(private portfolioserv:PortfolioService,private route:Router) { }
+  //phone misssing !!!!!!!!!!!!!!
   headerupdateForm = new FormGroup({
     full_name : new FormControl(''),
     street : new FormControl(''),
@@ -22,7 +23,9 @@ export class DashHomeComponent implements OnInit {
     facebook: new FormControl(''),
     linkedin: new FormControl(''),
     github: new FormControl(''),
-    alias:new FormControl('') 
+    phone: new FormControl(''),
+    alias:new FormControl(''),
+    image_url : new FormControl('')
   })
   li:any
   button : any  = "Update Header Information"
@@ -41,10 +44,12 @@ export class DashHomeComponent implements OnInit {
       street:li.street,
       town:li.town,
       email:li.email,
+      phone:li.phone,
       description:li.description,
       facebook:li.facebook,
       linkedin:li.linkedin,
       github:li.github,
+      image_url:li.image_url,
       alias:localStorage.getItem('alias')
     })
   }

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
 import { Title } from '@angular/platform-browser';
 import { UserServiceService } from 'src/services/user-service.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -15,7 +16,7 @@ import { UserServiceService } from 'src/services/user-service.service';
 })
 export class SignupComponent implements OnInit {
   words:any = words
-  constructor(private authservice:AuthService,private userservice:UserServiceService) { }
+  constructor(private authservice:AuthService,private userservice:UserServiceService,private router:Router) { }
   signupForm = new FormGroup({
     name : new FormControl('',Validators.required),
     surname : new FormControl('',Validators.required),
@@ -27,6 +28,7 @@ export class SignupComponent implements OnInit {
   li:any
   links : any = link
   ngOnInit(): void {
+    this.userservice.checkbackend_isup().subscribe()
     this.userservice.changeTitle("Yo Yo welcome - Portfolio.")
   }
 
@@ -39,7 +41,12 @@ export class SignupComponent implements OnInit {
         Swal.fire({
           icon: 'info',
           title: 'Oops..! ',
-          html: '<b>Email<b> already in use!'
+          html: '<b>Email<b> already in use!',
+          allowEnterKey:false,
+          allowEscapeKey:false,
+          allowOutsideClick:false
+        }).then(res=>{
+          this.router.navigate(['/signin'])
         })
       }
       else {

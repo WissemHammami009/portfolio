@@ -38,7 +38,6 @@ export class DashCertifComponent implements OnInit {
   getdata(){
     this.portfolioserv.getcertif({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
-      console.log(this.li)
     })
   }
   updateskills(){
