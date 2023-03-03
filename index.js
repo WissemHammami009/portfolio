@@ -27,6 +27,6 @@ app.get('/',(req,res)=>{
 app.get('/testbackend',(req,res)=>{
     res.json({data:true})
 })
-app.listen(3000,()=>{
+app.listen(0,()=>{
     console.log('server running !! ')
 })
