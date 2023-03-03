@@ -27,6 +27,6 @@ app.get('/',(req,res)=>{
 app.get('/testbackend',(req,res)=>{
     res.json({data:true})
 })
-app.listen(0,()=>{
+app.listen(process.env.PORT,()=>{
     console.log('server running !! ')
 })
