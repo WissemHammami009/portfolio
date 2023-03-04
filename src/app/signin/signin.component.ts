@@ -82,6 +82,7 @@ export class SigninComponent implements OnInit {
         })
         this.authservice.settokken(this.li.tokken,this.li.resp.fullname)
         localStorage.setItem('alias',this.li.resp.alias)
+        localStorage.setItem('hashuser',this.li.resp.userhash)
         this.router.navigate(["dashboard"])
       }
     })

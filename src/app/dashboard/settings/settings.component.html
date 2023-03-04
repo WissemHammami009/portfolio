@@ -27,14 +27,18 @@
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center experience"><h4>Link Options</h4></div><br>
                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inlineFormInputGroup" value="{{li?.alias}}">
+                    <input type="text" class="form-control" id="inlineFormInputGroup"  [formControl]="alias">
                     <div class="input-group-prepend">
-                        <button class=" button input-group-text" style="color:green" onclick="alert(0)"><i class="fa-solid fa-check"></i></button>
+                        <button class=" button input-group-text" style="color:green" (click)="updatealias()" title="Check availability and update"><i class="fa-solid fa-check"></i></button>
                       </div>
                 </div>
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="show_already">
                     <i class="fa-solid fa-circle-exclamation"></i> Username already taken
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="reset()" aria-label="Close"></button>
+                  </div>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="show_nochanges">
+                    <i class="fa-solid fa-circle-exclamation"></i> No changes detected
+                    <button type="button" class="btn-close" (click)="reset()" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
                   
             </div>

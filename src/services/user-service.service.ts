@@ -41,4 +41,8 @@ export class UserServiceService {
   changeTitle(newtitle:string){
     this.title.setTitle(newtitle)
   }
+
+  updatealias(json:any){
+    return this.http.patch(this.endpoint+"api/user/updatealias",json)
+  }
 }
