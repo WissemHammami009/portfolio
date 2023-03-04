@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import links from './links.json'
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  endpoint = "http://localhost:3000/"
+  endpoint  = links.backend_links
   constructor(private http:HttpClient,private route:Router) { }
   
   signup(json:any){

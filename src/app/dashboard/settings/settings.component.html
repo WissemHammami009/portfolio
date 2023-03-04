@@ -12,26 +12,31 @@
                 </div>
                 <form [formGroup]="updateForm" (ngSubmit)="update()">
                         <div class="row mt-2">
-                            <div class="col-md-12"><label class="labels">Fullname</label><input type="text" class="form-control" placeholder="Full name" value="" formControlName="fullname"></div>
+                            <div class="col-md-12"><label class="labels">Fullname<br>- Field allows only alphabets and spaces </label><input type="text" class="form-control" placeholder="Full name" value="" formControlName="fullname"></div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="Phone number" value="" formControlName="phone"></div>
+                            <div class="col-md-12"><label class="labels">Mobile Number<br>- Field allows only numeric characters </label><input type="text" class="form-control" placeholder="Phone number" value="" formControlName="phone"></div>
                             <div class="col-md-12"><label class="labels">Email</label><input type="email" class="form-control" placeholder="Email" value="" formControlName="email"></div>
-                            <div class="col-md-12"><label class="labels">Birthdate</label><input type="text" class="form-control" placeholder="Birthdate" value="" formControlName="birthdate"></div>
+                            <div class="col-md-12"><label class="labels">Birthdate(yyyy-mm-yy)</label><input type="text" class="form-control" placeholder="Birthdate" value="" formControlName="birthdate"></div>
                         </div>
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" [disabled]="!this.updateForm.valid">Save Profile</button></div>
                 </form>
             </div>
         </div>
         <div class="col-md-4">
             <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience"><span>Link Options</span></div><br>
+                <div class="d-flex justify-content-between align-items-center experience"><h4>Link Options</h4></div><br>
                <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="inlineFormInputGroup" value="{{li?.alias}}">
                     <div class="input-group-prepend">
-                      <div class="input-group-text">@</div>
-                    </div>
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="{{li?.alias}}">
+                        <button class=" button input-group-text" style="color:green" onclick="alert(0)"><i class="fa-solid fa-check"></i></button>
+                      </div>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <i class="fa-solid fa-circle-exclamation"></i> Username already taken
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
+                  
             </div>
         </div>
     </div>

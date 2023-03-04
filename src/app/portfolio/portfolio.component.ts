@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { PortfolioService } from 'src/services/portfolio.service';
 import { UserServiceService } from 'src/services/user-service.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -11,8 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class PortfolioComponent implements OnInit {
   li:any
-  link:String = "http://localhost:4200/portfolio/"
-  constructor(private http:HttpClient,private route: ActivatedRoute,private title:Title,private userservice:UserServiceService) { }
+  link:String = "https://free-portfolio.web.app/portfolio/"
+  constructor(private http:HttpClient,private route: ActivatedRoute,private portfolioservice:PortfolioService, private title:Title,private userservice:UserServiceService) { }
   json:any
   ngOnInit(): void {
     this.userservice.checkbackend_isup().subscribe()
@@ -23,7 +24,7 @@ export class PortfolioComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.json = {alias:params.get('id')}
   })
-   this.http.post("http://localhost:3000/api/portfolio/profile",this.json).subscribe(resp=>{
+   this.portfolioservice.getportfolio(this.json).subscribe(resp=>{
     
    this.li = resp
    this.title.setTitle(this.li.full_name)

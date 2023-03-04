@@ -1,13 +1,13 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
-
+import links from './links.json'
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
 
-  endpoint  = "http://localhost:3000/"
+  endpoint  = links.backend_links
   constructor(private http:HttpClient) { }
 
   createportfolio(json:any){
@@ -53,5 +53,8 @@ export class PortfolioService {
 
   getlastestportfolio(){
     return this.http.get(this.endpoint+"api/portfolio/lastest")
+  }
+  getportfolio(json:any){
+    return this.http.post(this.endpoint+"api/portfolio/profile",json)
   }
 }

@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { catchError, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
-
+import links from './links.json'
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
-  endpoint = "http://localhost:3000/"
+  endpoint  = links.backend_links
   constructor(private http:HttpClient,private title:Title) { }
 
 

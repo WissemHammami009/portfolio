@@ -2,6 +2,7 @@
 @import "../../assets/plugins/icofont/icofont.css";
 @import "../../assets/plugins/fontawesome/css/all.css";
 @import "../../assets/plugins/bootstrap/bootstrap.min.css";
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,600,700|Rubik:400,600,700");
 a:hover{
   color:#3330a3;
 }
@@ -19,7 +20,7 @@ a:hover{
 
 
 
-@import url("https://fonts.googleapis.com/css?family=Poppins:400,600,700|Rubik:400,600,700");
+
 body {
   font-size: 16px;
   font-weight: 400;

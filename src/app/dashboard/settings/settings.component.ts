@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth.service';
 import { UserServiceService } from 'src/services/user-service.service';
@@ -15,10 +15,10 @@ export class SettingsComponent implements OnInit {
   constructor(private userinfo:UserServiceService, private userservice:UserServiceService,private authservice:AuthService,private router:Router) { }
   li:any
   updateForm = new FormGroup({
-    fullname : new FormControl(),
-    phone : new FormControl(),
-    email : new FormControl(),
-    birthdate : new FormControl()
+    fullname : new FormControl('',[Validators.required,Validators.pattern("^[a-zA-Z ]+$")]),
+    email : new FormControl('',[Validators.required,Validators.email]),
+    phone:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(8),Validators.maxLength(8)]),
+    birthdate : new FormControl('',Validators.required)
   })
   here = "nav-item active"
   ngOnInit(): void {
@@ -45,7 +45,49 @@ export class SettingsComponent implements OnInit {
       })
     })
   }
+
   update(){
-    console.log(this.updateForm.value)
+    Swal.fire({
+      title: 'Running!',
+    })
+    Swal.showLoading(null)
+    if (this.test_datachanges() == true) {
+      Swal.fire({
+        icon:"info",
+        title:"Information",
+        text:"You need to change something to make an update!"
+      })
+      return 
+    }
+    else {
+      this.userservice.updateuser(this.updateForm.value).subscribe(resp=>{
+        let li_temp : any  = resp
+        if (li_temp.isModified == true) {
+          Swal.fire({
+            icon:"success",
+            title:"Profile updated"
+          })
+          this.ngOnInit()
+        }
+        else {
+          Swal.fire({
+            icon:"error",
+            title:"Profile not Updated",
+            text:"Try again..!"
+          })
+        }
+      })
+    }
+  }
+
+  test_datachanges(){
+    let test_fullname = this.li.fullname == this.updateForm.controls['fullname'].value
+    let test_phone = this.li.phone == this.updateForm.controls['phone'].value
+    let test_birthdate = this.li.birthdate == this.updateForm.controls['birthdate'].value
+    let test_email = this.li.email == this.updateForm.controls['email'].value
+    if (test_birthdate && test_fullname && test_phone && test_email)
+      return true
+    else 
+    return false
   }
 }
