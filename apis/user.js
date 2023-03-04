@@ -1,4 +1,4 @@
-var { genUniqueId } = require('../tools/functions');
+var { genUniqueId, randomId } = require('../tools/functions');
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
@@ -7,6 +7,7 @@ router.use(bodyParser.json());
 
 const  User = require('../models/user');
 var nodemailer = require('nodemailer');
+const portfolio = require('../models/portfolio');
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -167,7 +168,8 @@ router.post('/add/user',async (req,res)=>{
         birthdate:req.body.birthdate,
         reset_id_bs:resets_id,
         code_confirm:code_confirm,
-        id_pass:id_pass
+        id_pass:id_pass,
+        alias:randomId(20)
         }
     )
     const mail = req.body.email;
@@ -407,7 +409,7 @@ router.post('/login',(req,res)=>{
         password:hash
     }
 
-    const getdata = User.findOne(data)
+    User.findOne(data)
     .then(resp=>{
         if (resp ==null) {
             res.status(200).json({isLogged:false,user:"not found!"})
@@ -469,6 +471,21 @@ router.post('/aboutuser',(req,res)=>{
         res.status(200).json(resp)
     })
 })
+
+router.patch("/updatealias",(req,res)=>{
+    alias_old = req.body.alias_old
+    alias_new = req.body.alias_new
+    User.updateOne({alias:alias_old},{$set:{alias:alias_new}}).then(resp=>{
+        portfolio.updateOne({alias:alias_old},{$set:{alias:alias_new}}).then(resp=>{
+            res.json({code:200,modified:resp.modifiedCount})
+        }).catch(err=>{
+            res.json({code:err.code,message:err.message})
+        })
+    }).catch(err=>{
+        res.json({code:err.code,message:err.message})
+    })
+})
+
 
 
 module.exports = router;

@@ -2,7 +2,12 @@
 const mongo = require('mongoose')
 var db = require('../database/connectdb');
 var {randomId} = require('../tools/functions')
+const crypto = require('crypto')
 const User = mongo.Schema({
+    userhash:{
+        type:String,
+        default:crypto.randomBytes(30).toString('hex')
+    },
     email: {
         type: String,
         required: true
@@ -47,7 +52,7 @@ const User = mongo.Schema({
     },
     alias:{
         type:String,
-        default:randomId(10)
+        unique:true
     }
 })
 
