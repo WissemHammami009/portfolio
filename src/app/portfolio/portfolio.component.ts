@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class PortfolioComponent implements OnInit {
   li:any
-  link:String = "https://free-portfolio.web.app/portfolio/"
+  link:String = "http://localhost:4200/portfolio/"
   constructor(private http:HttpClient,private route: ActivatedRoute,private portfolioservice:PortfolioService, private title:Title,private userservice:UserServiceService) { }
   json:any
   ngOnInit(): void {

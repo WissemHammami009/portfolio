@@ -1,0 +1,74 @@
+<div class="card  container">
+    <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th scope="col"> University or College</th>
+            <th scope="col">License</th>
+            <th scope="col">branch</th>
+            <th scope="col">Period</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let item of li">
+            <td>{{item.university}}</td>
+            <td>{{item.diploma}}</td>
+            <td>{{item.branch}}</td>
+            <td>{{item.time}}</td>
+            <td><button class="btn btn-primary" (click)="delete(item)" >Delete</button>&nbsp; <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#educmodal" (click)="modify_educ(item.diploma,item.university,item.branch,item.time,item)">Modify</button></td>
+          </tr>
+        </tbody>
+      </table>
+    <form [formGroup]="educForm" (ngSubmit)="additem()">
+        <div class="row">
+            <div class="col">
+            <input type="text" class="form-control" placeholder="University" formControlName="university">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="License" formControlName="diploma">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Branch" formControlName="branch">
+                </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Period" formControlName="time">
+                </div>
+            <div class="col">
+                <button class="btn btn-primary" type="submit" >Add</button>
+            </div><br>
+        </div>
+
+    </form><br>
+    <button class="btn btn-primary" (click)="updateeduc()">Save Changes</button><br>
+</div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="educmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+            <input type="text" class="form-control" placeholder="diploma" [formControl]="diploma">
+            </div>
+            <div class="col">
+              <textarea type="text" class="form-control" placeholder="University" [formControl]="university"></textarea>
+              </div>
+              <div class="col">
+                <textarea type="text" class="form-control" placeholder="University" [formControl]="university"></textarea>
+                </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Period" [formControl]="time">
+                </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  (click)="update_educ()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

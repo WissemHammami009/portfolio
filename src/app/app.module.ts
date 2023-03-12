@@ -19,6 +19,7 @@ import { DashCertifComponent } from './dashboard/dash-certif/dash-certif.compone
 import { DashInterestComponent } from './dashboard/dash-interest/dash-interest.component';
 import { ReloadComponent } from './dashboard/reload/reload.component';
 import { SettingsComponent } from './dashboard/settings/settings.component';
+import { DashEducComponent } from './dashboard/dash-educ/dash-educ.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SettingsComponent } from './dashboard/settings/settings.component';
     DashCertifComponent,
     DashInterestComponent,
     ReloadComponent,
-    SettingsComponent
+    SettingsComponent,
+    DashEducComponent
   ],
   imports: [
     BrowserModule,

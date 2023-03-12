@@ -57,4 +57,11 @@ export class PortfolioService {
   getportfolio(json:any){
     return this.http.post(this.endpoint+"api/portfolio/profile",json)
   }
+  geteducation( json:any){
+    return this.http.post(this.endpoint+"api/portfolio/geteducation",json)
+  }
+  updateeducationdata(json:any){
+    return this.http.patch(this.endpoint+"api/portfolio/updateeducation",json)
+  }
+  
 }
