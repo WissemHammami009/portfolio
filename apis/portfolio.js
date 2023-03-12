@@ -186,4 +186,31 @@ router.patch('/updateexperience',(req,res)=>{
         }
     })
 })
+
+//--------------------------------------------Education-----------------------------------
+//get education
+router.post('/geteducation',(req,res)=>{
+    portfolio.findOne({alias:req.body.alias}).then(resp=>{
+        if (resp == null) {
+            res.status(200).json({found:false,message:"No data found"})
+        }
+        else{
+            res.status(200).json(resp.education)
+         }
+    })
+})
+
+//update education
+router.patch('/updateeducation',(req,res)=>{
+    let alias = req.body.alias
+    delete req.body.alias
+    const data = portfolio.updateOne({alias:alias},{$set:req.body}).then(resp=>{
+        if (resp.modifiedCount > 0) {
+            res.status(200).json({isModified:true})
+        }
+        else {
+            res.status(200).json({isModified:false})
+        }
+    })
+})
 module.exports = router;
