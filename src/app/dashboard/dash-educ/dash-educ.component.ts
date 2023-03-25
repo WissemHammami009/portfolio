@@ -56,7 +56,7 @@ export class DashEducComponent implements OnInit {
       if (this.li.isModified == true) {
         Swal.fire({
           icon:"success",
-          title:"Experience Updated",
+          title:"Education Section Updated",
           allowOutsideClick:false
         }).then(result=>{
           this.ngOnInit()
@@ -66,7 +66,7 @@ export class DashEducComponent implements OnInit {
       else {
         Swal.fire({
           icon:"error",
-          title:"Skills  not Updated",
+          title:"Education Section not Updated",
           text:"Try again..!"
         })
       }

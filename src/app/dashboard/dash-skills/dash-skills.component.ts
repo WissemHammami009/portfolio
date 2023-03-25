@@ -52,14 +52,14 @@ export class DashSkillsComponent implements OnInit {
       if (this.li.isModified == true) {
         Swal.fire({
           icon:"success",
-          title:"Skills Updated"
+          title:"Skills Section Updated"
         })
         this.ngOnInit()
       }
       else {
         Swal.fire({
           icon:"error",
-          title:"Skills  not Updated",
+          title:"Skills Section not Updated",
           text:"Try again..!"
         })
       }

@@ -44,7 +44,7 @@ export class DashInterestComponent implements OnInit {
       if (this.li.isModified == true) {
         Swal.fire({
           icon:"success",
-          title:"Interest Updated"
+          title:"Interest Section Updated"
         }).then(result=>{
           this.ngOnInit()
         })
@@ -53,7 +53,7 @@ export class DashInterestComponent implements OnInit {
       else {
         Swal.fire({
           icon:"error",
-          title:"Interest not Updated",
+          title:"Interest Section not Updated",
           text:"Try again..!"
         })
       }

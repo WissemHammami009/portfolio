@@ -55,7 +55,7 @@ export class DashExperienceComponent implements OnInit {
       if (this.li.isModified == true) {
         Swal.fire({
           icon:"success",
-          title:"Experience Updated",
+          title:"Experience Section Updated",
           allowOutsideClick:false
         }).then(result=>{
           this.ngOnInit()
@@ -65,7 +65,7 @@ export class DashExperienceComponent implements OnInit {
       else {
         Swal.fire({
           icon:"error",
-          title:"Skills  not Updated",
+          title:"Experience Section not Updated",
           text:"Try again..!"
         })
       }

@@ -20,6 +20,7 @@ import { DashInterestComponent } from './dashboard/dash-interest/dash-interest.c
 import { ReloadComponent } from './dashboard/reload/reload.component';
 import { SettingsComponent } from './dashboard/settings/settings.component';
 import { DashEducComponent } from './dashboard/dash-educ/dash-educ.component';
+import { LostPasswordComponent } from './lost-password/lost-password.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DashEducComponent } from './dashboard/dash-educ/dash-educ.component';
     DashInterestComponent,
     ReloadComponent,
     SettingsComponent,
-    DashEducComponent
+    DashEducComponent,
+    LostPasswordComponent
   ],
   imports: [
     BrowserModule,

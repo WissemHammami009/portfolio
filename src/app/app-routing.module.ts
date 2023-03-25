@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReloadComponent } from './dashboard/reload/reload.component';
 import { SettingsComponent } from './dashboard/settings/settings.component';
 import { HomeComponent } from './home/home.component';
+import { LostPasswordComponent } from './lost-password/lost-password.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { SigninComponent } from './signin/signin.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:"dashboard",component:DashboardComponent},
   {path:"reload",component:ReloadComponent},
   {path:"dashboard/settings",component:SettingsComponent},
+  {path:"lost/password",component:LostPasswordComponent},
   {path: '',   redirectTo: '/home', pathMatch: 'full' },
   {path: '**', component: NotfoundComponent }
 ];

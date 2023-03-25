@@ -73,7 +73,7 @@ export class DashHomeComponent implements OnInit {
       if (this.li.isModified == true) {
         Swal.fire({
           icon:"success",
-          title:"Header Updated"
+          title:"Header Section Updated"
         }).then(result=>{
           this.ngOnInit()
         })
@@ -82,7 +82,7 @@ export class DashHomeComponent implements OnInit {
       else {
         Swal.fire({
           icon:"error",
-          title:"Header  not Updated",
+          title:"Header Section not Updated",
           text:"Try again..!"
         })
       }

@@ -54,14 +54,14 @@ export class DashCertifComponent implements OnInit {
       if (this.li.isModified == true) {
         Swal.fire({
           icon:"success",
-          title:"Skills Updated"
+          title:"Awards Section Updated"
         })
         this.ngOnInit()
       }
       else {
         Swal.fire({
           icon:"error",
-          title:"Skills  not Updated",
+          title:"Awards Section  not Updated",
           text:"Try again..!"
         })
       }

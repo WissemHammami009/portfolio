@@ -28,5 +28,8 @@ export class AuthService {
   checkalreadylogged(){
     return localStorage.getItem('alias') != null && localStorage.getItem('name') != null && localStorage.getItem('tokken') != null
   }
+  passwordlost(json:any){
+    return this.http.patch(this.endpoint+"api/user/reset/sent_password",json)
+  }
   
 }
