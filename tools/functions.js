@@ -21,4 +21,10 @@ function genUniqueId() {
     return Math.random().toString(36).substring(2, length+2);
   };
   
-  module.exports = {genUniqueId,randomId}
+  const date =()=>{
+    let str = new Date()
+    str = String(str)
+    str = str.substr(0,24)
+    return str
+  }
+  module.exports = {date,genUniqueId,randomId}

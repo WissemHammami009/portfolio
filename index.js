@@ -3,6 +3,7 @@ require('dotenv').config();
 
 const portfolio = require('./apis/portfolio')
 const User = require('./apis/user')
+const email = require('./apis/email')
 const app = express()
 var bodyParser = require('body-parser');
 
@@ -20,7 +21,8 @@ app.use(function (req, res, next) {
 });
 
 app.use('/api/portfolio',portfolio)
- app.use('/api/user',User)
+app.use('/api/user',User)
+app.use('/api/email',email)
 app.get('/',(req,res)=>{
     res.sendFile('./views/index.html',{root:__dirname})
 })

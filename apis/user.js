@@ -475,15 +475,25 @@ router.post('/aboutuser',(req,res)=>{
 router.patch("/updatealias",(req,res)=>{
     alias_old = req.body.alias_old
     alias_new = req.body.alias_new
-    User.updateOne({alias:alias_old},{$set:{alias:alias_new}}).then(resp=>{
-        portfolio.updateOne({alias:alias_old},{$set:{alias:alias_new}}).then(resp=>{
-            res.json({code:200,modified:resp.modifiedCount})
-        }).catch(err=>{
-            res.json({code:err.code,message:err.message})
-        })
-    }).catch(err=>{
-        res.json({code:err.code,message:err.message})
+    User.findOne({alias:alias_new}).then(resp=>{
+        if (resp == null) {
+            User.updateOne({alias:alias_old},{$set:{alias:alias_new}}).then(resp=>{
+                portfolio.updateOne({alias:alias_old},{$set:{alias:alias_new}}).then(resp=>{
+                    res.json({code:200,modified:resp.modifiedCount})
+                }).catch(err=>{
+                    res.json({code:err.code,message:err.message})
+                })
+            }).catch(err=>{
+                res.json({code:err.code,message:err.message})
+            })
+        }
+        else{
+            res.json({modified:false,message:'Username aleady in use'})
+        }
     })
+
+
+    
 })
 
 
