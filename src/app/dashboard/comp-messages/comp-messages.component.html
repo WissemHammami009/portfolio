@@ -1,0 +1,35 @@
+<app-dash-nav [active_message]="here"></app-dash-nav>
+<h2>Emails received</h2>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-responsive" data-pattern="priority-columns">
+        <table  class="table table-bordered table-hover">
+         <thead>
+            <tr>
+              <th data-priority="1">Sender Name</th>
+              <th data-priority="2">Sender Email</th>
+              <th data-priority="3">Subject</th>
+              <th data-priority="4">Message</th>
+              <th data-priority="5">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of li">
+              <td>{{item.sender}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.subject}}</td>
+              <td>{{item.message}}</td>
+              <td>{{item.time}}</td>
+            </tr>
+            
+          </tbody>
+          <tfoot>
+            
+          </tfoot>
+        </table>
+      </div><!--end of .table-responsive-->
+    </div>
+  </div>
+</div>

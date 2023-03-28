@@ -1,6 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ConfirmaccComponent } from './confirmacc/confirmacc.component';
+import { CompMessagesComponent } from './dashboard/comp-messages/comp-messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReloadComponent } from './dashboard/reload/reload.component';
 import { SettingsComponent } from './dashboard/settings/settings.component';
@@ -20,7 +21,9 @@ const routes: Routes = [
   {path:"dashboard",component:DashboardComponent},
   {path:"reload",component:ReloadComponent},
   {path:"dashboard/settings",component:SettingsComponent},
+  {path:"dashboard/messages",component:CompMessagesComponent},
   {path:"lost/password",component:LostPasswordComponent},
+
   {path: '',   redirectTo: '/home', pathMatch: 'full' },
   {path: '**', component: NotfoundComponent }
 ];

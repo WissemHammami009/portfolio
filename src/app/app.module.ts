@@ -21,6 +21,7 @@ import { ReloadComponent } from './dashboard/reload/reload.component';
 import { SettingsComponent } from './dashboard/settings/settings.component';
 import { DashEducComponent } from './dashboard/dash-educ/dash-educ.component';
 import { LostPasswordComponent } from './lost-password/lost-password.component';
+import { CompMessagesComponent } from './dashboard/comp-messages/comp-messages.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { LostPasswordComponent } from './lost-password/lost-password.component';
     ReloadComponent,
     SettingsComponent,
     DashEducComponent,
-    LostPasswordComponent
+    LostPasswordComponent,
+    CompMessagesComponent
   ],
   imports: [
     BrowserModule,
