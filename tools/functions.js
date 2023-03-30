@@ -1,5 +1,5 @@
 var crypto = require("crypto");
-
+const { v4: uuidv4 } = require ('uuid');
 function genUniqueId() {
     const dateStr = Date
       .now()
@@ -27,4 +27,9 @@ function genUniqueId() {
     str = str.substr(0,24)
     return str
   }
-  module.exports = {date,genUniqueId,randomId}
+  const generate5digit = ()=>{
+  // Generate a random UUID
+    let id = uuidv4 (); // -> '110ec58a-a0f2-4ac4-8393-c866d813b8d1'
+    return id
+  }
+  module.exports = {generate5digit,date,genUniqueId,randomId}
