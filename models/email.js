@@ -22,7 +22,7 @@ const Email = mongo.Schema({
             type:String,
             default:date()
         },
-        toalias:{
+        hashuser:{
             type:String
         }
 })

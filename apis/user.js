@@ -467,7 +467,7 @@ router.patch('/update/profile',(req,res)=>{
 })
 
 router.post('/aboutuser',(req,res)=>{
-    User.findOne({alias:req.body.alias},{email:1,birthdate:1,fullname:1,phone:1,alias:1}).then(resp=>{
+    User.findOne({alias:req.body.alias},{email:1,birthdate:1,fullname:1,phone:1,alias:1,image_url:1}).then(resp=>{
         res.status(200).json(resp)
     })
 })

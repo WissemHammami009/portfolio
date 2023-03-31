@@ -53,6 +53,9 @@ const User = mongo.Schema({
     alias:{
         type:String,
         unique:true
+    },
+    image_url:{
+        type:String
     }
 })
 

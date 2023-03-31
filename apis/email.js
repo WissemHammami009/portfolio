@@ -15,7 +15,7 @@ router.post('/send',async (req,res)=>{
 })
 
 router.post('/getemails',async (req,res)=>{
-    Email.find({toalias:req.body.alias}).sort({time:-1}).then(resp=>{
+    Email.find({toalias:req.body.hashuser}).sort({time:-1}).then(resp=>{
         res.json(resp)
     }).catch(err=>{
         res.json({code:err.code,message:err.message})
@@ -23,14 +23,21 @@ router.post('/getemails',async (req,res)=>{
 })
 
 router.post('/countemails',async (req,res)=>{
-    Email.find({toalias:req.body.alias}).count().then(resp=>{
+    Email.find({hashuser:req.body.hashuser}).count().then(resp=>{
         res.json({number:resp})
     })
 })
 
-router.post('/delete/email',async (req,res)=>{
-    Email.deleteOne({id:req.body.id,toalias:req.body.alias}).then(resp=>{
-
+router.delete('/delete',async (req,res)=>{
+    Email.deleteOne({id:req.body.id,hashuser:req.body.hashuser}).then(resp=>{
+        if (resp.deletedCount > 0) {
+            res.json({deleted:true})
+        }
+        else {
+            res.json({deleted:false})
+        }
+    }).catch(err=>{
+        res.json({deleted:false,message:err.message})
     })
 })
 
