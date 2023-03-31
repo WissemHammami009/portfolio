@@ -27,7 +27,7 @@ export class UserServiceService {
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
-          footer: 'Contact the developer I think my backend server is down!!',
+          html: 'There is a problem with my backend server.<br> Can you please connect me with the developer ?!',
           allowEnterKey:false,
           allowEscapeKey:false,
           allowOutsideClick:false,

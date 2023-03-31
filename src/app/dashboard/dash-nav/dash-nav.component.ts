@@ -15,10 +15,12 @@ export class DashNavComponent implements OnInit {
   constructor(private auth:AuthService,private emailserv:EmailsServicesService) { }
   link:any
   li:any
+  number:number=0
   ngOnInit(): void {
     this.link = "/portfolio/"+localStorage.getItem('alias')
-    this.emailserv.countemails({alias:localStorage.getItem('alias')}).subscribe(resp=>{
+    this.emailserv.countemails({hashuser:localStorage.getItem('hashuser')}).subscribe(resp=>{
       this.li = resp
+      this.number = this.li.number
     })
   }
 

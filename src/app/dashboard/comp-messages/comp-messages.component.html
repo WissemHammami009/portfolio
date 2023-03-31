@@ -1,11 +1,22 @@
 <app-dash-nav [active_message]="here"></app-dash-nav>
-<h2>Emails received</h2>
+<br>
+<div class="container info-header" *ngIf="len == 0">
+  <div class="row">
+    <div class="alert alert-info text-center" role="alert">
+      
+      <h4><i class="fa-solid fa-circle-info"></i> You have not received any feedback. Maybe you should promote your portfolio more.</h4>
+    </div>
+  </div>
+</div>
 
-<div class="container">
+
+<div class="container" *ngIf="len > 0">
+  <h2>You have some amazing news in your inbox. Check it out!</h2>
   <div class="row">
     <div class="col-xs-12">
-      <div class="table-responsive" data-pattern="priority-columns">
-        <table  class="table table-bordered table-hover">
+      
+      <div class="table-responsive" data-pattern="priority-columns" >
+        <table  class="table table-bordered table-hover" >
          <thead>
             <tr>
               <th data-priority="1">Sender Name</th>
@@ -13,6 +24,7 @@
               <th data-priority="3">Subject</th>
               <th data-priority="4">Message</th>
               <th data-priority="5">Time</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -22,6 +34,7 @@
               <td>{{item.subject}}</td>
               <td>{{item.message}}</td>
               <td>{{item.time}}</td>
+              <td class="icon"><a (click)="deleteemail(item.id)"><i class="fa-solid fa-trash"></i></a></td>
             </tr>
             
           </tbody>

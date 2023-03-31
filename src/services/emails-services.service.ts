@@ -18,4 +18,7 @@ export class EmailsServicesService {
   countemails(json:any){
     return this.http.post(this.endpoint+"api/email/countemails",json)
   }
+  deletemail(json:any){
+    return this.http.delete(this.endpoint+"api/email/delete",json)
+  }
 }

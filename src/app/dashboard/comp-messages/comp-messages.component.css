@@ -15,6 +15,7 @@ h2 {
     table caption {
       display: none;
     }
+    
   }
   
   .p {
@@ -22,3 +23,14 @@ h2 {
     padding-top: 140px;
     font-size: 14px;
   }
+  .fa-solid {
+    padding-top: 10px;
+    font-size: x-large;
+  }
+  .fa-solid:hover{
+    color:rgb(99, 39, 120);
+  }
+
+
+
+  
