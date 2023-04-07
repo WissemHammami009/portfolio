@@ -70,7 +70,7 @@
             </section>
             <hr class="m-0" />
             <!-- Education-->
-            <section class="resume-section" id="education" *ngIf="li?.education">
+            <section class="resume-section" id="education" *ngIf="li?.education.length> 0">
                 
                 <div class="resume-section-content">
                     <h2 class="mb-5">Education</h2>
@@ -96,7 +96,7 @@
             </section>
             <hr class="m-0" />
             <!-- Skills-->
-            <section class="resume-section" id="skills" *ngIf="li?.skills">
+            <section class="resume-section" id="skills" *ngIf="li?.skills > 0">
                 <div class="resume-section-content">
                     <h2 class="mb-5">Skills</h2>
                     <h3 class="nothin_toshow_here" *ngIf="li?.skills==0">Nothing to show here</h3>

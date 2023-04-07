@@ -605,11 +605,7 @@ ul.dropdown-menu li {
   padding: 10px 30px;
 }
 
-.banner-1 {
-  background: url("../../assets/images/banner/bg-2.jpg");
-  background-size: cover;
-  position: relative;
-}
+
 
 .banner-2 {
   background: url("../../assets/images/banner/slider-3.jpg");

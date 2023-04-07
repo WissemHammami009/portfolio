@@ -20,7 +20,10 @@ hr {
  
   
   body {
-    
+    background: url("../../assets/images/banner/slider-3.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     place-content: center;
   }
   .section {
@@ -29,3 +32,6 @@ hr {
     cursor: pointer;
     --_p: 100%
   }
+
+  
+  

@@ -1,47 +1,51 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Easiest Way to Add Input Masks to Your Forms</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-</head>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
 <body>
-    <div class="registration-form">
-        <form [formGroup]="signupForm" (ngSubmit)="signup()">
-            <div class="form-icon">
-                <span><i class="icon icon-user"></i></span>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item"  placeholder="{{words.name}}" formControlName="name">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item"  placeholder="{{words.surname}}" formControlName="surname">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control item" id="password" placeholder="{{words.password}}" formControlName='password'>
-            </div>
-            <div class="form-group">
-                <input type="email" class="form-control item" id="email" placeholder="{{words.email}}" formControlName='email'>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" id="phone-number" placeholder="{{words.phone}}" formControlName="phone">
-            </div>
-            <div class="form-group">
-                <input type="date" class="form-control item" id="birth-date" placeholder="Birth Date" formControlName="birthdate">
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-block create-account" [disabled]="!signupForm.valid">{{words.button_text}}</button>
-            </div>
-        </form>
-        <div class="social-media">
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form [formGroup]="signupForm" (ngSubmit)="signup()">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Name</span>
+            <input type="text" placeholder="{{words.name}}" formControlName="name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Surname</span> 
+            <input type="text" placeholder="{{words.surname}}" formControlName="surname" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" placeholder="{{words.email}}" formControlName='email' required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" placeholder="{{words.phone}}" formControlName="phone" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="text" placeholder="{{words.password}}" required formControlName='password'>
+          </div>
+          <div class="input-box">
+            <span class="details">Confirm Password</span>
+            <input type="text" placeholder="Confirm your password" required>
+          </div>
+        <div class="input-box width-100">
+            <span class="details">Birthday</span>
+            <input type="date" placeholder="Confirm your password" required formControlName="birthdate">
+          </div>
         </div>
+        <div class="button">
+          <button type="submit" [disabled]="!signupForm.valid" >{{words.button_text}}</button>
+        </div>
+      </form>
     </div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-    <script src="assets/js/script.js"></script>
+  </div>
+
 </body>
 </html>
