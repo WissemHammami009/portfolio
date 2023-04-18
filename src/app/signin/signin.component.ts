@@ -80,7 +80,7 @@ export class SigninComponent implements OnInit {
             Swal.showLoading(null)
           }
         })
-        this.authservice.settokken(this.li.tokken,this.li.resp.fullname)
+        this.authservice.settokken(this.li.token,this.li.resp.fullname)
         localStorage.setItem('alias',this.li.resp.alias)
         localStorage.setItem('hashuser',this.li.resp.userhash)
         this.router.navigate(["dashboard"])

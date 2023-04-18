@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { catchError, throwError } from 'rxjs';
@@ -11,12 +11,13 @@ export class UserServiceService {
   endpoint  = links.backend_links
   constructor(private http:HttpClient,private title:Title) { }
 
-
+  token = localStorage.getItem("tokken") || ""
+  headers= new HttpHeaders().set('x-access-token',this.token)
   aboutuser(json:any){
-    return this.http.post(this.endpoint+'api/user/aboutuser',json)
+    return this.http.post(this.endpoint+'api/user/aboutuser',json,{'headers':this.headers})
   }
   updateuser(json:any){
-    return this.http.patch(this.endpoint+"api/user/update/profile",json)
+    return this.http.patch(this.endpoint+"api/user/update/profile",json,{'headers':this.headers})
   }
 
   checkbackend_isup(){
@@ -43,6 +44,6 @@ export class UserServiceService {
   }
 
   updatealias(json:any){
-    return this.http.patch(this.endpoint+"api/user/updatealias",json)
+    return this.http.patch(this.endpoint+"api/user/updatealias",json,{'headers':this.headers})
   }
 }

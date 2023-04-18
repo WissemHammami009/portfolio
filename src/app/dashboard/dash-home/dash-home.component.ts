@@ -1,4 +1,5 @@
- import { Component, OnInit } from '@angular/core';
+ import { HttpHeaders } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {  Router } from '@angular/router';
 import { PortfolioService } from 'src/services/portfolio.service';
