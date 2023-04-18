@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
 router.use(bodyParser.json());
-
+const isAuthenticate = require('../middlewares/Auth')
 const portfolio= require('../models/portfolio');
 
 //create new alias for new portfolio 
-router.post("/create-portfolio",async (req,res)=>{
+router.post("/create-portfolio", isAuthenticate, async (req,res)=>{
     const port = new portfolio({
         alias:req.body.alias,
         experience:[{time:"",entreprise:"",description_post:""}],
@@ -23,7 +23,7 @@ router.post("/create-portfolio",async (req,res)=>{
 })
 
 //check if having a portfolio
-router.post("/check/portfolio",async (req,res)=>{
+router.post("/check/portfolio",isAuthenticate,async (req,res)=>{
     portfolio.findOne({alias:req.body.alias}).then(resp=>{
         if(resp == null ){
             res.status(200).json({data:false})
@@ -50,7 +50,7 @@ router.get('/lastest',(req,res)=>{
     })
 })
 
-router.post('/getheader',(req,res)=>{
+router.post('/getheader',isAuthenticate,(req,res)=>{
     const find = portfolio.findOne({alias:req.body.alias}).then(resp=>{
         if (resp == null) {
             res.status(200).json({found:false,message:"No data found"})
@@ -73,7 +73,7 @@ router.post('/getheader',(req,res)=>{
         }
     })
 })
-router.patch("/updateheader",(req,res)=>{
+router.patch("/updateheader",isAuthenticate,(req,res)=>{
     let alias = req.body.alias
     delete req.body.alias
     const data = portfolio.updateOne({alias:alias},{$set:req.body}).then(resp=>{
@@ -86,7 +86,7 @@ router.patch("/updateheader",(req,res)=>{
     })
 })
 
-router.patch('/updateskills',(req,res)=>{
+router.patch('/updateskills',isAuthenticate,(req,res)=>{
     let alias = req.body.alias
     delete req.body.alias
     const data = portfolio.updateOne({alias:alias},{$set:req.body}).then(resp=>{
@@ -99,7 +99,7 @@ router.patch('/updateskills',(req,res)=>{
     })
 })
 
-router.post('/getskills',(req,res)=>{
+router.post('/getskills',isAuthenticate,(req,res)=>{
     const find = portfolio.findOne({alias:req.body.alias}).then(resp=>{
         if (resp == null) {
             res.status(200).json({found:false,message:"No data found"})
@@ -112,7 +112,7 @@ router.post('/getskills',(req,res)=>{
 })
 
 
-router.patch('/updatecertif',(req,res)=>{
+router.patch('/updatecertif',isAuthenticate,(req,res)=>{
     let alias = req.body.alias
     delete req.body.alias
     const data = portfolio.updateOne({alias:alias},{$set:req.body}).then(resp=>{
@@ -125,7 +125,7 @@ router.patch('/updatecertif',(req,res)=>{
     })
 })
 
-router.post('/getcertif',(req,res)=>{
+router.post('/getcertif',isAuthenticate,(req,res)=>{
     const find = portfolio.findOne({alias:req.body.alias}).then(resp=>{
         if (resp == null) {
             res.status(200).json({found:false,message:"No data found"})
@@ -137,7 +137,7 @@ router.post('/getcertif',(req,res)=>{
     })
 })
 
-router.patch('/updateinterest',(req,res)=>{
+router.patch('/updateinterest',isAuthenticate,(req,res)=>{
     let alias = req.body.alias
     delete req.body.alias
     const data = portfolio.updateOne({alias:alias},{$set:req.body}).then(resp=>{
@@ -150,7 +150,7 @@ router.patch('/updateinterest',(req,res)=>{
     })
 })
 
-router.post('/getinterest',(req,res)=>{
+router.post('/getinterest',isAuthenticate,(req,res)=>{
     const find = portfolio.findOne({alias:req.body.alias}).then(resp=>{
         if (resp == null) {
             res.status(200).json({found:false,message:"No data found"})
@@ -162,7 +162,7 @@ router.post('/getinterest',(req,res)=>{
     })
 })
 //get experience
-router.post('/getexperience',(req,res)=>{
+router.post('/getexperience',isAuthenticate,(req,res)=>{
     portfolio.findOne({alias:req.body.alias}).then(resp=>{
         if (resp == null) {
             res.status(200).json({found:false,message:"No data found"})
@@ -174,7 +174,7 @@ router.post('/getexperience',(req,res)=>{
 })
 
 //update experience 
-router.patch('/updateexperience',(req,res)=>{
+router.patch('/updateexperience',isAuthenticate,(req,res)=>{
     let alias = req.body.alias
     delete req.body.alias
     const data = portfolio.updateOne({alias:alias},{$set:req.body}).then(resp=>{
@@ -189,7 +189,7 @@ router.patch('/updateexperience',(req,res)=>{
 
 //--------------------------------------------Education-----------------------------------
 //get education
-router.post('/geteducation',(req,res)=>{
+router.post('/geteducation',isAuthenticate,(req,res)=>{
     portfolio.findOne({alias:req.body.alias}).then(resp=>{
         if (resp == null) {
             res.status(200).json({found:false,message:"No data found"})
@@ -201,7 +201,7 @@ router.post('/geteducation',(req,res)=>{
 })
 
 //update education
-router.patch('/updateeducation',(req,res)=>{
+router.patch('/updateeducation',isAuthenticate,(req,res)=>{
     let alias = req.body.alias
     delete req.body.alias
     const data = portfolio.updateOne({alias:alias},{$set:req.body}).then(resp=>{

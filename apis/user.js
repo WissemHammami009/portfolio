@@ -4,10 +4,11 @@ var router = express.Router();
 var bodyParser = require('body-parser')
 const crypto = require('crypto')
 router.use(bodyParser.json());
-
+require('dotenv').config();
 const  User = require('../models/user');
 var nodemailer = require('nodemailer');
 const portfolio = require('../models/portfolio');
+const isAuthenticate = require('../middlewares/Auth')
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -64,7 +65,7 @@ router.patch('/reset/sent_password', (req,res)=>{
         $set: {reset_id_as:cle,reset_id_bs:resets_id}
     })
     .then(resp1=>{
-        link = "http://localhost:3000/"+cle;
+        link = process.env.EMAIL_LINK+cle;
         var html = '<body style="width:100%;font-family:lato, \'helvetica neue\', helvetica, arial, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0"><div class="es-wrapper-color" style="background-color:#F4F4F4"><!--[if gte mso 9]><v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t"> <v:fill type="tile" color="#f4f4f4"></v:fill> </v:background><![endif]--><table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top"><tr class="gmail-fix" height="0" style="border-collapse:collapse"><td style="padding:0;Margin:0"><table cellspacing="0" cellpadding="0" border="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:600px"><tr style="border-collapse:collapse"><td cellpadding="0" cellspacing="0" border="0" style="padding:0;Margin:0;line-height:1px;min-width:600px" height="0"><img src="https://veoxxq.stripocdn.email/content/guids/CABINET_837dc1d79e3a5eca5eb1609bfe9fd374/images/41521605538834349.png" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;max-height:0px;min-height:0px;min-width:600px;width:600px" alt width="600" height="1"></td></tr></table></td>'
         html += '</tr><tr style="border-collapse:collapse"><td valign="top" style="padding:0;Margin:0"><table cellpadding="0" cellspacing="0" class="es-content" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%"><tr style="border-collapse:collapse"><td align="center" style="padding:0;Margin:0"><table class="es-content-body" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px" cellspacing="0" cellpadding="0" align="center"><tr style="border-collapse:collapse"><td align="left" style="Margin:0;padding-left:10px;padding-right:10px;padding-top:15px;padding-bottom:15px"><!--[if mso]><table style="width:580px" cellpadding="0" cellspacing="0"><tr><td style="width:282px" valign="top"><![endif]--><table class="es-left" cellspacing="0" cellpadding="0" align="left" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left"><tr style="border-collapse:collapse"><td align="left" style="padding:0;Margin:0;width:282px"><table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr style="border-collapse:collapse"><td class="es-infoblock es-m-txt-c" align="left" style="padding:0;Margin:0;line-height:14px;font-size:12px;color:#CCCCCC"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, \'helvetica\ neue\', helvetica, sans-serif;line-height:14px;color:#CCCCCC;font-size:12px"> <br></p>'
         html += '</td></tr></table></td></tr></table><!--[if mso]></td><td style="width:20px"></td>'
@@ -81,7 +82,7 @@ router.patch('/reset/sent_password', (req,res)=>{
         html += '</tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr></table></div></body></html>'
 
         var mailOptions = {
-        from: 'About me <>',
+        from: 'Portfolio <>',
             to: email,
             subject: 'Réinitialisation de mot de passe ',
             html: html
@@ -173,7 +174,7 @@ router.post('/add/user',async (req,res)=>{
         }
     )
     const mail = req.body.email;
-    const link = "https://free-portfolio.web.app/confirm/account/"+code_confirm;
+    const link = process.env.EMAIL_LINK+"/confirm/account/"+code_confirm;
         var html = '<body style="width:100%;font-family:lato, \'helvetica neue\', helvetica, arial, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0"><div class="es-wrapper-color" style="background-color:#F4F4F4"><!--[if gte mso 9]><v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t"> <v:fill type="tile" color="#f4f4f4"></v:fill> </v:background><![endif]--><table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top"><tr class="gmail-fix" height="0" style="border-collapse:collapse"><td style="padding:0;Margin:0"><table cellspacing="0" cellpadding="0" border="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:600px"><tr style="border-collapse:collapse"><td cellpadding="0" cellspacing="0" border="0" style="padding:0;Margin:0;line-height:1px;min-width:600px" height="0"><img src="https://veoxxq.stripocdn.email/content/guids/CABINET_837dc1d79e3a5eca5eb1609bfe9fd374/images/41521605538834349.png" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;max-height:0px;min-height:0px;min-width:600px;width:600px" alt width="600" height="1"></td></tr></table></td>'
         html += '</tr><tr style="border-collapse:collapse"><td valign="top" style="padding:0;Margin:0"><table cellpadding="0" cellspacing="0" class="es-content" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%"><tr style="border-collapse:collapse"><td align="center" style="padding:0;Margin:0"><table class="es-content-body" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px" cellspacing="0" cellpadding="0" align="center"><tr style="border-collapse:collapse"><td align="left" style="Margin:0;padding-left:10px;padding-right:10px;padding-top:15px;padding-bottom:15px"><!--[if mso]><table style="width:580px" cellpadding="0" cellspacing="0"><tr><td style="width:282px" valign="top"><![endif]--><table class="es-left" cellspacing="0" cellpadding="0" align="left" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left"><tr style="border-collapse:collapse"><td align="left" style="padding:0;Margin:0;width:282px"><table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr style="border-collapse:collapse"><td class="es-infoblock es-m-txt-c" align="left" style="padding:0;Margin:0;line-height:14px;font-size:12px;color:#CCCCCC"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, \'helvetica\ neue\', helvetica, sans-serif;line-height:14px;color:#CCCCCC;font-size:12px"> <br></p>'
         html += '</td></tr></table></td></tr></table><!--[if mso]></td><td style="width:20px"></td>'
@@ -190,7 +191,7 @@ router.post('/add/user',async (req,res)=>{
         html += '</tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr></table></div></body></html>'
 
     var mailOptions = {
-        from: 'About me',
+        from: 'Portfolio',
         to: mail,
         subject: 'Confirmation de votre compte',
         html: html
@@ -415,8 +416,8 @@ router.post('/login',(req,res)=>{
             res.status(200).json({isLogged:false,user:"not found!"})
         }
         else {
-            tokken = genUniqueId()
-            res.status(200).json({isLogged:true, user: "found!",resp,tokken:tokken })
+            tokken = jwt.sign({email:req.body.email,password:hash},process.env.MAIN_KEY)
+            res.status(200).json({isLogged:true, user: "found!",resp,token:tokken })
         }
 })
 .catch(err=>{
@@ -438,7 +439,7 @@ router.post("/getdata",(req,res)=>{
 
 
 //update name 
-router.post("/update/name",(req,res)=>{
+router.post("/update/name",isAuthenticate,(req,res)=>{
     data = {
         name :req.body.name,
         fullname : req.body.name
@@ -453,7 +454,7 @@ router.post("/update/name",(req,res)=>{
 })
 
 //<---------------------------------------------------- Settings Section ------------------------------------->
-router.patch('/update/profile',(req,res)=>{
+router.patch('/update/profile',isAuthenticate,(req,res)=>{
     let alias = req.body.alias 
     delete req.body.alias 
     User.updateOne({alias:alias},{$set:req.body}).then(resp=>{
@@ -466,13 +467,13 @@ router.patch('/update/profile',(req,res)=>{
     })
 })
 
-router.post('/aboutuser',(req,res)=>{
+router.post('/aboutuser',isAuthenticate,(req,res)=>{
     User.findOne({alias:req.body.alias},{email:1,birthdate:1,fullname:1,phone:1,alias:1,image_url:1}).then(resp=>{
         res.status(200).json(resp)
     })
 })
 
-router.patch("/updatealias",(req,res)=>{
+router.patch("/updatealias",isAuthenticate,(req,res)=>{
     alias_old = req.body.alias_old
     alias_new = req.body.alias_new
     User.findOne({alias:alias_new}).then(resp=>{

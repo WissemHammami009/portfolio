@@ -3,7 +3,8 @@ var router = express.Router();
 var bodyParser = require('body-parser')
 router.use(bodyParser.json());
 
-const Email = require('../models/email')
+const Email = require('../models/email');
+const isAuthenticate = require('../middlewares/Auth');
 
 router.post('/send',async (req,res)=>{
     const email = new Email(req.body)
@@ -14,7 +15,7 @@ router.post('/send',async (req,res)=>{
     })
 })
 
-router.post('/getemails',async (req,res)=>{
+router.post('/getemails',isAuthenticate ,async (req,res)=>{
     Email.find({toalias:req.body.hashuser}).sort({time:-1}).then(resp=>{
         res.json(resp)
     }).catch(err=>{
@@ -22,13 +23,13 @@ router.post('/getemails',async (req,res)=>{
     })
 })
 
-router.post('/countemails',async (req,res)=>{
+router.post('/countemails',isAuthenticate ,async (req,res)=>{
     Email.find({hashuser:req.body.hashuser}).count().then(resp=>{
         res.json({number:resp})
     })
 })
 
-router.delete('/delete',async (req,res)=>{
+router.delete('/delete',isAuthenticate ,async (req,res)=>{
     Email.deleteOne({id:req.body.id,hashuser:req.body.hashuser}).then(resp=>{
         if (resp.deletedCount > 0) {
             res.json({deleted:true})
@@ -40,5 +41,8 @@ router.delete('/delete',async (req,res)=>{
         res.json({deleted:false,message:err.message})
     })
 })
+
+
+
 
 module.exports = router;
