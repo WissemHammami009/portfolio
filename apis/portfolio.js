@@ -23,7 +23,7 @@ router.post("/create-portfolio", isAuthenticate, async (req,res)=>{
 })
 
 //check if having a portfolio
-router.post("/check/portfolio",isAuthenticate,async (req,res)=>{
+router.post("/check/portfolio",async (req,res)=>{
     portfolio.findOne({alias:req.body.alias}).then(resp=>{
         if(resp == null ){
             res.status(200).json({data:false})
