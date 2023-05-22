@@ -8,6 +8,7 @@ require('dotenv').config();
 const  User = require('../models/user');
 var nodemailer = require('nodemailer');
 const portfolio = require('../models/portfolio');
+const Image = require('../models/imageModel')
 const isAuthenticate = require('../middlewares/Auth')
 
 var transporter = nodemailer.createTransport({
@@ -480,7 +481,11 @@ router.patch("/updatealias",isAuthenticate,(req,res)=>{
         if (resp == null) {
             User.updateOne({alias:alias_old},{$set:{alias:alias_new}}).then(resp=>{
                 portfolio.updateOne({alias:alias_old},{$set:{alias:alias_new}}).then(resp=>{
+                    Image.updateOne({alias:alias_old},{$set:{alias:alias_new}}).then(resp=>{
                     res.json({code:200,modified:resp.modifiedCount})
+                    }).catch(err=>{
+                        res.json({code:err.code,message:err.message})
+                    })
                 }).catch(err=>{
                     res.json({code:err.code,message:err.message})
                 })

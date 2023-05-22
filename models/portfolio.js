@@ -1,6 +1,7 @@
 
 const mongo = require('mongoose')
 var db = require('../database/connectdb');
+var imageModel = require('./imageModel')
 const portfolio = mongo.Schema({
     full_name: {
         type:String,
@@ -27,8 +28,7 @@ const portfolio = mongo.Schema({
         default:""
     },
     image_url:{
-        type:String,
-        default:""
+        type:String
     },
     description: {
         type: String,

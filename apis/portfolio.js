@@ -4,6 +4,19 @@ var bodyParser = require('body-parser')
 router.use(bodyParser.json());
 const isAuthenticate = require('../middlewares/Auth')
 const portfolio= require('../models/portfolio');
+const image = require('../models/imageModel')
+const multer = require('multer');
+// Define the upload middleware
+const upload = multer({
+    storage: multer.memoryStorage({
+      destination: './uploads',
+      filename: (req, file, cb) => {
+        const date = new Date();
+        cb(null, `${date.getTime()}-${file.originalname}`);
+      },
+    }),
+  });
+  
 
 //create new alias for new portfolio 
 router.post("/create-portfolio", isAuthenticate, async (req,res)=>{
@@ -50,8 +63,10 @@ router.get('/lastest',(req,res)=>{
     })
 })
 
-router.post('/getheader',isAuthenticate,(req,res)=>{
-    const find = portfolio.findOne({alias:req.body.alias}).then(resp=>{
+router.post('/getheader',isAuthenticate,async (req,res)=>{
+    const data = await image.findOne({alias:req.body.alias}).then()
+    const avatarname = data?.originalname || "Not selected Yet"
+    const find = await portfolio.findOne({alias:req.body.alias}).then(resp=>{
         if (resp == null) {
             res.status(200).json({found:false,message:"No data found"})
         }
@@ -67,7 +82,7 @@ router.post('/getheader',isAuthenticate,(req,res)=>{
                 facebook:resp.facebook,
                 linkedin:resp.linkedin,
                 github:resp.github,
-                image_url:resp.image_url
+                avatarname:avatarname
                 }
             res.status(200).json(json)
         }
