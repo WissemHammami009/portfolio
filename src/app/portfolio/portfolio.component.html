@@ -16,17 +16,17 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
                 <span class="d-block d-lg-none">{{li?.full_name}}</span>
-                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{li?.image_url}}" alt="..." /></span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="data:{{imagedata.type}};base64,{{imagedata.data}}" alt="..." /></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
                     <li class="nav-item" ><a class="nav-link js-scroll-trigger" href="{{link}}#about">About</a></li>
-                    <li class="nav-item" *ngIf="li?.experience"><a class="nav-link js-scroll-trigger" href="{{link}}#experience">Experience</a></li>
-                    <li class="nav-item" *ngIf="li?.education"><a class="nav-link js-scroll-trigger" href="{{link}}#education">Education</a></li>
-                    <li class="nav-item" *ngIf="li?.skills"><a class="nav-link js-scroll-trigger" href="{{link}}#skills">Skills</a></li>
+                    <li class="nav-item" *ngIf="li?.experience.length> 1"><a class="nav-link js-scroll-trigger" href="{{link}}#experience">Experience</a></li>
+                    <li class="nav-item" *ngIf="li?.education.length> 1"><a class="nav-link js-scroll-trigger" href="{{link}}#education">Education</a></li>
+                    <li class="nav-item" *ngIf="li?.skills.length> 1"><a class="nav-link js-scroll-trigger" href="{{link}}#skills">Skills</a></li>
                     <li class="nav-item" *ngIf="li?.interest"><a class="nav-link js-scroll-trigger" href="{{link}}#interests">Interests</a></li>
-                    <li class="nav-item" *ngIf="li?.certif"><a class="nav-link js-scroll-trigger" href="{{link}}#awards">Awards</a></li>
+                    <li class="nav-item" *ngIf="li?.certif.length> 1"><a class="nav-link js-scroll-trigger" href="{{link}}#awards">Awards</a></li>
                 </ul>
             </div>
         </nav>
@@ -53,11 +53,11 @@
             </section>
             <hr class="m-0" />
             <!-- Experience-->
-            <section class="resume-section" id="experience" *ngIf="li?.experience.length >0">
+            <section class="resume-section" id="experience" *ngIf="li?.experience.length >1">
                 <div class="resume-section-content">
                     <h2 class="mb-5">Experience</h2>
                     <h3 class="nothin_toshow_here" *ngIf="li?.experience==0">Nothing to show here</h3>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5" *ngFor="let item of li?.experience">
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5" *ngFor="let item of li?.experience.slice(1)">
                         <div class="flex-grow-1">
                             <h3 class="mb-0">{{item.postion}}</h3>
                             <div class="subheading mb-3">{{item.entreprise}}</div>
@@ -70,12 +70,11 @@
             </section>
             <hr class="m-0" />
             <!-- Education-->
-            <section class="resume-section" id="education" *ngIf="li?.education.length> 0">
+            <section class="resume-section" id="education" *ngIf="li?.education.length> 1">
                 
                 <div class="resume-section-content">
                     <h2 class="mb-5">Education</h2>
-                    <h3 class="nothin_toshow_here" *ngIf="li?.education==0">Nothing to show here</h3>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5" *ngFor="let educ of li?.education">
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5" *ngFor="let educ of li?.education.slice(1)">
                         <div class="flex-grow-1">
                             <h3 class="mb-0">{{educ.university}}</h3>
                             <div class="subheading mb-3">{{educ.diploma}}</div>
@@ -96,12 +95,11 @@
             </section>
             <hr class="m-0" />
             <!-- Skills-->
-            <section class="resume-section" id="skills" *ngIf="li?.skills > 0">
+            <section class="resume-section" id="skills" *ngIf="li?.skills.length> 1">
                 <div class="resume-section-content">
                     <h2 class="mb-5">Skills</h2>
-                    <h3 class="nothin_toshow_here" *ngIf="li?.skills==0">Nothing to show here</h3>
                     <div class="subheading mb-3">Programming Languages & Frameworks</div>
-                       <div *ngFor="let item of li?.skills">
+                       <div *ngFor="let item of li?.skills.slice(1)">
                             {{item.skill.toUpperCase()}}
                             <div class="progress">
                                     <div class="progress-bar " role="progressbar" style="width:{{item.percentage}}%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">{{item.percentage}}%</div>
@@ -133,18 +131,17 @@
             <section class="resume-section" id="interests" *ngIf="li?.interest">
                 <div class="resume-section-content">
                     <h2 class="mb-5">Interests</h2>
-                    <h3 class="nothin_toshow_here" *ngIf="li?.interest==0">Nothing to show here</h3>
                     <p>{{li?.interest}}.</p>
                     <p class="mb-0"></p>
                 </div>
             </section>
             <hr class="m-0" />
             <!-- Awards-->
-            <section class="resume-section" id="awards" *ngIf="li?.certif">
+            <section class="resume-section" id="awards" *ngIf="li?.certif.length >1">
                 <div class="resume-section-content">
                     <h2 class="mb-5">Awards & Certifications</h2>
-                    <h3 class="nothin_toshow_here" *ngIf="li?.certif==0">Nothing to show here</h3>
-                    <ul class="fa-ul mb-0" *ngFor="let item of li?.certif">
+                    <h3 class="nothin_toshow_here" *ngIf="li?.certif.length==1">Nothing to show here</h3>
+                    <ul class="fa-ul mb-0" *ngFor="let item of li?.certif.slice(1)">
                         <li>
                             <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
                             {{item.name}}

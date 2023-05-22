@@ -10,7 +10,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr  *ngFor="let item of li">
+          <tr  *ngFor="let item of li.slice(1)">
             <td>{{item.entreprise}}</td>
             <td><textarea [value]="item.description_post" readonly></textarea></td>
             <td>{{item.time}}</td>

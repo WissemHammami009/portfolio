@@ -46,4 +46,7 @@ export class UserServiceService {
   updatealias(json:any){
     return this.http.patch(this.endpoint+"api/user/updatealias",json,{'headers':this.headers})
   }
+  confirmaccount(id:any){
+    return this.http.patch(this.endpoint+"api/user/confirm/"+id,{})
+  }
 }

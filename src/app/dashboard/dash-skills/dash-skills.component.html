@@ -8,7 +8,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of li">
+          <tr *ngFor="let item of li.slice(1)">
             <td>{{item.skill}}</td>
             <td>{{item.percentage}}</td>
             <td><button class="btn btn-primary" (click)="delete(item)">Delete</button>&nbsp; <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#skills_modal" (click)="modify_skills(item.skill,item.percentage,item)">Modify</button></td>

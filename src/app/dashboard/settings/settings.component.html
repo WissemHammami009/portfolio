@@ -29,8 +29,10 @@
                <div class="input-group mb-2">
                     <input type="text" class="form-control" id="inlineFormInputGroup"  [formControl]="alias">
                     <div class="input-group-prepend">
-                        <button class=" button input-group-text" style="color:green" (click)="updatealias()" title="Check availability and update"><i class="fa-solid fa-check"></i></button>
-                      </div>
+                        <button class=" button input-group-text" [style]="!this.alias.valid ? 'color:grey;': 'color:green;'" [disabled]="!this.alias.valid" (click)="updatealias()" title="Check availability and update"><i class="fa-solid fa-check"></i></button>
+                      
+                    </div>
+                    <div class="col-md-12">- Field allows only digits, uppercase letters, lowercase letters, or hyphens.</div>
                 </div>
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="show_already">
                     <i class="fa-solid fa-circle-exclamation"></i> Username already taken

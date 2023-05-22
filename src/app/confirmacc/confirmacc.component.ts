@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import links from "../global.json"
+import links from "../../services/links.json"
+import { UserServiceService } from 'src/services/user-service.service';
 @Component({
   selector: 'app-confirmacc',
   templateUrl: './confirmacc.component.html',
@@ -10,7 +11,7 @@ import links from "../global.json"
 })
 export class ConfirmaccComponent implements OnInit {
 
-  constructor(private http:HttpClient,private route:ActivatedRoute,private router: Router) { }
+  constructor(private UserServ:UserServiceService,private route:ActivatedRoute,private router: Router) { }
   id:any
   links:any = links
   li:any
@@ -22,7 +23,7 @@ export class ConfirmaccComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id')
   })
-    this.http.patch(this.links.backend_link+"api/user/confirm/"+this.id,{}).subscribe(resp=>{
+    this.UserServ.confirmaccount(this.id).subscribe(resp=>{
       this.li = resp
       if (this.li.confirm.confirm == "yes") {
         Swal.fire({

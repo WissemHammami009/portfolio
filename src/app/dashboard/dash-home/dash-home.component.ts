@@ -1,7 +1,8 @@
- import { HttpHeaders } from '@angular/common/http';
+ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {  Router } from '@angular/router';
+import { AvatarimageService } from 'src/services/avatarimage.service';
 import { PortfolioService } from 'src/services/portfolio.service';
 import Swal from 'sweetalert2';
 
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class DashHomeComponent implements OnInit {
 
-  constructor(private portfolioserv:PortfolioService,private route:Router) { }
+  constructor(private portfolioserv:PortfolioService,private route:Router,private avatarServ:AvatarimageService) { }
   //phone misssing !!!!!!!!!!!!!!
   headerupdateForm = new FormGroup({
     full_name : new FormControl(''),
@@ -24,11 +25,14 @@ export class DashHomeComponent implements OnInit {
     linkedin: new FormControl(''),
     github: new FormControl(''),
     phone: new FormControl(''),
-    alias:new FormControl(''),
-    image_url : new FormControl('')
+    alias:new FormControl('')
   })
+
+  showmsg : boolean = false
+  file: File | undefined  
   li:any
   button : any  = "Update Header Information"
+  formData: any = new FormData;
   ngOnInit(): void {
     Swal.fire({
       title: 'loading Data From DataBase...',
@@ -49,7 +53,6 @@ export class DashHomeComponent implements OnInit {
       facebook:li.facebook,
       linkedin:li.linkedin,
       github:li.github,
-      image_url:li.image_url,
       alias:localStorage.getItem('alias')
     })
   }
@@ -57,6 +60,7 @@ export class DashHomeComponent implements OnInit {
   getdata(){
     this.portfolioserv.getheader({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
+      console.log(this.li)
       if (this.li.found == true) {
         this.setForm(this.li) 
       }
@@ -67,6 +71,7 @@ export class DashHomeComponent implements OnInit {
     Swal.fire({
       title: 'Running...',
     });
+    console.log(this.headerupdateForm.value)
     Swal.showLoading(null);
     this.portfolioserv.updateheader(this.headerupdateForm.value).subscribe(resp=>{
       this.li = resp
@@ -89,7 +94,36 @@ export class DashHomeComponent implements OnInit {
     })
   }
 
+  handleFileInput(event: any): void {
+    const files: FileList = event.target.files;
+    console.log(files)
+    if (files && files.length > 0) {
+      const file: File | null = files.item(0);
+      if (file) {
+        this.uploadFile(file);
+      } else {
+        console.error('Invalid file');
+      }
+    } else {
+      console.error('No file selected');
+    }
+  }
+  
 
-
-
+  uploadFile(event: any): void {
+    const file: File = event.target.files[0];
+    const formData: FormData = new FormData();
+    formData.append('image', file);
+    let alias = localStorage.getItem('alias') || ''
+    formData.append('alias',alias)
+    this.avatarServ.setavatar(formData)
+      .subscribe(
+        response => {
+          this.showmsg = true
+        },
+        error => {
+          console.error('File upload failed', error);
+        }
+      );
+  }
 }

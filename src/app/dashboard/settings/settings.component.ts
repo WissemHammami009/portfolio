@@ -22,7 +22,7 @@ export class SettingsComponent implements OnInit {
     phone:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(8),Validators.maxLength(8)]),
     birthdate : new FormControl('',Validators.required)
   })
-  alias = new FormControl('',Validators.required)
+  alias = new FormControl('',[Validators.required,Validators.pattern("^[a-zA-Z0-9-]+$")])
   here = "nav-item active"
   ngOnInit(): void {
     Swal.showLoading(null)

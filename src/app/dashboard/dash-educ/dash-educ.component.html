@@ -11,7 +11,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr  *ngFor="let item of li">
+          <tr  *ngFor="let item of li.slice(1)">
             <td>{{item.university}}</td>
             <td>{{item.diploma}}</td>
             <td>{{item.branch}}</td>
