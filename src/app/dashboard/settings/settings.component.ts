@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth.service';
+import { AvatarimageService } from 'src/services/avatarimage.service';
 import { UserServiceService } from 'src/services/user-service.service';
 import Swal from 'sweetalert2';
 
@@ -12,10 +13,11 @@ import Swal from 'sweetalert2';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private userinfo:UserServiceService, private userservice:UserServiceService,private authservice:AuthService,private router:Router) { }
+  constructor(private avatarser:AvatarimageService,private userinfo:UserServiceService, private userservice:UserServiceService,private authservice:AuthService,private router:Router) { }
   li:any
   show_already :boolean = false
   show_nochanges : boolean =false
+  imagedata:any
   updateForm = new FormGroup({
     fullname : new FormControl('',[Validators.required,Validators.pattern("^[a-zA-Z ]+$")]),
     email : new FormControl('',[Validators.required,Validators.email]),
@@ -38,6 +40,11 @@ export class SettingsComponent implements OnInit {
 
 
   getdata(){
+    Swal.showLoading(null)
+    let json = {alias:localStorage.getItem('alias')}
+    this.avatarser.getavatar(json).subscribe(resp=>{
+      this.imagedata = resp
+    })
     this.userinfo.aboutuser({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
       this.updateForm.patchValue({
@@ -48,6 +55,7 @@ export class SettingsComponent implements OnInit {
       })
       this.alias.patchValue(this.li.alias)
     })
+    Swal.close()
   }
 
   update(){
