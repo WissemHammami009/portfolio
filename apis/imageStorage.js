@@ -46,10 +46,8 @@ router.post('/getimage', upload.single('image'), async (req, res) => {
    const imageFromDb = await ImageModel.findOne(query).then()
 
    const base64Image = imageFromDb.image.toString('base64');
-   res.status(200).json({data:base64Image,type:imageFromDb.type})
+   res.status(200).json({data:base64Image,type:imageFromDb.type,filename:imageFromDb.originalname})
    //Send the image back as a response
    
   });
-
-
 module.exports = router;
