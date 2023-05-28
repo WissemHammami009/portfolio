@@ -16,12 +16,14 @@ export class DashExperienceComponent implements OnInit {
   entreprise = new FormControl()
   description = new FormControl()
   time = new FormControl()
+  post = new FormControl()
   pos :any
   expForm = new FormGroup({
     id:new FormControl(),
     entreprise: new FormControl(),
     description_post:new FormControl(),
     time:new FormControl(),
+    post:new FormControl()
   })
   ngOnInit(): void {
     Swal.isLoading()
@@ -48,7 +50,7 @@ export class DashExperienceComponent implements OnInit {
     Swal.fire({
       title: 'Updating...',
     });
-    Swal.showLoading(null);
+    Swal.showLoading();
     let json = {alias:localStorage.getItem('alias'),experience:this.li}
     this.serviceport.updateexpriencedata(json).subscribe(resp=>{
       this.li = resp
@@ -73,15 +75,16 @@ export class DashExperienceComponent implements OnInit {
     Swal.close()
   }
 
-  modify_exp(entreprise:any,description:any,time:any,item:any){
+  modify_exp(entreprise:any,description:any,time:any,post:any,item:any){
     this.pos = this.li.indexOf(item);
     this.entreprise.setValue(entreprise)
     this.description.setValue(description)
     this.time.setValue(time)
+    this.post.setValue(post)
   }
   update_exp(){
     this.li.splice(this.pos,1);
-    let json = {entreprise:this.entreprise.value,description_post:this.description.value,time:this.time.value}
+    let json = {entreprise:this.entreprise.value,description_post:this.description.value,time:this.time.value,post:this.post.value}
     this.li.push(json)
     Swal.fire({
       icon:"success",

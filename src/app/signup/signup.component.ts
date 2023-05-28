@@ -57,7 +57,7 @@ export class SignupComponent implements OnInit {
           footer:'A confirmation email has been sent to you. Check your email and spam folders to complete the verification process.',
           allowOutsideClick:false,
           didOpen: () => {
-            Swal.showLoading(null)
+            Swal.showLoading()
           }
         })
       }

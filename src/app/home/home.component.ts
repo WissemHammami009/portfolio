@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
       Swal.fire({
         title: 'loading Data From DataBase...',
       });
-      Swal.showLoading(null);
+      Swal.showLoading();
       this.userservice.checkbackend_isup().subscribe()
       this.get_data()
       Swal.close()

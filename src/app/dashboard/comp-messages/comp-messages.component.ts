@@ -15,7 +15,7 @@ export class CompMessagesComponent implements OnInit {
   len:number = 0
   here = "nav-item active"
   ngOnInit(): void {
-    Swal.showLoading(null)
+    Swal.showLoading()
     this.userservice.checkbackend_isup().subscribe()
     this.emailserv.getmail({alias:localStorage.getItem('hashuser')}).subscribe(resp=>{
       this.li = resp
@@ -26,7 +26,7 @@ export class CompMessagesComponent implements OnInit {
 
 
   deleteemail(id:any){
-    Swal.showLoading(null)
+    Swal.showLoading()
     let json = {id:id,hashuser:localStorage.getItem('hashuser')}
     console.log(json)
     this.emailserv.deletemail(json).subscribe(resp=>{

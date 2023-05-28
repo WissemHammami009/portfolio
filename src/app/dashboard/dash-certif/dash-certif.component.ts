@@ -45,7 +45,7 @@ export class DashCertifComponent implements OnInit {
       title: 'Running...',
     });
 
-    Swal.showLoading(null);
+    Swal.showLoading();
 
     let json  = {alias:localStorage.getItem('alias'),certif:this.li}
 

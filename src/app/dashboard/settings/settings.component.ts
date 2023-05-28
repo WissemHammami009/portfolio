@@ -27,7 +27,7 @@ export class SettingsComponent implements OnInit {
   alias = new FormControl('',[Validators.required,Validators.pattern("^[a-zA-Z0-9-]+$")])
   here = "nav-item active"
   ngOnInit(): void {
-    Swal.showLoading(null)
+    Swal.showLoading()
     this.userservice.checkbackend_isup().subscribe()
     if (this.authservice.checkalreadylogged() == false){
       localStorage.setItem('notlogged',"yes")
@@ -40,7 +40,7 @@ export class SettingsComponent implements OnInit {
 
 
   getdata(){
-    Swal.showLoading(null)
+    Swal.showLoading()
     let json = {alias:localStorage.getItem('alias')}
     this.avatarser.getavatar(json).subscribe(resp=>{
       this.imagedata = resp
@@ -62,7 +62,7 @@ export class SettingsComponent implements OnInit {
     Swal.fire({
       title: 'Running!',
     })
-    Swal.showLoading(null)
+    Swal.showLoading()
     if (this.test_datachanges() == true) {
       Swal.fire({
         icon:"info",
@@ -113,7 +113,7 @@ export class SettingsComponent implements OnInit {
       Swal.fire({
         title:"Updating.."
       })
-      Swal.showLoading(null)
+      Swal.showLoading()
       this.userservice.updatealias(json).subscribe(resp=>{
         let li_temp : any = resp
         if (li_temp.code == 200) {

@@ -20,7 +20,7 @@ export class DashInterestComponent implements OnInit {
     Swal.fire({
       title: 'loading Data From DataBase...',
     }); 
-    Swal.showLoading(null);
+    Swal.showLoading();
     this.getdata()
     Swal.close()
     
@@ -37,7 +37,7 @@ export class DashInterestComponent implements OnInit {
     Swal.fire({
       title: 'Running...',
     });
-    Swal.showLoading(null);
+    Swal.showLoading();
     let json = {alias:localStorage.getItem('alias'),interest:this.interest.value}
     this.portfolioserv.updateinterest(json).subscribe(resp=>{
       this.li = resp

@@ -44,7 +44,7 @@ export class DashSkillsComponent implements OnInit {
     Swal.fire({
       title: 'Running...',
     });
-    Swal.showLoading(null);
+    Swal.showLoading();
     let json  = {alias:localStorage.getItem('alias'),skills:this.li}
     console.log(json)
     this.portfolioserv.updateskills(json).subscribe(resp=>{

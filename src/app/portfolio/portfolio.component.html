@@ -59,7 +59,7 @@
                     <h3 class="nothin_toshow_here" *ngIf="li?.experience==0">Nothing to show here</h3>
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5" *ngFor="let item of li?.experience.slice(1)">
                         <div class="flex-grow-1">
-                            <h3 class="mb-0">{{item.postion}}</h3>
+                            <h3 class="mb-0">{{item.post}}</h3>
                             <div class="subheading mb-3">{{item.entreprise}}</div>
                             <p>{{item.description_post || "-"}}.</p>
                         </div>

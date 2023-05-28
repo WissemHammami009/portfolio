@@ -23,7 +23,7 @@ export class PortfolioComponent implements OnInit {
     Swal.fire({
       title: 'loading Data From DataBase...',
     });
-    Swal.showLoading(null);
+    Swal.showLoading();
     this.route.paramMap.subscribe(params => {
       this.json = {alias:params.get('id')}
   })

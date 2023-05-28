@@ -25,7 +25,7 @@ export class DashEducComponent implements OnInit {
     time:new FormControl(),
   })
   ngOnInit(): void {
-    Swal.showLoading(null)
+    Swal.showLoading()
     this.getdata()
     Swal.close()
   }
@@ -49,7 +49,7 @@ export class DashEducComponent implements OnInit {
     Swal.fire({
       title: 'Updating...',
     });
-    Swal.showLoading(null);
+    Swal.showLoading();
     let json = {alias:localStorage.getItem('alias'),education:this.li}
     this.serviceport.updateeducationdata(json).subscribe(resp=>{
       this.li = resp

@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
-                Swal.showLoading(null)
+                Swal.showLoading()
                 this.portfolioserv.createportfolio({alias:localStorage.getItem('alias')}).subscribe(resp=>{
                   let res : any  = resp 
                   if (res.code == 11000) {

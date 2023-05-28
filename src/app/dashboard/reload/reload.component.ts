@@ -12,7 +12,7 @@ export class ReloadComponent implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit(): void {
-    Swal.showLoading(null)
+    Swal.showLoading()
     this.router.navigate(['/dashboard'])
   }
 

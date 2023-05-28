@@ -77,7 +77,7 @@ export class SigninComponent implements OnInit {
           title: 'Login successfully..!',
           html: 'We just keeping things ready to you  &#128515;!',
           didOpen: () => {
-            Swal.showLoading(null)
+            Swal.showLoading()
           }
         })
         this.authservice.settokken(this.li.token,this.li.resp.fullname)

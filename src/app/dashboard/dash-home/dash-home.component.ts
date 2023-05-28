@@ -37,7 +37,7 @@ export class DashHomeComponent implements OnInit {
     Swal.fire({
       title: 'loading Data From DataBase...',
     });
-    Swal.showLoading(null);
+    Swal.showLoading();
     this.getdata()
     Swal.close()
   }
@@ -60,7 +60,6 @@ export class DashHomeComponent implements OnInit {
   getdata(){
     this.portfolioserv.getheader({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
-      console.log(this.li)
       if (this.li.found == true) {
         this.setForm(this.li) 
       }
@@ -72,7 +71,7 @@ export class DashHomeComponent implements OnInit {
       title: 'Running...',
     });
     console.log(this.headerupdateForm.value)
-    Swal.showLoading(null);
+    Swal.showLoading();
     this.portfolioserv.updateheader(this.headerupdateForm.value).subscribe(resp=>{
       this.li = resp
       if (this.li.isModified == true) {
