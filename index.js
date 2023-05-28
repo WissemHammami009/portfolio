@@ -8,16 +8,7 @@ const image = require('./apis/imageStorage')
 const app = express()
 var bodyParser = require('body-parser');
 const isAuthenticate = require('./middlewares/Auth');
-const multer = require("multer");
 
-const upload =  multer({
-    // The directory where the files will be stored.
-    destination: "uploads",
-    // The list of file types that are allowed to be uploaded.
-    limits: {
-      fileSize: 1000 * 1024 * 1024, // 1 GB
-    },
-  })
 app.use(bodyParser.json());
 
 
@@ -43,28 +34,7 @@ app.listen(process.env.PORT,()=>{
     console.log(`Server Running on ${process.env.PORT}`)
 })
 
-app.post("/upload",upload.single('file'), (req, res) => {
-    // Get the file object from the request.
-    const file = req.file;
-  
-    // Check if the file was uploaded successfully.
-    if (!file) {
-      res.send("File not uploaded.");
-      return;
-    }
-  
-    // Save the file to MongoDB.
-    const image = {
-      filename: file.originalname,
-      data: file.buffer,
-      type:file.mimetype
-    };
-  
-    // Send a success response to the client.
-    const base64Image = image.data.toString('base64');
-    let html = `<img src="data:${image.type};base64,${base64Image}">`
-    res.send(html)
-  });
+
 
 
 

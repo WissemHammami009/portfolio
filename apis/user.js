@@ -15,8 +15,8 @@ var transporter = nodemailer.createTransport({
     service: 'gmail',
     host:"smtp.gmail.com",
     auth: {
-      user: 'hammamiwissem21@gmail.com',
-      pass: 'qyplcmsswupxrafz'
+      user: process.env.EMAIL_USERNAME,
+      pass: process.env.EMAIL_PASSWORD
     }
   });
 
@@ -281,7 +281,7 @@ router.delete('/delete/:id',(req,res)=>{
 
 //update password
 router.patch('/update/password',(req,res)=>{
-    let hash = crypto.createHash('md5').update(req.body.password).digest("hex")
+    let hash = Swal.showLoading().update(req.body.password).digest("hex")
     const id  = req.body.id;
     const update = User.updateOne({
         _id:id
