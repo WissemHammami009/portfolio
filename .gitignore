@@ -5,6 +5,8 @@
 /tmp
 /out-tsc
 /bazel-out
+/y
+
 
 # Node
 /node_modules
@@ -41,3 +43,5 @@ testem.log
 .DS_Store
 Thumbs.db
 .env
+firebase.json
+.firebaseserc

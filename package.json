@@ -23,7 +23,7 @@
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.7.5",
     "tslib": "^2.3.0",
-    "webpack": "^5.83.1",
+    "webpack": "^5.85.0",
     "webpack-sources": "^2.3.1",
     "webpacks": "^1.0.0",
     "zone.js": "~0.11.4"

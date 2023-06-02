@@ -32,7 +32,7 @@ export class SettingsComponent implements OnInit {
     if (this.authservice.checkalreadylogged() == false){
       localStorage.setItem('notlogged',"yes")
       this.router.navigate(['/signin'])
-      
+
     }
     this.getdata()
     Swal.close()
@@ -69,7 +69,7 @@ export class SettingsComponent implements OnInit {
         title:"Information",
         text:"You need to change something to make an update!"
       })
-      return 
+      return
     }
     else {
       this.userservice.updateuser(this.updateForm.value).subscribe(resp=>{
@@ -99,7 +99,7 @@ export class SettingsComponent implements OnInit {
     let test_email = this.li.email == this.updateForm.controls['email'].value
     if (test_birthdate && test_fullname && test_phone && test_email)
       return true
-    else 
+    else
     return false
   }
 
@@ -111,42 +111,60 @@ export class SettingsComponent implements OnInit {
     }
     else {
       Swal.fire({
-        title:"Updating.."
-      })
-      Swal.showLoading()
-      this.userservice.updatealias(json).subscribe(resp=>{
-        let li_temp : any = resp
-        if (li_temp.code == 200) {
-          if (li_temp.modified == 1) {
-            Swal.fire({
-              icon:"success",
-              title:"Username updated",
-              text:"You need to re-signin to make changes",
-              allowEnterKey:false,
-              allowEscapeKey:false,
-              allowOutsideClick:false,
-              confirmButtonText:"Logout"
-            }).then(res=>{
-
-              this.authservice.logout()
-            })
-            
-          }
-          else {
-            Swal.fire({
-              icon:"error",
-              title:"username not Updated",
-              text:"Try again..!"
-            })
-          }
-        }
-        else {
+        title: 'Do you want to save the changes?',
+        html:"<div class='alert alert-warning'>Changes are going to make a new link to your portfolio.</div>",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+        denyButtonText: `Don't save`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
           Swal.fire({
-            icon:"warning",
-            title:"Information",
-            text:"Username already taken."
+            title:"Updating.."
           })
-          this.show_already = true
+          Swal.showLoading()
+          this.userservice.updatealias(json).subscribe(resp=>{
+            let li_temp : any = resp
+            if (li_temp.code == 200) {
+              if (li_temp.modified == 1) {
+                Swal.fire({
+                  icon:"success",
+                  title:"Username updated",
+                  text:"You need to re-signin to make changes",
+                  allowEnterKey:false,
+                  allowEscapeKey:false,
+                  allowOutsideClick:false,
+                  confirmButtonText:"Logout"
+                }).then(res=>{
+
+                  this.authservice.logout()
+                })
+
+              }
+              else {
+                Swal.fire({
+                  icon:"error",
+                  title:"username not Updated",
+                  text:"Try again..!"
+                })
+              }
+            }
+            else {
+              Swal.fire({
+                icon:"warning",
+                title:"Information",
+                text:"Username already taken."
+              })
+              this.show_already = true
+            }
+          })
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info').then(
+            result=>{
+              this.ngOnInit()
+            }
+          )
         }
       })
     }
