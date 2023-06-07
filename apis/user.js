@@ -6,22 +6,14 @@ const crypto = require('crypto')
 router.use(bodyParser.json());
 require('dotenv').config();
 const  User = require('../models/user');
-var nodemailer = require('nodemailer');
 const portfolio = require('../models/portfolio');
 const Image = require('../models/imageModel')
 const isAuthenticate = require('../middlewares/Auth')
 
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host:"smtp.gmail.com",
-    auth: {
-      user: process.env.EMAIL_USERNAME,
-      pass: process.env.EMAIL_PASSWORD
-    }
-  });
+var transporter = require('../plugins/mailer')
 
 
-router.get('/home', function(req, res, next) { 
+router.get('/home', function(req, res) { 
     res.end('Welcome to You in Home Page');
 });
 
