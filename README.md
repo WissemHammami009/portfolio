@@ -13,3 +13,16 @@ a powerful and user-friendly platform designed to help you showcase your work in
 
 # First Template 
 ![Initial template](https://github.com/WissemHammami009/portfolio/assets/44125202/b7e7e151-2d52-4d68-9269-92e3b864d824)
+
+
+## Environment Variables
+
+| Environment Variable | Description                                                  |
+| -------------------- | ------------------------------------------------------------ |
+| MONGO_URI            | URI to connect to the database                               |
+| PORT                 | The port number for the application (default: 3000)          |
+| EMAIL_USERNAME       | Username for the email account used for sending emails       |
+| EMAIL_PASSWORD       | Password for the email account used for sending emails       |
+| EMAIL_LINK           | The frontend URL used as a reference for sending emails      |
+| MAIN_KEY             | JWT secret key composed of 64 bytes                          |
+
