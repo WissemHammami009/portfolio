@@ -31,8 +31,9 @@ export class SigninComponent implements OnInit {
     if ( "notlogged" in localStorage) {
       localStorage.clear()
       this.dashaccess = true
+      this.authservice.clearApplication()
     }
-    if(this.authservice.checkalreadylogged()){
+    else if(this.authservice.checkalreadylogged()){
       Swal.fire({
         icon:"info",
         title:"Already logged!",
@@ -43,6 +44,9 @@ export class SigninComponent implements OnInit {
       }).then(res=>{
         this.router.navigate(['dashboard'])
       })
+    }
+    else {
+      this.authservice.clearApplication()
     }
   }
   login(){

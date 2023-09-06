@@ -23,6 +23,7 @@ import { DashEducComponent } from './dashboard/dash-educ/dash-educ.component';
 import { LostPasswordComponent } from './lost-password/lost-password.component';
 import { CompMessagesComponent } from './dashboard/comp-messages/comp-messages.component';
 import { StoreModule } from '@ngrx/store';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -53,8 +54,8 @@ import { StoreModule } from '@ngrx/store';
     ReactiveFormsModule,
     FormsModule,
     StoreModule.forRoot({}, {})
-  ], 
-  providers: [],
+  ],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 
