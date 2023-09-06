@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {  Router } from '@angular/router';
-import { AvatarimageService } from 'src/services/avatarimage.service';
-import { PortfolioService } from 'src/services/portfolio.service';
+import { AvatarimageService } from 'src/app/services/avatarimage.service';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -29,7 +29,7 @@ export class DashHomeComponent implements OnInit {
   })
 
   showmsg : boolean = false
-  file: File | undefined  
+  file: File | undefined
   li:any
   button : any  = "Update Header Information"
   formData: any = new FormData;
@@ -61,12 +61,12 @@ export class DashHomeComponent implements OnInit {
     this.portfolioserv.getheader({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
       if (this.li.found == true) {
-        this.setForm(this.li) 
+        this.setForm(this.li)
       }
     })
   }
   updateheader(){
-    
+
     Swal.fire({
       title: 'Running...',
     });
@@ -81,7 +81,7 @@ export class DashHomeComponent implements OnInit {
         }).then(result=>{
           this.ngOnInit()
         })
-        
+
       }
       else {
         Swal.fire({
@@ -107,7 +107,7 @@ export class DashHomeComponent implements OnInit {
       console.error('No file selected');
     }
   }
-  
+
 
   uploadFile(event: any): void {
     const file: File = event.target.files[0];

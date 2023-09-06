@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import links from './links.json'
+import {environment} from '../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
 export class EmailsServicesService {
-  endpoint  = links.backend_links
+  endpoint  = environment.backend_links
   constructor(private http:HttpClient) { }
   token = localStorage.getItem("tokken") || ""
   headers= new HttpHeaders().set('x-access-token',this.token)

@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import links from "../../services/links.json"
-import { UserServiceService } from 'src/services/user-service.service';
+import links from "../services/links.json"
+import { UserServiceService } from 'src/app/services/user-service.service';
 @Component({
   selector: 'app-confirmacc',
   templateUrl: './confirmacc.component.html',
@@ -47,7 +47,7 @@ export class ConfirmaccComponent implements OnInit {
         }).then(resul=>{
           this.router.navigate(["/signin"])
         });
-        
+
       }
     })
   }

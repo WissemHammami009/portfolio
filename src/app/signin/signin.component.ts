@@ -4,10 +4,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import words from "./words.json";
 import link from "../global.json"
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { UserServiceService } from 'src/services/user-service.service';
+import { UserServiceService } from 'src/app/services/user-service.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -71,7 +71,7 @@ export class SigninComponent implements OnInit {
         })
       }
       else  {
-        
+
         Swal.fire({
           icon: 'success',
           title: 'Login successfully..!',

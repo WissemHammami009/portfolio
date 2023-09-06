@@ -1,13 +1,13 @@
 import { HttpClient, HttpErrorResponse,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
-import links from './links.json'
+import {environment} from '../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
 
-  endpoint  = links.backend_links
+  endpoint  = environment.backend_links
   constructor(private http:HttpClient) { }
   token = localStorage.getItem("tokken") || ""
   headers= new HttpHeaders().set('x-access-token',this.token)
@@ -24,14 +24,14 @@ export class PortfolioService {
   updateexpriencedata(json:any){
     return this.http.patch(this.endpoint+"api/portfolio/updateexperience",json,{'headers':this.headers})
   }
-  
+
   getskills(json:any){
     return this.http.post(this.endpoint+"api/portfolio/getskills",json,{'headers':this.headers})
   }
   updateskills(json:any){
     return this.http.patch(this.endpoint+'api/portfolio/updateskills',json,{'headers':this.headers})
   }
-  
+
   getinterest(json:any){
     return this.http.post(this.endpoint+'api/portfolio/getinterest',json,{'headers':this.headers})
   }
@@ -40,7 +40,7 @@ export class PortfolioService {
   }
 
   getheader(json:any){
-    
+
     return this.http.post(this.endpoint+"api/portfolio/getheader",json,{'headers':this.headers})
   }
   updateheader(json:any){
@@ -65,5 +65,5 @@ export class PortfolioService {
   updateeducationdata(json:any){
     return this.http.patch(this.endpoint+"api/portfolio/updateeducation",json,{'headers':this.headers})
   }
-  
+
 }

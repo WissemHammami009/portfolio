@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/services/auth.service';
-import { EmailsServicesService } from 'src/services/emails-services.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { EmailsServicesService } from 'src/app/services/emails-services.service';
 
 @Component({
   selector: 'app-dash-nav',

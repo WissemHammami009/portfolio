@@ -2,9 +2,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { AvatarimageService } from 'src/services/avatarimage.service';
-import { PortfolioService } from 'src/services/portfolio.service';
-import { UserServiceService } from 'src/services/user-service.service';
+import { AvatarimageService } from 'src/app/services/avatarimage.service';
+import { PortfolioService } from 'src/app/services/portfolio.service';
+import { UserServiceService } from 'src/app/services/user-service.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-portfolio',
@@ -18,7 +18,7 @@ export class PortfolioComponent implements OnInit {
   json:any
   imagedata:any
   ngOnInit(): void {
-    
+
     this.userservice.checkbackend_isup().subscribe()
     Swal.fire({
       title: 'loading Data From DataBase...',
@@ -49,9 +49,9 @@ export class PortfolioComponent implements OnInit {
       return
     }
     this.link = this.link+this.li.alias
-      }) 
+      })
     Swal.close()
-   
+
   }
 
 }

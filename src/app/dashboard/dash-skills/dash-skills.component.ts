@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PortfolioService } from 'src/services/portfolio.service';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -22,7 +22,7 @@ export class DashSkillsComponent implements OnInit {
   skill_modal = new FormControl('')
   percentage_modal = new FormControl('')
   pos: number = 0
- 
+
   additem_skills(){
     this.languageForm.patchValue({id:this.li.length + 1})
     this.li.push(this.languageForm.value)

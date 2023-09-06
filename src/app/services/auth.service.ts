@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import links from './links.json'
+import {environment} from '../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  endpoint  = links.backend_links
+  endpoint  = environment.backend_links
   constructor(private http:HttpClient,private route:Router) { }
-  
+
   signup(json:any){
     return this.http.post(this.endpoint+"api/user/add/user",json)
   }
@@ -31,5 +31,5 @@ export class AuthService {
   passwordlost(json:any){
     return this.http.patch(this.endpoint+"api/user/reset/sent_password",json)
   }
-  
+
 }

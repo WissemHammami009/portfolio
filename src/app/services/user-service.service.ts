@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { catchError, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
-import links from './links.json'
+import {environment} from '../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
-  endpoint  = links.backend_links
+  endpoint  = environment.backend_links
   constructor(private http:HttpClient,private title:Title) { }
 
   token = localStorage.getItem("tokken") || ""

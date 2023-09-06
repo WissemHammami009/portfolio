@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/services/auth.service';
-import { UserServiceService } from 'src/services/user-service.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserServiceService } from 'src/app/services/user-service.service';
 import Swal from 'sweetalert2';
-import { PortfolioService } from '../../services/portfolio.service';
+import { PortfolioService } from '../services/portfolio.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
     if (this.authservice.checkalreadylogged() == false){
       localStorage.setItem('notlogged',"yes")
       this.router.navigate(['/signin'])
-      
+
     }
     else {
       this.portfolioserv.checkprotfolioexist({alias:localStorage.getItem('alias')}).subscribe(resp=>{
@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
               if (result.isConfirmed) {
                 Swal.showLoading()
                 this.portfolioserv.createportfolio({alias:localStorage.getItem('alias')}).subscribe(resp=>{
-                  let res : any  = resp 
+                  let res : any  = resp
                   if (res.code == 11000) {
                     Swal.fire({
                       icon:"error",
@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
             })
           })
         }
-        
+
       })
     }
   }

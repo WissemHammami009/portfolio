@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { AuthService } from 'src/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,7 +19,7 @@ export class LostPasswordComponent implements OnInit {
 
   sendemail(){
     this.authservice.passwordlost({email:this.email.value}).subscribe(resp=>{
-      let li:any = resp 
+      let li:any = resp
       if (li.password_reset.alias == "not sent") {
         Swal.fire({
           icon:"error",

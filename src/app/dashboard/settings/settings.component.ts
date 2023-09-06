@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/services/auth.service';
-import { AvatarimageService } from 'src/services/avatarimage.service';
-import { UserServiceService } from 'src/services/user-service.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { AvatarimageService } from 'src/app/services/avatarimage.service';
+import { UserServiceService } from 'src/app/services/user-service.service';
 import Swal from 'sweetalert2';
 
 @Component({

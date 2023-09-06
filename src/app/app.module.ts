@@ -22,6 +22,7 @@ import { SettingsComponent } from './dashboard/settings/settings.component';
 import { DashEducComponent } from './dashboard/dash-educ/dash-educ.component';
 import { LostPasswordComponent } from './lost-password/lost-password.component';
 import { CompMessagesComponent } from './dashboard/comp-messages/comp-messages.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CompMessagesComponent } from './dashboard/comp-messages/comp-messages.c
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot({}, {})
   ], 
   providers: [],
   bootstrap: [AppComponent]

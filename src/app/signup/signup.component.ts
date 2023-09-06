@@ -5,9 +5,9 @@ import words from "./words.json";
 import link from "../global.json"
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { Title } from '@angular/platform-browser';
-import { UserServiceService } from 'src/services/user-service.service';
+import { UserServiceService } from 'src/app/services/user-service.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit {
   signup(){
     console.log(this.signupForm.value)
     this.authservice.signup(this.signupForm.value).subscribe(resp=>{
-      this.li = resp 
+      this.li = resp
       this.signupForm.reset()
       if (this.li.signup.added == "no") {
         Swal.fire({
@@ -62,7 +62,7 @@ export class SignupComponent implements OnInit {
         })
       }
     })
-    
+
   }
 
 }

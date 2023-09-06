@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PortfolioService } from 'src/services/portfolio.service';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,7 +14,7 @@ export class DashCertifComponent implements OnInit {
 
   constructor(private portfolioserv:PortfolioService) { }
   li:any
-  username:any 
+  username:any
   awardsForm = new FormGroup({
     id:new FormControl(''),
     name:new FormControl('',[Validators.required])

@@ -1,9 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { catchError, throwError } from 'rxjs';
-import { PortfolioService } from 'src/services/portfolio.service';
-import { UserServiceService } from 'src/services/user-service.service';
+import { Component, OnInit ,OnDestroy, OnChanges, SimpleChanges,} from '@angular/core';
+import { PortfolioService } from 'src/app/services/portfolio.service';
+import { UserServiceService } from 'src/app/services/user-service.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,9 +9,10 @@ import Swal from 'sweetalert2';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit{
 
-  constructor(private http:HttpClient,private userservice:UserServiceService,private portfolio:PortfolioService) { }
+  constructor(private userservice:UserServiceService,private portfolio:PortfolioService) { }
+
   li:any
    ngOnInit():void {
       this.userservice.changeTitle("Welcome - Portfolio")
@@ -24,7 +23,7 @@ export class HomeComponent implements OnInit {
       this.userservice.checkbackend_isup().subscribe()
       this.get_data()
       Swal.close()
-    
+
     }
 
 
@@ -33,6 +32,6 @@ export class HomeComponent implements OnInit {
           this.li = resp
         })
     }
-    
+
 
 }

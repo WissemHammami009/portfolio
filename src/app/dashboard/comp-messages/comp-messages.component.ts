@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EmailsServicesService } from 'src/services/emails-services.service';
-import { UserServiceService } from 'src/services/user-service.service';
+import { EmailsServicesService } from 'src/app/services/emails-services.service';
+import { UserServiceService } from 'src/app/services/user-service.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -30,7 +30,7 @@ export class CompMessagesComponent implements OnInit {
     let json = {id:id,hashuser:localStorage.getItem('hashuser')}
     console.log(json)
     this.emailserv.deletemail(json).subscribe(resp=>{
-      let res  :any = resp 
+      let res  :any = resp
       if (res.deleted == false) {
         Swal.fire({
           icon:"error",

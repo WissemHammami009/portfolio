@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { PortfolioService } from 'src/services/portfolio.service';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -61,7 +61,7 @@ export class DashEducComponent implements OnInit {
         }).then(result=>{
           this.ngOnInit()
         })
-        
+
       }
       else {
         Swal.fire({
