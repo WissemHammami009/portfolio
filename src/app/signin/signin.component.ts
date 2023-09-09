@@ -20,11 +20,22 @@ export class SigninComponent implements OnInit {
     email: new FormControl('',[Validators.required,Validators.email]),
     password: new FormControl('',[Validators.required,Validators.minLength(8)])
   })
+  remember = new FormControl(false)
   li:any
   dashaccess:boolean = false
   passerror:boolean = false
   link : any = link
-
+  check_remember(){
+    console.log(this.remember.value)
+    if (this.remember.value == true ) {
+      console.log("0")
+      this.signinForm.controls['password'].reset();
+    }
+    else {
+      console.log("A")
+      this.signinForm.reset()
+    }
+  }
   ngOnInit(): void {
     this.userservice.changeTitle("Welcome back - Portfolio. ")
     this.userservice.checkbackend_isup().subscribe()
@@ -60,7 +71,7 @@ export class SigninComponent implements OnInit {
             html: 'Wrong authentification (<u>Password</u> or <u>Email</u>)! <br><b>Please try again!</b>',
             showConfirmButton:true
           }).then(result=>{
-            this.signinForm.reset()
+            this.check_remember()
           })
       }
       else if (this.li.resp.confirm == "no"){

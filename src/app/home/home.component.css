@@ -611,6 +611,7 @@ ul.dropdown-menu li {
   background: url("../../assets/images/banner/slider-3.jpg");
   background-size: cover;
   position: relative;
+  height: 100vh;
 }
 
 .banner-3 {

@@ -1,6 +1,5 @@
 import { HttpClient, HttpErrorResponse,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
 import {environment} from '../../environments/environment'
 @Injectable({
   providedIn: 'root'
@@ -15,6 +14,7 @@ export class PortfolioService {
     return this.http.post(this.endpoint+"api/portfolio/create-portfolio",json,{'headers':this.headers})
   }
   checkprotfolioexist(json:any){
+    console.log(this.headers)
     return this.http.post(this.endpoint+'api/portfolio/check/portfolio',json,{'headers':this.headers})
   }
 
@@ -47,6 +47,7 @@ export class PortfolioService {
     return this.http.patch(this.endpoint+"api/portfolio/updateheader",json,{'headers':this.headers})
   }
   getcertif(json:any){
+    console.log(this.headers)
     return this.http.post(this.endpoint+"api/portfolio/getcertif",json,{'headers':this.headers})
   }
   updatecertif(json:any){
