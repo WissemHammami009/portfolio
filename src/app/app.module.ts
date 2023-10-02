@@ -24,6 +24,7 @@ import { LostPasswordComponent } from './lost-password/lost-password.component';
 import { CompMessagesComponent } from './dashboard/comp-messages/comp-messages.component';
 import { StoreModule } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
+import { NewpasswordComponent } from './lost-password/newpassword/newpassword.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CookieService } from 'ngx-cookie-service';
     SettingsComponent,
     DashEducComponent,
     LostPasswordComponent,
-    CompMessagesComponent
+    CompMessagesComponent,
+    NewpasswordComponent
   ],
   imports: [
     BrowserModule,

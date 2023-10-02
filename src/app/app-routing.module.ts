@@ -11,6 +11,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { NewpasswordComponent } from './lost-password/newpassword/newpassword.component';
 
 const routes: Routes = [
   {path:"portfolio/:id",component:PortfolioComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path:"dashboard/settings",component:SettingsComponent},
   {path:"dashboard/messages",component:CompMessagesComponent},
   {path:"lost/password",component:LostPasswordComponent},
+  {path:"lost/newpassword/:token",component:NewpasswordComponent},
 
   {path: '',   redirectTo: '/home', pathMatch: 'full' },
   {path: '**', component: NotfoundComponent }

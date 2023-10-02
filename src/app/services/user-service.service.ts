@@ -49,4 +49,10 @@ export class UserServiceService {
   confirmaccount(id:any){
     return this.http.patch(this.endpoint+"api/user/confirm/"+id,{})
   }
+  checktokkennewpass(json:any){
+    return this.http.patch(this.endpoint+"api/user/get/setpassword",json)
+  }
+  setnewpass(json:any){
+    return this.http.patch(this.endpoint+"api/user/set/password",json)
+  }
 }

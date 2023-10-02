@@ -26,13 +26,10 @@ export class SigninComponent implements OnInit {
   passerror:boolean = false
   link : any = link
   check_remember(){
-    console.log(this.remember.value)
     if (this.remember.value == true ) {
-      console.log("0")
       this.signinForm.controls['password'].reset();
     }
     else {
-      console.log("A")
       this.signinForm.reset()
     }
   }
