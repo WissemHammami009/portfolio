@@ -18,19 +18,25 @@ router.get('/home', function(req, res) {
 });
 
 router.patch('/get/setpassword',(req,res)=>{
+    let id_pass 
     let data = {
-        reset_id_as:req.body.code,
-        id_pass:req.body.id_pass
+        reset_id_as:req.body.token
         }
 const getdata = User.findOne(data)
     .then(resp=>{
     if (resp ==null) {
         return res.json({verif:{
-            check:"not exist"
+            check:false,message:"token not found"
         }})
     }
     else{
-        return res.json({verif:{check:"exist"}})
+        id_pass = resp.id_pass 
+        User.updateOne(data,{$set: {reset_id_as:""}}).then(resp=>{
+            return res.json({verif:{check:true,message:"token found"},data:{id_pass:id_pass}})
+        }).catch(err=>{
+            res.json({code:err.code,message:err.message})
+        })
+        
     }
 })
 
@@ -58,7 +64,7 @@ router.patch('/reset/sent_password', (req,res)=>{
         $set: {reset_id_as:cle,reset_id_bs:resets_id}
     })
     .then(resp1=>{
-        link = process.env.EMAIL_LINK+cle;
+        link = process.env.EMAIL_LINK+"/lost/newpassword/"+cle;
         var html = '<body style="width:100%;font-family:lato, \'helvetica neue\', helvetica, arial, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0"><div class="es-wrapper-color" style="background-color:#F4F4F4"><!--[if gte mso 9]><v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t"> <v:fill type="tile" color="#f4f4f4"></v:fill> </v:background><![endif]--><table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top"><tr class="gmail-fix" height="0" style="border-collapse:collapse"><td style="padding:0;Margin:0"><table cellspacing="0" cellpadding="0" border="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:600px"><tr style="border-collapse:collapse"><td cellpadding="0" cellspacing="0" border="0" style="padding:0;Margin:0;line-height:1px;min-width:600px" height="0"><img src="https://veoxxq.stripocdn.email/content/guids/CABINET_837dc1d79e3a5eca5eb1609bfe9fd374/images/41521605538834349.png" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;max-height:0px;min-height:0px;min-width:600px;width:600px" alt width="600" height="1"></td></tr></table></td>'
         html += '</tr><tr style="border-collapse:collapse"><td valign="top" style="padding:0;Margin:0"><table cellpadding="0" cellspacing="0" class="es-content" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%"><tr style="border-collapse:collapse"><td align="center" style="padding:0;Margin:0"><table class="es-content-body" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px" cellspacing="0" cellpadding="0" align="center"><tr style="border-collapse:collapse"><td align="left" style="Margin:0;padding-left:10px;padding-right:10px;padding-top:15px;padding-bottom:15px"><!--[if mso]><table style="width:580px" cellpadding="0" cellspacing="0"><tr><td style="width:282px" valign="top"><![endif]--><table class="es-left" cellspacing="0" cellpadding="0" align="left" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left"><tr style="border-collapse:collapse"><td align="left" style="padding:0;Margin:0;width:282px"><table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr style="border-collapse:collapse"><td class="es-infoblock es-m-txt-c" align="left" style="padding:0;Margin:0;line-height:14px;font-size:12px;color:#CCCCCC"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, \'helvetica\ neue\', helvetica, sans-serif;line-height:14px;color:#CCCCCC;font-size:12px"> <br></p>'
         html += '</td></tr></table></td></tr></table><!--[if mso]></td><td style="width:20px"></td>'
@@ -122,7 +128,6 @@ router.patch('/set/password', (req,res)=>{
             },{
                 $set: {
                     reset_id_bs:resets_id,
-                    reset_id_as:null,
                     password:hash
                 }
             })

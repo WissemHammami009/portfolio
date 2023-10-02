@@ -26,7 +26,6 @@ router.post("/create-portfolio", isAuthenticate, async (req,res)=>{
         education:[{diploma:"",time:"",university:"",branch:""}],
         skills:[{skill:"",percentage:""}],
         certif:[{name:""}]
-
     })
     port.save({alias:req.body.alias}).then(resp=>{
         res.json({code:200,resp})
