@@ -371,34 +371,7 @@ router.patch('/confirm/:cle',(req,res)=>{
 
 
 
-//update mail
-router.patch('/update/email',(req,res)=>{
-    const id  = req.body.id;
-    const data = {
-        email:req.body.email
-    }
-    const find = User.findOne(data).then(resp=>{
-        if (resp ==null) {
-            const update = User.updateOne({
-                _id:id
-            },{
-                $set: {email:req.body.email}
-            })
-            .then(resp=>{
-                res.json({updated:{email:'yes'}})
-            })
-            .catch(err=>{
-                res.send(err)
-            })
-        }
-        else {
-        res.json({updated:{email:"no",message:"exist"}})
-        }
-    })
-    .catch(err=>{
-        res.send(err)
-    })
-})
+
 
 //authentification
 router.post('/login',(req,res)=>{
@@ -491,14 +464,27 @@ router.patch("/updatealias",isAuthenticate,(req,res)=>{
             })
         }
         else{
-            res.json({modified:false,message:'Username aleady in use'})
+            res.json({modified:false,message:'Username already in use'})
         }
     })
-
-
-    
 })
 
+
+router.patch('/updateemail',isAuthenticate,(req,res)=>{
+    User.findOne({email:req.body.newemail}).then(resp=>{
+        if (resp == null) {
+            User.updateOne({email:req.body.oldemail},{$set:{email:req.body.newemail}}).then(resp=>{
+                res.status(200).json({code:200,modified:resp.modifiedCount})
+            }).catch(err=>{
+                res.json({code:err.code,message:err.message})
+            })
+        }else{
+            res.json({modified:false,message:'Email already in use'})
+        }
+    }).catch(err=>{
+        res.json({code:err.code,message:err.message})
+    })
+})
 
 
 module.exports = router;
