@@ -9,9 +9,14 @@ const app = express()
 var bodyParser = require('body-parser');
 const isAuthenticate = require('./middlewares/Auth');
 
+const path = require('path');
 app.use(bodyParser.json());
 
+// Set the view engine to EJS
+app.set('view engine', 'ejs');
 
+// Set the 'views' directory to the 'views' folder
+app.set('views', path.join(__dirname, 'views'));
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

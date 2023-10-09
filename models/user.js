@@ -3,13 +3,30 @@ const mongo = require('mongoose')
 var db = require('../database/connectdb');
 var {randomId} = require('../tools/functions')
 const crypto = require('crypto')
+const emailSchema = new mongo.Schema({
+    oldEmail: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+    },
+    newEmail: {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+    tokenEmail:{
+        type:String,
+        default:crypto.randomBytes(30).toString('hex')
+    }
+  });
 const User = mongo.Schema({
     userhash:{
         type:String,
         default:crypto.randomBytes(30).toString('hex')
     },
     email: {
-        type: String,
+        type:emailSchema,
         required: true
     },
     fullname: {

@@ -46,7 +46,7 @@ router.patch('/reset/sent_password', (req,res)=>{
     let resets_id = crypto.randomBytes(50).toString('hex');
     let email = req.body.email;
     data = {
-        email:email
+        "email.oldEmail":email
     }
     let cle = ""
     const getdata = User.findOne(data)
@@ -59,7 +59,7 @@ router.patch('/reset/sent_password', (req,res)=>{
     }
     cle = resp.reset_id_bs;
     const update = User.updateOne({
-        email:email
+        "email.oldEmail":email
     },{
         $set: {reset_id_as:cle,reset_id_bs:resets_id}
     })
@@ -161,7 +161,7 @@ router.post('/add/user',async (req,res)=>{
     const user = new User(
         {
         fullname: req.body.name + " "+ req.body.surname,
-        email: req.body.email,
+        email: {newEmail:req.body.email},
         password: hash,
         phone:req.body.phone,
         birthdate:req.body.birthdate,
@@ -194,7 +194,7 @@ router.post('/add/user',async (req,res)=>{
         subject: 'Confirmation de votre compte',
         html: html
       };
-    const find = User.findOne({email:req.body.email}).then(resp=>{
+    const find = User.findOne({"email.oldEmail":req.body.email}).then(resp=>{
         if (resp ==null) {
             user.save()
             .then(resp=>{
@@ -302,7 +302,7 @@ router.post('/password/lost',(req,res)=>{
     let email = req.body.email
     let code_cli = req.body.cle
     
-    const find = User.findOne({email: email}).then(resp=>{
+    const find = User.findOne({"email.oldEmail": email}).then(resp=>{
         if(resp != null){
             code_cli = resp.reset_id_bs;
             link = "localhost:4200/set/password/"+resp.reset_id_bs+"/"+resp.id_pass+"/2";
@@ -377,7 +377,7 @@ router.patch('/confirm/:cle',(req,res)=>{
 router.post('/login',(req,res)=>{
     let hash = crypto.createHash('md5').update(req.body.password).digest("hex")
     const data = {
-        email:req.body.email,
+        "email.oldEmail":req.body.email,
         password:hash
     }
 
@@ -398,9 +398,9 @@ router.post('/login',(req,res)=>{
 
 //get data
 router.post("/getdata",(req,res)=>{
-    const getdata = User.findOne({email:req.body.email}).then(resp=>{
+    const getdata = User.findOne({"email.oldEmail":req.body.email}).then(resp=>{
         if (resp != null ) {
-            res.json({data:{name:resp.name+" "+resp.surname+"<"+resp.email+">",exist:"yes"}})  
+            res.json({data:{name:resp.name+" "+resp.surname+"<"+resp.email.oldEmail+">",exist:"yes"}})  
         }
         else {
             res.send({data:{name:null,exist:"no"}})
@@ -470,14 +470,49 @@ router.patch("/updatealias",isAuthenticate,(req,res)=>{
 })
 
 
-router.patch('/updateemail',isAuthenticate,(req,res)=>{
-    User.findOne({email:req.body.newemail}).then(resp=>{
+router.patch('/updateemail',(req,res)=>{
+    User.findOne({"email.oldEmail":req.body.newemail}).then(resp=>{
         if (resp == null) {
-            User.updateOne({email:req.body.oldemail},{$set:{email:req.body.newemail}}).then(resp=>{
-                res.status(200).json({code:200,modified:resp.modifiedCount})
-            }).catch(err=>{
-                res.json({code:err.code,message:err.message})
-            })
+            User.findOne({"email.oldEmail":req.body.oldemail}).then(resp=>{
+                let  link = process.env.BACKEND_LINK +"/api/user/confirmnewemail/"+resp.email.tokenEmail
+
+                const html = `
+                        <html>
+                            <head>
+                            <style>
+                                /* Add your CSS styles here to format the email */
+                            </style>
+                            </head>
+                            <body>
+                            <p>Hello ${req.body.name},</p>
+                            <p>We received a request to update the email address associated with your account. To complete this process, please click the link below to confirm your new email address:</p>
+                            <p><a href="${link}">Confirm Email Address</a></p>
+                            <p>If you did not request this change, please reply to this email for assistance.</p>
+                            <p>Thank you for using our services!</p>
+                            <p>Best regards, Portfolio</p>
+                            </body>
+                        </html>
+                        `;
+                var mailOptions = {
+                    from: 'ABout me <>',
+                        to: req.body.newemail,
+                        subject: 'Email Address Update Confirmation',
+                        html: html
+                    };
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                        console.log(error);
+                        } else {
+                        console.log('Email sent: ' + info.response);
+                        }
+                });
+                User.updateOne({"email.oldEmail":req.body.oldemail},{$set:{"email.newEmail":req.body.newemail}}).then(resp=>{
+                    res.status(200).json({code:200,modified:resp.modifiedCount})
+                }).catch(err=>{
+                    res.json({code:err.code,message:err.message})
+                })
+                })
+            
         }else{
             res.json({modified:false,message:'Email already in use'})
         }
@@ -486,5 +521,26 @@ router.patch('/updateemail',isAuthenticate,(req,res)=>{
     })
 })
 
+
+router.get('/confirmnewemail/:token',(req,res)=>{
+    token = req.params.token
+
+    User.findOne({'email.tokenEmail':token}).then(resp=>{
+        if (resp != null && resp.email.newEmail !="" ) {
+            const linksett = process.env.LINK_SETT;
+            newtokenemail = crypto.randomBytes(30).toString('hex')
+            User.updateOne({'email.tokenEmail':token},{$set:{"email.oldEmail":resp.email.newEmail,"email.newEmail":"","email.tokenEmail":newtokenemail}}).then(resp=>{
+                 // Render the success.ejs template
+                res.render('success',{linksett});   
+            }).catch(err=>{
+                res.json({code:err.code,message:err.message})
+            })
+        }else{
+            res.json({modified:false,message:'Token is not valid'})
+        }
+    }).catch(err=>{
+        res.json({code:err.code,message:err.message})
+    })
+})
 
 module.exports = router;
