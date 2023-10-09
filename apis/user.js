@@ -470,7 +470,7 @@ router.patch("/updatealias",isAuthenticate,(req,res)=>{
 })
 
 
-router.patch('/updateemail',(req,res)=>{
+router.patch('/updateemail',isAuthenticate,(req,res)=>{
     User.findOne({"email.oldEmail":req.body.newemail}).then(resp=>{
         if (resp == null) {
             User.findOne({"email.oldEmail":req.body.oldemail}).then(resp=>{
@@ -488,7 +488,7 @@ router.patch('/updateemail',(req,res)=>{
                             <p>We received a request to update the email address associated with your account. To complete this process, please click the link below to confirm your new email address:</p>
                             <p><a href="${link}">Confirm Email Address</a></p>
                             <p>If you did not request this change, please reply to this email for assistance.</p>
-                            <p>Thank you for using our services!</p>
+                            <p>Thank you for using our platform!</p>
                             <p>Best regards, Portfolio</p>
                             </body>
                         </html>
