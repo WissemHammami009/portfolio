@@ -24,6 +24,7 @@ export class SigninComponent implements OnInit {
   li:any
   dashaccess:boolean = false
   passerror:boolean = false
+  setpass:boolean = false
   link : any = link
   check_remember(){
     if (this.remember.value == true ) {
@@ -36,6 +37,11 @@ export class SigninComponent implements OnInit {
   ngOnInit(): void {
     this.userservice.changeTitle("Welcome back - Portfolio. ")
     this.userservice.checkbackend_isup().subscribe()
+
+    if ("setpass" in localStorage) {
+      this.setpass = true
+      localStorage.removeItem("setpass")
+    }
     if ( "notlogged" in localStorage) {
       localStorage.clear()
       this.dashaccess = true

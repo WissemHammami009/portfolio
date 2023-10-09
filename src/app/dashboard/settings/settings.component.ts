@@ -17,6 +17,11 @@ export class SettingsComponent implements OnInit {
   li:any
   show_already :boolean = false
   show_nochanges : boolean =false
+
+  show_already_email :boolean = false
+  show_nochanges_email : boolean =false
+  show_success_email :boolean = false
+
   imagedata:any
   updateForm = new FormGroup({
     fullname : new FormControl('',[Validators.required,Validators.pattern("^[a-zA-Z ]+$")]),
@@ -25,6 +30,7 @@ export class SettingsComponent implements OnInit {
     birthdate : new FormControl('',Validators.required)
   })
   alias = new FormControl('',[Validators.required,Validators.pattern("^[a-zA-Z0-9-]+$")])
+  email = new FormControl('',[Validators.required,Validators.email])
   here = "nav-item active"
   ngOnInit(): void {
     Swal.showLoading()
@@ -50,10 +56,11 @@ export class SettingsComponent implements OnInit {
       this.updateForm.patchValue({
         fullname:this.li.fullname,
         phone:this.li.phone,
-        email:this.li.email,
+        email:this.li.email.oldEmail,
         birthdate:this.li.birthdate
       })
       this.alias.patchValue(this.li.alias)
+      this.email.patchValue(this.li.email.oldEmail)
     })
     Swal.close()
   }
@@ -172,5 +179,66 @@ export class SettingsComponent implements OnInit {
   reset(){
     this.show_already = false
     this.show_nochanges = false
+  }
+  updateemail(){
+    let json = {oldemail:this.li.email.oldEmail,newemail:this.email.value}
+    if (this.li.email.oldEmail == this.email.value) {
+      this.show_nochanges_email = true
+    }
+    else {
+      Swal.fire({
+        title: 'Do you want to save the changes?',
+        html:"<div class='alert alert-danger'>Changes are going to add new email to your account.</div>",
+        showDenyButton: false,
+        showCancelButton: true,
+        confirmButtonText: 'Continue',
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire({
+            title:"Updating.."
+          })
+          Swal.showLoading()
+          this.userservice.updateemail(json).subscribe(resp=>{
+            let li_temp : any = resp
+            if (li_temp.code == 200) {
+              if (li_temp.modified == 1) {
+                Swal.fire({
+                  icon:"success",
+                  title:"Email Confirmation sent!",
+                  text:"you need to confirm your new email to set it as your primary email.",
+                  allowEnterKey:false,
+                  allowEscapeKey:false,
+                  allowOutsideClick:false,
+                }).then(res=>{
+                  this.show_success_email = true
+                })
+              }
+              else {
+                Swal.fire({
+                  icon:"error",
+                  title:"Email not Updated",
+                  text:"Try again..!"
+                })
+              }
+            }
+            else {
+              Swal.fire({
+                icon:"warning",
+                title:"Information",
+                text:"Email already taken."
+              })
+              this.show_already_email = true
+            }
+          })
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info').then(
+            result=>{
+              this.ngOnInit()
+            }
+          )
+        }
+      })
+    }
   }
 }

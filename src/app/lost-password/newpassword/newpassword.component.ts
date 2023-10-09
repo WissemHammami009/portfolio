@@ -85,6 +85,7 @@ export class NewpasswordComponent implements OnInit {
           allowOutsideClick:false,
 
       }).then((result)=>{
+        localStorage.setItem('setpass',"true")
         this.route.navigate(['/signin'])
       })
       }

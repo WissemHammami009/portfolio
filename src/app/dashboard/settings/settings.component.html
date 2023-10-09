@@ -3,7 +3,7 @@
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px"  src="data:{{imagedata?.type}};base64,{{imagedata?.data}}" alt="{{imagedata?.filename}}"><span class="font-weight-bold">{{li?.fullname}}</span><span class="text-black-50">{{li?.email}}</span><span> </span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px"  src="data:{{imagedata?.type}};base64,{{imagedata?.data}}" alt="{{imagedata?.filename}}"><span class="font-weight-bold">{{li?.fullname}}</span><span class="text-black-50">{{li?.email.oldEmail}}</span><span> </span></div>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
@@ -16,7 +16,7 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12"><label class="labels">Mobile Number<br>- Field allows only numeric characters </label><input type="text" class="form-control" placeholder="Phone number" value="" formControlName="phone"></div>
-                            <div class="col-md-12"><label class="labels">Email</label><input type="email" class="form-control" placeholder="Email" value="" formControlName="email"></div>
+                            <div class="col-md-12"><label class="labels">Email</label><input type="email" class="form-control" placeholder="Email" value="" formControlName="email" readonly></div>
                             <div class="col-md-12"><label class="labels">Birthdate(yyyy-mm-yy)</label><input type="text" class="form-control" placeholder="Birthdate" value="" formControlName="birthdate"></div>
                         </div>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" [disabled]="!this.updateForm.valid">Save Profile</button></div>
@@ -26,23 +26,41 @@
         <div class="col-md-4">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center experience"><h4>Link Options</h4></div><br>
-               <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inlineFormInputGroup"  [formControl]="alias">
-                    <div class="input-group-prepend">
-                        <button class=" button input-group-text" [style]="!this.alias.valid ? 'color:grey;': 'color:green;'" [disabled]="!this.alias.valid" (click)="updatealias()" title="Check availability and update"><i class="fa-solid fa-check"></i></button>
-                      
+                    <div class="input-group mb-2">
+                          <input type="text" class="form-control" id="inlineFormInputGroup"  [formControl]="alias">
+                          <div class="input-group-prepend">
+                              <button class=" button input-group-text" [style]="!this.alias.valid ? 'color:grey;': 'color:green;'" [disabled]="!this.alias.valid" (click)="updatealias()" title="Check availability and update"><i class="fa-solid fa-check"></i></button>
+                          </div>
+                          <div class="col-md-12"><h6 class="text-muted">- Field allows only digits, uppercase letters, lowercase letters, or hyphens.</h6></div>
                     </div>
-                    <div class="col-md-12"><h6 class="text-muted">- Field allows only digits, uppercase letters, lowercase letters, or hyphens.</h6></div>
-                </div>
-                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="show_already">
+                      <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="show_already">
+                          <i class="fa-solid fa-circle-exclamation"></i> Username already taken
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="reset()" aria-label="Close"></button>
+                        </div>
+                      <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="show_nochanges">
+                        <i class="fa-solid fa-circle-exclamation"></i> No changes detected
+                        <button type="button" class="btn-close" (click)="reset()" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+
+                      <div class="input-group mb-2">
+                        <input type="email" class="form-control" id="inlineFormInputGroup"  [formControl]="email">
+                        <div class="input-group-prepend">
+                            <button class=" button input-group-text" [style]="!this.email.valid ? 'color:grey;': 'color:green;'" [disabled]="!this.email.valid" (click)="updateemail()" title="Check availability and update"><i class="fa-solid fa-check"></i></button>
+                        </div>
+                        <div class="col-md-12"><h6 class="text-muted">-When you change your email, you need to confirm it to set it as your primary email..</h6></div>
+                  </div>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="show_already_email">
                     <i class="fa-solid fa-circle-exclamation"></i> Username already taken
                     <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="reset()" aria-label="Close"></button>
                   </div>
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="show_nochanges">
-                    <i class="fa-solid fa-circle-exclamation"></i> No changes detected
-                    <button type="button" class="btn-close" (click)="reset()" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
-                  
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="show_nochanges_email">
+                  <i class="fa-solid fa-circle-exclamation"></i> No changes detected
+                  <button type="button" class="btn-close" (click)="reset()" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="show_success_email">
+                  <i class="fa-solid fa-circle-exclamation"></i> Email Sent to <b>{{email.value}}</b>!
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="reset()" aria-label="Close"></button>
+                </div>
             </div>
         </div>
     </div>

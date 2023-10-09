@@ -43,6 +43,9 @@
                             <div class="alert alert-danger text-center alert-dismissible fade show" *ngIf="passerror"><strong>Sorry..! </strong>Authentification failed.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
+                            <div class="alert alert-success text-center alert-dismissible fade show" *ngIf="setpass">You can now attempt to sign in using your updated password after making the password change.
+                              <button type="button" class="btn-close align-middle" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
                             <form [formGroup]="signinForm" (ngSubmit)="login()" class="mt-4">
                                 <!-- Form -->
                                 <div class="form-group mb-4">
