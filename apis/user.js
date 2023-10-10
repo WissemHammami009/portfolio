@@ -161,7 +161,7 @@ router.post('/add/user',async (req,res)=>{
     const user = new User(
         {
         fullname: req.body.name + " "+ req.body.surname,
-        email: {newEmail:req.body.email},
+        email: {oldEmail:req.body.email},
         password: hash,
         phone:req.body.phone,
         birthdate:req.body.birthdate,
