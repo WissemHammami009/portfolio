@@ -112,7 +112,6 @@ export class SettingsComponent implements OnInit {
 
   updatealias(){
     let json = {alias_old:this.li.alias,alias_new:this.alias.value}
-    console.log(json)
     if (this.li.alias == this.alias.value) {
       this.show_nochanges = true
     }
@@ -181,7 +180,7 @@ export class SettingsComponent implements OnInit {
     this.show_nochanges = false
   }
   updateemail(){
-    let json = {oldemail:this.li.email.oldEmail,newemail:this.email.value}
+    let json = {oldemail:this.li.email.oldEmail,newemail:this.email.value,name:localStorage.getItem('name')}
     if (this.li.email.oldEmail == this.email.value) {
       this.show_nochanges_email = true
     }

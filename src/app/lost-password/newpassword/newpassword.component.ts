@@ -25,8 +25,6 @@ export class NewpasswordComponent implements OnInit {
       }
       this.userServ.checktokkennewpass({token:this.token}).subscribe(resp=>{
         let res:any = resp
-        console.log(res)
-        console.log(res)
         if (res.verif.check == false) {
            this.textShow = false
         Swal.fire({
@@ -71,10 +69,8 @@ export class NewpasswordComponent implements OnInit {
       pass: this.newpasswordForm.controls['password'].value ,
       id_pass : localStorage.getItem("id_pass")
     }
-    console.log(json)
     this.userServ.setnewpass(json).subscribe(resp=>{
       let res:any = resp
-      console.log(res)
       if (res.password_reset.reset == "Yes") {
         Swal.fire({
           icon: 'success',
