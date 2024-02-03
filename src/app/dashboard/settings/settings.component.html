@@ -21,6 +21,16 @@
                         </div>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" [disabled]="!this.updateForm.valid">Save Profile</button></div>
                 </form>
+                <form [formGroup]="passwordForm" (ngSubmit)="update_pass()">
+                  <div class="row mt-2">
+                      <div class="col-md-12"><label class="labels">Old Password<br></label><input type="password" class="form-control" placeholder="Old password" value="" formControlName="old_pass"></div>
+                  </div>
+                  <div class="row mt-3">
+                      <div class="col-md-12"><label class="labels">New Password<br></label><input type="password" class="form-control" placeholder="New Password" value="" formControlName="new_pass"></div>
+                      <div class="col-md-12"><label class="labels">Confirm New Password</label><input type="password" class="form-control" placeholder="Confirm New password" value="" formControlName="confirm_pass"></div>
+                   </div>
+                  <div class="mt-5 text-center"><button class="btn btn-primary profile-button" [disabled]="verif_pass_retype()" type="submit">Update Password</button></div>
+          </form>
             </div>
         </div>
         <div class="col-md-4">
@@ -31,7 +41,7 @@
                           <div class="input-group-prepend">
                               <button class=" button input-group-text" [style]="!this.alias.valid ? 'color:grey;': 'color:green;'" [disabled]="!this.alias.valid" (click)="updatealias()" title="Check availability and update"><i class="fa-solid fa-check"></i></button>
                           </div>
-                          <div class="col-md-12"><h6 class="text-muted">- Field allows only digits, uppercase letters, lowercase letters, or hyphens.</h6></div>
+                          <div class="col-md-12"><small class="text-muted">- Field allows only digits, uppercase letters, lowercase letters, or hyphens.</small></div>
                     </div>
                       <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="show_already">
                           <i class="fa-solid fa-circle-exclamation"></i> Username already taken
@@ -41,13 +51,13 @@
                         <i class="fa-solid fa-circle-exclamation"></i> No changes detected
                         <button type="button" class="btn-close" (click)="reset()" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
-
+                      <hr>
                       <div class="input-group mb-2">
                         <input type="email" class="form-control" id="inlineFormInputGroup"  [formControl]="email">
                         <div class="input-group-prepend">
                             <button class=" button input-group-text" [style]="!this.email.valid ? 'color:grey;': 'color:green;'" [disabled]="!this.email.valid" (click)="updateemail()" title="Check availability and update"><i class="fa-solid fa-check"></i></button>
                         </div>
-                        <div class="col-md-12"><h6 class="text-muted">-When you change your email, you need to confirm it to set it as your primary email..</h6></div>
+                        <div class="col-md-12"><small class="text-muted">-When you change your email, you need to confirm it to set it as your primary email.</small></div>
                   </div>
                   <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="show_already_email">
                     <i class="fa-solid fa-circle-exclamation"></i> email already registred!

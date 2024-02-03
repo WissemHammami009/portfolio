@@ -58,4 +58,7 @@ export class UserServiceService {
   updateemail(json:any){
     return this.http.patch(this.endpoint+"api/user/updateemail",json,{'headers':this.headers})
   }
+  updatepassword(json:any){
+    return this.http.patch(this.endpoint+"api/user//update/password",json,{'headers':this.headers})
+  }
 }

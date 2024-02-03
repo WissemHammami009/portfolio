@@ -29,6 +29,12 @@ export class SettingsComponent implements OnInit {
     phone:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(8),Validators.maxLength(8)]),
     birthdate : new FormControl('',Validators.required)
   })
+  passwordForm = new FormGroup({
+    userhash: new FormControl(localStorage.getItem('hashuser')),
+    old_pass: new FormControl(''),
+    new_pass: new FormControl(''),
+    confirm_pass: new FormControl(''),
+  })
   alias = new FormControl('',[Validators.required,Validators.pattern("^[a-zA-Z0-9-]+$")])
   email = new FormControl('',[Validators.required,Validators.email])
   here = "nav-item active"
@@ -239,5 +245,26 @@ export class SettingsComponent implements OnInit {
         }
       })
     }
+  }
+
+  verif_pass_retype(){
+    if (this.passwordForm.value.new_pass != this.passwordForm.value.confirm_pass) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+  update_pass(){
+    console.log()
+    this.userservice.updatepassword(this.passwordForm.value).subscribe(resp=>{
+      let li:any = resp
+      console.log(resp)
+      if (li.changed == false) {
+        console.log(li.message)
+      }else{
+        console.log(li.message)
+      }
+    })
   }
 }
