@@ -277,24 +277,39 @@ router.delete('/delete/:id',(req,res)=>{
 
 
 //update password
-router.patch('/update/password',(req,res)=>{
-    let hash = Swal.showLoading().update(req.body.password).digest("hex")
-    const id  = req.body.id;
-    const update = User.updateOne({
-        _id:id
-    },{
-        $set: {password:hash}
+router.patch('/update/password',isAuthenticate,(req,res)=>{
+    let old_hash = crypto.createHash('md5').update(req.body.old_pass).digest("hex")
+    let new_hash = crypto.createHash('md5').update(req.body.new_pass).digest('hex')
+
+    const userhash = req.body.hash;
+    const find = User.findOne({password:old_hash,userhash:userhash}).then(resp=>{
+        // console.log(resp)
+        if (resp == null) {
+            res.json({changed:false,message:"Old password is wrong"})
+        }else {
+            const update = User.updateOne({
+                userhash:userhash
+            },{
+                $set: {password:new_hash}
+            })
+            .then(resp=>{
+                if (resp.modifiedCount == 1) {
+                    res.json(
+                        {changed:true,message:"Password changed succefully",updated: {
+                    password:"yes"}})
+                }
+                else {
+                    res.json({changed:false,message:"something goes wrong. Try again! ",updated: {
+                        password:"no"}})
+                }
+            }
+            )
+            .catch(err=>{
+                res.send(err)
+            })
+        }
     })
-    .then(resp=>{
-        res.json(
-            {updated: {
-        password:"yes"
-    }}
-    )
-    })
-    .catch(err=>{
-        res.send(err)
-    })
+    
 })
 
 //sent an email for password 
