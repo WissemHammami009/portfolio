@@ -257,6 +257,7 @@ export class SettingsComponent implements OnInit {
   }
   update_pass(){
     console.log()
+    console.log(this.passwordForm.value)
     this.userservice.updatepassword(this.passwordForm.value).subscribe(resp=>{
       let li:any = resp
       console.log(resp)

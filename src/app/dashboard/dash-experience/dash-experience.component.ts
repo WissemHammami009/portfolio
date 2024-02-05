@@ -1,3 +1,9 @@
+/*
+    Author: Wissem Hammami
+    Github: wissemhammami009
+    Website: https://wissem-hammami.web.app || www.wissem-hammami.info
+    Email: hammamiwissem21@gmail.com
+*/
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError } from 'rxjs';

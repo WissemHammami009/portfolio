@@ -1,3 +1,9 @@
+/*
+    Author: Wissem Hammami
+    Github: wissemhammami009
+    Website: https://wissem-hammami.web.app || www.wissem-hammami.info
+    Email: hammamiwissem21@gmail.com
+*/
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';

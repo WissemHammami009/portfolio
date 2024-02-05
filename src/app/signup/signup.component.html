@@ -7,36 +7,36 @@
    </head>
 <body>
   <div class="container">
-    <div class="title">Registration</div>
+    <div class="title">{{words.headertext}}</div>
     <div class="content">
       <form [formGroup]="signupForm" (ngSubmit)="signup()">
         <div class="user-details">
           <div class="input-box">
-            <span class="details">Name</span>
+            <span class="details">{{words.name}}</span>
             <input type="text" placeholder="{{words.name}}" formControlName="name" required>
           </div>
           <div class="input-box">
-            <span class="details">Surname</span> 
+            <span class="details">{{words.surname}}</span>
             <input type="text" placeholder="{{words.surname}}" formControlName="surname" required>
           </div>
           <div class="input-box">
-            <span class="details">Email</span>
+            <span class="details">{{words.email}}</span>
             <input type="text" placeholder="{{words.email}}" formControlName='email' required>
           </div>
           <div class="input-box">
-            <span class="details">Phone Number</span>
+            <span class="details">{{words.phone}}</span>
             <input type="text" placeholder="{{words.phone}}" formControlName="phone" required>
           </div>
           <div class="input-box">
-            <span class="details">Password</span>
+            <span class="details">{{words.password}}</span>
             <input type="password" placeholder="{{words.password}}" required formControlName='password'>
           </div>
           <div class="input-box">
-            <span class="details">Confirm Password</span>
+            <span class="details">{{words.confirmpass}}</span>
             <input type="password" placeholder="Confirm your password" required>
           </div>
         <div class="input-box width-100">
-            <span class="details">Birthday</span>
+            <span class="details">{{words.birth}}</span>
             <input type="date"  required formControlName="birthdate">
           </div>
         </div>

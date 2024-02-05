@@ -1,8 +1,12 @@
 {
+  "headertext":"Registration",
     "name":"Name",
     "surname":"Surname",
     "password":"Password",
     "email":"Email",
     "phone":"Phone Number",
-    "button_text":"Create Account" 
+    "confirmpass":"Confirm Password",
+    "birth":"Birthday",
+
+    "button_text":"Create Account"
 }

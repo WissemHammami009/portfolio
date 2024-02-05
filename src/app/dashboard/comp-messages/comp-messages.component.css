@@ -2,22 +2,27 @@ h2 {
     text-align: center;
     padding: 20px 0;
   }
-  
+
   .table-bordered {
     border: 1px solid #ddd !important;
   }
-  
+
   table caption {
       padding: .5em 0;
   }
-  
+
   @media screen and (max-width: 767px) {
     table caption {
       display: none;
     }
-    
+
+    .alert {
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
   }
-  
+
   .p {
     text-align: center;
     padding-top: 140px;
@@ -30,9 +35,13 @@ h2 {
   .fa-solid:hover{
     color:rgb(99, 39, 120);
   }
-.container {
-  padding-top: 4%;
+.container{
+  padding-top: 10%;
+  align-items: center;
+}
+.row {
+  justify-content: center;
 }
 
 
-  
+

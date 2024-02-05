@@ -1,3 +1,9 @@
+/*
+    Author: Wissem Hammami
+    Github: wissemhammami009
+    Website: https://wissem-hammami.web.app || www.wissem-hammami.info
+    Email: hammamiwissem21@gmail.com
+*/
 import { Component, OnInit } from '@angular/core';
 import { EmailsServicesService } from 'src/app/services/emails-services.service';
 import { UserServiceService } from 'src/app/services/user-service.service';

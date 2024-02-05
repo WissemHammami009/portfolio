@@ -1,3 +1,9 @@
+/*
+    Author: Wissem Hammami
+    Github: wissemhammami009
+    Website: https://wissem-hammami.web.app || www.wissem-hammami.info
+    Email: hammamiwissem21@gmail.com
+*/
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
@@ -6,6 +12,7 @@ import { AvatarimageService } from 'src/app/services/avatarimage.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { UserServiceService } from 'src/app/services/user-service.service';
 import Swal from 'sweetalert2';
+import words from "./words.json"
 @Component({
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
@@ -13,6 +20,7 @@ import Swal from 'sweetalert2';
 })
 export class PortfolioComponent implements OnInit {
   li:any
+  words:any = words
   link:String = "https://free-portfolio.web.app/portfolio/"
   constructor(private avatarser:AvatarimageService,private http:HttpClient,private route: ActivatedRoute,private portfolioservice:PortfolioService, private title:Title,private userservice:UserServiceService) { }
   json:any

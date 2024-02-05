@@ -1,3 +1,9 @@
+/*
+    Author: Wissem Hammami
+    Github: wissemhammami009
+    Website: https://wissem-hammami.web.app || www.wissem-hammami.info
+    Email: hammamiwissem21@gmail.com
+*/
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit ,OnDestroy, OnChanges, SimpleChanges,} from '@angular/core';
 import { PortfolioService } from 'src/app/services/portfolio.service';

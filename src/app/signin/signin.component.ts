@@ -1,3 +1,9 @@
+/*
+    Author: Wissem Hammami
+    Github: wissemhammami009
+    Website: https://wissem-hammami.web.app || www.wissem-hammami.info
+    Email: hammamiwissem21@gmail.com
+*/
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -63,6 +69,7 @@ export class SigninComponent implements OnInit {
       this.authservice.clearApplication()
     }
   }
+
   login(){
     this.authservice.login(this.signinForm.value).subscribe(resp=>{
       this.li = resp

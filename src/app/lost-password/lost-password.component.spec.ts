@@ -1,3 +1,9 @@
+/*
+    Author: Wissem Hammami
+    Github: wissemhammami009
+    Website: https://wissem-hammami.web.app || www.wissem-hammami.info
+    Email: hammamiwissem21@gmail.com
+*/
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LostPasswordComponent } from './lost-password.component';
