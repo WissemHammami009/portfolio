@@ -29,7 +29,7 @@
                       <div class="col-md-12"><label class="labels">New Password<br></label><input type="password" class="form-control" placeholder="New Password" value="" formControlName="new_pass"></div>
                       <div class="col-md-12"><label class="labels">Confirm New Password</label><input type="password" class="form-control" placeholder="Confirm New password" value="" formControlName="confirm_pass"></div>
                    </div>
-                  <div class="mt-5 text-center"><button class="btn btn-primary profile-button" [disabled]="verif_pass_retype()" type="submit">Update Password</button></div>
+                  <div class="mt-5 text-center"><button class="btn btn-primary profile-button" [disabled]="!this.passwordForm.valid" type="submit">Update Password</button></div>
           </form>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ValidatorFn, AbstractControl  } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AvatarimageService } from 'src/app/services/avatarimage.service';
@@ -29,12 +29,26 @@ export class SettingsComponent implements OnInit {
     phone:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(8),Validators.maxLength(8)]),
     birthdate : new FormControl('',Validators.required)
   })
+  // Custom validator function to check if the passwords match
+passwordMatchValidator: ValidatorFn = (control: AbstractControl): {[key: string]: any} | null => {
+  const newPass = control.get('new_pass');
+  const confirmPass = control.get('confirm_pass');
+
+  // Return null if both fields are empty
+  if (!newPass || !confirmPass) {
+    return null;
+  }
+
+  // Return null if passwords match
+  return newPass.value === confirmPass.value ? null : { 'passwordMismatch': true };
+};
+
   passwordForm = new FormGroup({
     userhash: new FormControl(localStorage.getItem('hashuser')),
-    old_pass: new FormControl(''),
-    new_pass: new FormControl(''),
-    confirm_pass: new FormControl(''),
-  })
+    old_pass: new FormControl('',[Validators.required]),
+    new_pass: new FormControl('',[Validators.required,Validators.minLength(8)]),
+    confirm_pass: new FormControl('',[Validators.required]),
+  }, { validators: this.passwordMatchValidator })
   alias = new FormControl('',[Validators.required,Validators.pattern("^[a-zA-Z0-9-]+$")])
   email = new FormControl('',[Validators.required,Validators.email])
   here = "nav-item active"
@@ -246,25 +260,31 @@ export class SettingsComponent implements OnInit {
       })
     }
   }
-
-  verif_pass_retype(){
-    if (this.passwordForm.value.new_pass != this.passwordForm.value.confirm_pass) {
-      return true
-    }
-    else {
-      return false
-    }
-  }
   update_pass(){
-    console.log()
-    console.log(this.passwordForm.value)
     this.userservice.updatepassword(this.passwordForm.value).subscribe(resp=>{
       let li:any = resp
       console.log(resp)
       if (li.changed == false) {
-        console.log(li.message)
-      }else{
-        console.log(li.message)
+        Swal.fire({
+          icon:"error",
+          title:"Information",
+          html:li.message
+        })
+        this.passwordForm.reset()
+      }else if (li.changed == true) {
+        Swal.fire({
+          icon:"info",
+          title:"Information",
+          html:li.message
+        })
+        this.passwordForm.reset()
+      }else {
+        Swal.fire({
+          icon:"warning",
+          title:"Information",
+          html:li.message
+        })
+        this.passwordForm.reset()
       }
     })
   }
