@@ -10,7 +10,8 @@ Here's where it all begins! The home page of my portfolio is designed to grab yo
 ## SignUp Page 📝
 Ready to join the journey? The signup page is your gateway to creating your own portfolio and joining our community of creatives. Sign up now and unlock endless possibilities!
 
-![Signup Page](https://github.com/WissemHammami009/portfolio/assets/44125202/812cf51c-45c4-4657-b85f-af79a64bfdf9)
+![Signup Page](https://github.com/WissemHammami009/portfolio/assets/44125202/f42d9f2a-8aa1-4611-a9a4-f7df93601d0e
+)
 
 ## SignIn Page 🔐
 Already part of the family? Welcome back! Sign in to access your dashboard, update your portfolio, and connect with other professionals in your field.
