@@ -280,8 +280,7 @@ router.delete('/delete/:id',(req,res)=>{
 router.patch('/update/password',isAuthenticate,(req,res)=>{
     let old_hash = crypto.createHash('md5').update(req.body.old_pass).digest("hex")
     let new_hash = crypto.createHash('md5').update(req.body.new_pass).digest('hex')
-
-    const userhash = req.body.hash;
+    const userhash = req.body.userhash;
     const find = User.findOne({password:old_hash,userhash:userhash}).then(resp=>{
         // console.log(resp)
         if (resp == null) {
@@ -308,6 +307,8 @@ router.patch('/update/password',isAuthenticate,(req,res)=>{
                 res.send(err)
             })
         }
+    }).catch(err=>{
+        res.json({error:err})
     })
     
 })
