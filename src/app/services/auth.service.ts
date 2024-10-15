@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {environment} from '../../environments/environment'
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +29,7 @@ export class AuthService {
     localStorage.clear()
     sessionStorage.clear()
     this.cookie.deleteAll()
-    this.route.navigate(['/home'])
+    this.route.navigate(['/signin'])
   }
 
   clearApplication(){
@@ -37,7 +38,7 @@ export class AuthService {
     this.cookie.deleteAll()
   }
 
-  settokken(tokken:string,username:string){
+  async settokken(tokken:string,username:string){
     localStorage.setItem("tokken",tokken)
     this.cookie.set('tokken', tokken, 7, '/');
     localStorage.setItem('name',username)
@@ -53,4 +54,17 @@ export class AuthService {
     return this.http.patch(this.endpoint+"api/user/reset/sent_password",json)
   }
 
+
+  // Centralized error handler
+handleError(error: any) {
+  if (error.status === 400) {
+      Swal.fire('Invalid Token', 'Your session has expired, please relogin.', 'error');
+  } else if (error.status === 403) {
+      Swal.fire('Token Required', 'Please login to continue.', 'error');
+  } else {
+      // You can customize other error handling here
+      Swal.fire('Error', 'Something went wrong. Please try again.', 'error');
+      console.error('An error occurred:', error);
+  }
+}
 }

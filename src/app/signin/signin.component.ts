@@ -71,8 +71,10 @@ export class SigninComponent implements OnInit {
   }
 
   login(){
+    Swal.showLoading()
     this.authservice.login(this.signinForm.value).subscribe(resp=>{
       this.li = resp
+      console.log(resp)
       if (this.li.isLogged == false) {
         this.passerror = true
           Swal.fire({
@@ -105,9 +107,11 @@ export class SigninComponent implements OnInit {
             Swal.showLoading()
           }
         })
-        this.authservice.settokken(this.li.token,this.li.resp.fullname)
+         this.authservice.settokken(this.li.token,this.li.resp.fullname)
         localStorage.setItem('alias',this.li.resp.alias)
         localStorage.setItem('hashuser',this.li.resp.userhash)
+
+
         this.router.navigate(["dashboard"])
       }
     })

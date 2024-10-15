@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
   constructor(private title:Title,private userservice:UserServiceService ,private portfolioserv:PortfolioService,private authservice:AuthService,private router:Router) { }
 
   ngOnInit(): void {
+    Swal.showLoading()
     this.title.setTitle("Portfolio - Dashboard")
     this.userservice.checkbackend_isup().subscribe()
     if (this.authservice.checkalreadylogged() == false){
@@ -79,6 +80,7 @@ export class DashboardComponent implements OnInit {
 
       })
     }
+    Swal.close()
   }
 
 }

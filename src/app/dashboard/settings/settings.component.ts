@@ -152,8 +152,11 @@ passwordMatchValidator: ValidatorFn = (control: AbstractControl): {[key: string]
           Swal.showLoading()
           this.userservice.updatealias(json).subscribe(resp=>{
             let li_temp : any = resp
+            console.log('-----------------------------------')
+            console.log(li_temp)
+            console.log('-----------------------------------')
             if (li_temp.code == 200) {
-              if (li_temp.modified == 1) {
+              if (li_temp.modifiedport == 1) {
                 Swal.fire({
                   icon:"success",
                   title:"Username updated",
