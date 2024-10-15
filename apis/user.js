@@ -463,12 +463,16 @@ router.post('/aboutuser',isAuthenticate,async (req,res)=>{
 router.patch("/updatealias",isAuthenticate,(req,res)=>{
     alias_old = req.body.alias_old
     alias_new = req.body.alias_new
+    let countport = 0
     User.findOne({alias:alias_new}).then(resp=>{
         if (resp == null) {
             User.updateOne({alias:alias_old},{$set:{alias:alias_new}}).then(resp=>{
                 portfolio.updateOne({alias:alias_old},{$set:{alias:alias_new}}).then(resp=>{
+                    if(resp.modifiedCount == 1){
+                        countport = 1
+                    }
                     Image.updateOne({alias:alias_old},{$set:{alias:alias_new}}).then(resp=>{
-                    res.json({code:200,modified:resp.modifiedCount})
+                    res.json({code:200,modifiedimage:resp.modifiedCount,modifiedport:countport})
                     }).catch(err=>{
                         res.json({code:err.code,message:err.message})
                     })
