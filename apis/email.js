@@ -4,7 +4,7 @@ var bodyParser = require('body-parser')
 router.use(bodyParser.json());
 
 const Email = require('../models/email');
-const isAuthenticate = require('../middlewares/Auth');
+const {isAuthenticate} = require('../middlewares/Auth');
 var transporter = require('../plugins/mailer')
 router.post('/send',async (req,res)=>{
     const email = new Email(req.body)

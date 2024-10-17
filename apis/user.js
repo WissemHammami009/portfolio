@@ -8,7 +8,7 @@ require('dotenv').config();
 const  User = require('../models/user');
 const portfolio = require('../models/portfolio');
 const Image = require('../models/imageModel')
-const isAuthenticate = require('../middlewares/Auth')
+const {isAuthenticate,validateToken} = require('../middlewares/Auth')
 
 var transporter = require('../plugins/mailer')
 
@@ -16,6 +16,7 @@ var transporter = require('../plugins/mailer')
 router.get('/home', function(req, res) { 
     res.end('Welcome to You in Home Page');
 });
+router.post('/validate-token', validateToken);
 
 router.patch('/get/setpassword',(req,res)=>{
     let id_pass 
@@ -403,7 +404,7 @@ router.post('/login',(req,res)=>{
             res.status(200).json({isLogged:false,user:"not found!"})
         }
         else {
-            tokken = jwt.sign({email:req.body.email,password:hash},process.env.MAIN_KEY)
+            tokken = jwt.sign({email:req.body.email,password:hash},process.env.MAIN_KEY,{expiresIn:"1m"})
             res.status(200).json({isLogged:true, user: "found!",resp,token:tokken })
         }
 })

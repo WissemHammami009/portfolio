@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
 router.use(bodyParser.json());
-const isAuthenticate = require('../middlewares/Auth')
+const {isAuthenticate} = require('../middlewares/Auth')
 const portfolio= require('../models/portfolio');
 const image = require('../models/imageModel')
 const multer = require('multer');
