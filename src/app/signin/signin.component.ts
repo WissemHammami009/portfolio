@@ -31,6 +31,7 @@ export class SigninComponent implements OnInit {
   dashaccess:boolean = false
   passerror:boolean = false
   setpass:boolean = false
+  invalidtoken:boolean = false
   link : any = link
   check_remember(){
     if (this.remember.value == true ) {
@@ -47,6 +48,10 @@ export class SigninComponent implements OnInit {
     if ("setpass" in localStorage) {
       this.setpass = true
       localStorage.removeItem("setpass")
+    }
+    if("invalidtoken" in localStorage){
+      this.invalidtoken = true
+      localStorage.removeItem("invalidtoken")
     }
     if ( "notlogged" in localStorage) {
       localStorage.clear()

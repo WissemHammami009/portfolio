@@ -1,67 +1,99 @@
-/*
-    Author: Wissem Hammami
-    Github: wissemhammami009
-    Website: https://wissem-hammami.web.app || www.wissem-hammami.info
-    Email: hammamiwissem21@gmail.com
-*/
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { catchError, throwError } from 'rxjs';
+import { catchError, map, switchMap, throwError, Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-import {environment} from '../../environments/environment'
+import { environment } from '../../environments/environment';
+import { AuthService } from './auth.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
-  endpoint  = environment.backend_links
-  constructor(private http:HttpClient,private title:Title) { }
+  endpoint = environment.backend_links;
+  token = localStorage.getItem("tokken") || "";
+  headers = new HttpHeaders().set('x-access-token', this.token);
 
-  token = localStorage.getItem("tokken") || ""
-  headers= new HttpHeaders().set('x-access-token',this.token)
+  constructor(private http: HttpClient, private title: Title,private authuser:AuthService) { }
 
-  aboutuser(json:any){
-    return this.http.post(this.endpoint+'api/user/aboutuser',json,{'headers':this.headers})
+  // Function to validate token before executing any API calls
+  validateToken(): Observable<boolean> {
+    return this.http.post<any>(this.endpoint + "api/user/validate-token", {}, { 'headers': this.headers })
+      .pipe(
+        map(response => {
+          // If the response confirms a valid token, return true
+          return response.isValid;
+        }),
+        catchError(error => {
+          this.authuser.invalidtokenaccess()
+          return throwError(error);
+        })
+      );
   }
 
-  updateuser(json:any){
-    return this.http.patch(this.endpoint+"api/user/update/profile",json,{'headers':this.headers})
+  aboutuser(json: any): Observable<any> {
+    return this.validateToken().pipe(
+      switchMap(isValid => {
+        if (isValid) {
+          return this.http.post(this.endpoint + 'api/user/aboutuser', json, { 'headers': this.headers });
+        } else {
+          throw new Error('Invalid token, cannot fetch about user');
+        }
+      })
+    );
   }
-  //this method  test the backend if up when user access the app
-  checkbackend_isup(){
-    return this.http.get(this.endpoint+"testbackend").pipe(
+
+  updateuser(json: any): Observable<any> {
+    return this.validateToken().pipe(
+      switchMap(isValid => {
+        if (isValid) {
+          return this.http.patch(this.endpoint + "api/user/update/profile", json, { 'headers': this.headers });
+        } else {
+          throw new Error('Invalid token, cannot update user profile');
+        }
+      })
+    );
+  }
+
+  checkbackend_isup(): Observable<any> {
+    return this.http.get(this.endpoint + "testbackend").pipe(
       catchError((error: HttpErrorResponse) => {
-        // Handle the error here
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
           html: 'There is a problem with my backend server.<br> Can you please connect me with the developer ?!',
-          allowEnterKey:false,
-          allowEscapeKey:false,
-          allowOutsideClick:false,
-          showConfirmButton:false,
-          showCancelButton:false,
-        })
+          allowEnterKey: false,
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          showCancelButton: false,
+        });
         return throwError(error);
       })
     );
   }
 
-  changeTitle(newtitle:string){
-    this.title.setTitle(newtitle)
+  changeTitle(newtitle: string): void {
+    this.title.setTitle(newtitle);
   }
 
-  //update the alias of user which like http://portfolio/{alias}
-  updatealias(json:any){
-    return this.http.patch(this.endpoint+"api/user/updatealias",json,{'headers':this.headers})
+  updatealias(json: any): Observable<any> {
+    return this.validateToken().pipe(
+      switchMap(isValid => {
+        if (isValid) {
+          return this.http.patch(this.endpoint + "api/user/updatealias", json, { 'headers': this.headers });
+        } else {
+          throw new Error('Invalid token, cannot update alias');
+        }
+      })
+    );
   }
 
-  //
   confirmaccount(id:any){
     return this.http.patch(this.endpoint+"api/user/confirm/"+id,{})
   }
-  //when u access the link of reset from the email this method test if the key valid to set a new pass
+
   checktokkennewpass(json:any){
     return this.http.patch(this.endpoint+"api/user/get/setpassword",json)
   }
@@ -71,15 +103,29 @@ export class UserServiceService {
     return this.http.patch(this.endpoint+"api/user/set/password",json)
   }
 
-  //method to update a new email from settings
-  updateemail(json:any){
-    return this.http.patch(this.endpoint+"api/user/updateemail",json,{'headers':this.headers})
+
+
+  updateemail(json: any): Observable<any> {
+    return this.validateToken().pipe(
+      switchMap(isValid => {
+        if (isValid) {
+          return this.http.patch(this.endpoint + "api/user/updateemail", json, { 'headers': this.headers });
+        } else {
+          throw new Error('Invalid token, cannot update email');
+        }
+      })
+    );
   }
 
-  //Set w new password from settings
-  updatepassword(json:any){
-    return this.http.patch(this.endpoint+"api/user//update/password",json,{'headers':this.headers})
+  updatepassword(json: any): Observable<any> {
+    return this.validateToken().pipe(
+      switchMap(isValid => {
+        if (isValid) {
+          return this.http.patch(this.endpoint + "api/user/update/password", json, { 'headers': this.headers });
+        } else {
+          throw new Error('Invalid token, cannot update password');
+        }
+      })
+    );
   }
 }
-
-

@@ -46,7 +46,7 @@ export class DashEducComponent implements OnInit {
   }
 
   getdata(){
-    this.serviceport.geteducation({alias:localStorage.getItem('alias')}).subscribe(resp=>{
+    this.serviceport.getEducation({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
     })
   }
@@ -57,7 +57,7 @@ export class DashEducComponent implements OnInit {
     });
     Swal.showLoading();
     let json = {alias:localStorage.getItem('alias'),education:this.li}
-    this.serviceport.updateeducationdata(json).subscribe(resp=>{
+    this.serviceport.updateEducationData(json).subscribe(resp=>{
       this.li = resp
       if (this.li.isModified == true) {
         Swal.fire({

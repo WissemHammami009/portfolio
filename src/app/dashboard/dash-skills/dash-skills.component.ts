@@ -42,7 +42,7 @@ export class DashSkillsComponent implements OnInit {
    this.getdata()
   }
   getdata(){
-    this.portfolioserv.getskills({alias:localStorage.getItem('alias')}).subscribe(resp=>{
+    this.portfolioserv.getSkills({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
     })
   }
@@ -53,7 +53,7 @@ export class DashSkillsComponent implements OnInit {
     Swal.showLoading();
     let json  = {alias:localStorage.getItem('alias'),skills:this.li}
     console.log(json)
-    this.portfolioserv.updateskills(json).subscribe(resp=>{
+    this.portfolioserv.updateSkills(json).subscribe(resp=>{
       this.li = resp
       if (this.li.isModified == true) {
         Swal.fire({

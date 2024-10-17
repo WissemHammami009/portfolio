@@ -31,6 +31,13 @@ export class AuthService {
     this.cookie.deleteAll()
     this.route.navigate(['/signin'])
   }
+  invalidtokenaccess(){
+    localStorage.clear()
+    sessionStorage.clear()
+    this.cookie.deleteAll()
+    localStorage.setItem('invalidtoken',"1")
+    this.route.navigate(['/signin'])
+  }
 
   clearApplication(){
     localStorage.clear()

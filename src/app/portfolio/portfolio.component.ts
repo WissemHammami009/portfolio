@@ -38,7 +38,7 @@ export class PortfolioComponent implements OnInit {
     this.avatarser.getavatar(this.json).subscribe(resp=>{
       this.imagedata = resp
     })
-    this.portfolioservice.getportfolio(this.json).subscribe(resp=>{
+    this.portfolioservice.getPortfolio(this.json).subscribe(resp=>{
     this.li = resp
     console.log(this.li)
     this.title.setTitle(this.li.full_name)

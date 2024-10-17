@@ -64,7 +64,7 @@ export class DashHomeComponent implements OnInit {
   }
 
   getdata(){
-    this.portfolioserv.getheader({alias:localStorage.getItem('alias')}).subscribe(resp=>{
+    this.portfolioserv.getHeader({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
       if (this.li.found == true) {
         this.setForm(this.li)
@@ -78,7 +78,7 @@ export class DashHomeComponent implements OnInit {
     });
     console.log(this.headerupdateForm.value)
     Swal.showLoading();
-    this.portfolioserv.updateheader(this.headerupdateForm.value).subscribe(resp=>{
+    this.portfolioserv.updateHeader(this.headerupdateForm.value).subscribe(resp=>{
       this.li = resp
       if (this.li.isModified == true) {
         Swal.fire({

@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit{
 
 
     get_data(){
-      this.portfolio.getlastestportfolio().subscribe(resp=>{
+      this.portfolio.getLatestPortfolio().subscribe(resp=>{
           this.li = resp
         })
     }

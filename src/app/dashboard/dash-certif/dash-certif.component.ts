@@ -42,7 +42,7 @@ export class DashCertifComponent implements OnInit {
    this.getdata()
   }
   getdata(){
-    this.portfolioserv.getcertif({alias:localStorage.getItem('alias')}).subscribe(resp=>{
+    this.portfolioserv.getCertif({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
     })
   }
@@ -55,7 +55,7 @@ export class DashCertifComponent implements OnInit {
 
     let json  = {alias:localStorage.getItem('alias'),certif:this.li}
 
-    this.portfolioserv.updatecertif(json).subscribe(resp=>{
+    this.portfolioserv.updateCertif(json).subscribe(resp=>{
       this.li = resp
       if (this.li.isModified == true) {
         Swal.fire({

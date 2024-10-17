@@ -47,7 +47,7 @@ export class DashExperienceComponent implements OnInit {
   }
 
   getdata(){
-    this.serviceport.getexperiencedata({alias:localStorage.getItem('alias')}).subscribe(resp=>{
+    this.serviceport.getExperienceData({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
     })
   }
@@ -58,7 +58,7 @@ export class DashExperienceComponent implements OnInit {
     });
     Swal.showLoading();
     let json = {alias:localStorage.getItem('alias'),experience:this.li}
-    this.serviceport.updateexpriencedata(json).subscribe(resp=>{
+    this.serviceport.updateExperienceData(json).subscribe(resp=>{
       this.li = resp
       if (this.li.isModified == true) {
         Swal.fire({

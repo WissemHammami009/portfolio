@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
 
     }
     else {
-      this.portfolioserv.checkprotfolioexist({alias:localStorage.getItem('alias')}).subscribe(resp=>{
+      this.portfolioserv.checkPortfolioExist({alias:localStorage.getItem('alias')}).subscribe(resp=>{
         this.li = resp
         if (this.li.data == false) {
           Swal.fire({
@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
                 Swal.showLoading()
-                this.portfolioserv.createportfolio({alias:localStorage.getItem('alias')}).subscribe(resp=>{
+                this.portfolioserv.createPortfolio({alias:localStorage.getItem('alias')}).subscribe(resp=>{
                   let res : any  = resp
                   if (res.code == 11000) {
                     Swal.fire({

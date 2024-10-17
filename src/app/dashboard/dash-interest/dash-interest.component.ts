@@ -33,7 +33,7 @@ export class DashInterestComponent implements OnInit {
   }
 
   getdata(){
-    this.portfolioserv.getinterest({alias:localStorage.getItem('alias')}).subscribe(resp=>{
+    this.portfolioserv.getInterest({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
       this.interest.setValue(this.li.interest);
     })
@@ -45,7 +45,7 @@ export class DashInterestComponent implements OnInit {
     });
     Swal.showLoading();
     let json = {alias:localStorage.getItem('alias'),interest:this.interest.value}
-    this.portfolioserv.updateinterest(json).subscribe(resp=>{
+    this.portfolioserv.updateInterest(json).subscribe(resp=>{
       this.li = resp
       if (this.li.isModified == true) {
         Swal.fire({
