@@ -26,7 +26,7 @@ export class PortfolioService {
         }),
         catchError(error => {
           // If the token is invalid, handle the error here
-          this.authser.invalidtokenaccess()
+        this.authser.invalidtokenaccess()
           return throwError(error);
         })
       );
