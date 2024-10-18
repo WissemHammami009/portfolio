@@ -65,14 +65,15 @@ passwordMatchValidator: ValidatorFn = (control: AbstractControl): {[key: string]
   }
 
 
-  getdata(){
+  async getdata(){
     Swal.showLoading()
     let json = {alias:localStorage.getItem('alias')}
     this.avatarser.getavatar(json).subscribe(resp=>{
       this.imagedata = resp
     })
-    this.userinfo.aboutuser({alias:localStorage.getItem('alias')}).subscribe(resp=>{
+    await this.userinfo.aboutuser({alias:localStorage.getItem('alias')}).subscribe(resp=>{
       this.li = resp
+      console.log(this.li)
       this.updateForm.patchValue({
         fullname:this.li.fullname,
         phone:this.li.phone,

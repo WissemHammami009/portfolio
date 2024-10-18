@@ -11,13 +11,16 @@ import { AuthService } from './auth.service';
 export class PortfolioService {
 
   endpoint = environment.backend_links;
-  token = localStorage.getItem("tokken") || "";
-  headers = new HttpHeaders().set('x-access-token', this.token);
+  token = ""
+  headers = new HttpHeaders()
 
   constructor(private http: HttpClient,private authser:AuthService) { }
 
   // Function to validate token before executing any API calls
   validateToken(): Observable<boolean> {
+    this.token = localStorage.getItem("tokken") || "";
+    // Set the 'x-access-token' header and reassign it to this.headers (since HttpHeaders is immutable)
+  this.headers = this.headers.set('x-access-token', this.token);
     return this.http.post<any>(this.endpoint + "api/user/validate-token", {}, { 'headers': this.headers })
       .pipe(
         map(response => {
