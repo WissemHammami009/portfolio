@@ -30,6 +30,7 @@ const isAuthenticate = async (req, res, next) => {
 const validateToken = async (req, res, next) => {
   const token = req.headers['x-access-token'];
 
+  // console.log("Token:"+token)
   if (!token) {
     return res.status(401).json({ isValid: false, message: 'Token is missing' });
   }
